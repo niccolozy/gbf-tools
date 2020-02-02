@@ -1,24 +1,47 @@
-import React from "react";
+import React, { Component } from "react";
+import { Grid } from "@material-ui/core";
+import Header from "./components/layout/Header";
+import BoxCalculator from "./components/BoxCalculator";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src="./logo192.png" className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// function App() {
+//   return (
+//     <div>
+//       <Header tools={["刷箱计算器"]} />
+//       <h1>Hello</h1>
+//     </div>
+//   );
+// }
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      tools: props.tools,
+      currentTool: props.tools[0]
+    };
+  }
+
+  onToolSelected = (e, index) => {
+    this.setState({ currentTool: this.state.tools[index] });
+  };
+
+  render() {
+    return (
+      <Grid container>
+        <Grid item sm={12}>
+          <Header
+            tools={this.state.tools}
+            currentTool={this.state.currentTool}
+            onItemClicked={this.onToolSelected}
+          />
+        </Grid>
+        <Grid item sm={12}>
+          <BoxCalculator />
+        </Grid>
+      </Grid>
+    );
+  }
 }
 
 export default App;
