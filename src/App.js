@@ -3,15 +3,6 @@ import { Grid } from "@material-ui/core";
 import Header from "./components/layout/Header";
 import BoxCalculator from "./components/BoxCalculator";
 
-// function App() {
-//   return (
-//     <div>
-//       <Header tools={["刷箱计算器"]} />
-//       <h1>Hello</h1>
-//     </div>
-//   );
-// }
-
 class App extends Component {
   constructor(props) {
     super(props);

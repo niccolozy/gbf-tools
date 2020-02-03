@@ -6,12 +6,27 @@ import BoxProgress from "./BoxProgress.js";
 import BoxEstimation from "./BoxEstimation.js";
 
 class BoxCalculator extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      targetBox: "",
+      drewBox: "",
+      currentToken: "",
+      currentHonor: "",
+      currentMeat: ""
+    };
+  }
+
+  onInputChange = (inputName, value) => {
+    this.setState({ [inputName]: value });
+  };
+
   render() {
     return (
       <Grid container spacing={1}>
         <Grid item sm={12}>
           <Paper>
-            <BoxInput />
+            <BoxInput current={this.state} onChange={this.onInputChange} />
           </Paper>
         </Grid>
         <Grid item sm={12}>

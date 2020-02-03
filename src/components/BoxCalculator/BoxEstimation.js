@@ -16,7 +16,7 @@ class BoxEstimation extends Component {
     return (
       <>
         <Paper>
-          <Tabs indicatorColor="primary" textColor="primary" centered>
+          <Tabs value={0} centered>
             <Tab label="单一关卡" />
             <Tab label="刷肉补正" />
           </Tabs>
