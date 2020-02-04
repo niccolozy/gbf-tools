@@ -23,9 +23,17 @@ class BoxCalculator extends Component {
   };
 
   render() {
-    let [progress, neededSolos] = calculateNeededSolo({ ...this.state });
-    console.log(progress);
-    console.log(neededSolos);
+    console.log(this.state);
+    let [progress, neededSolos] = calculateNeededSolo(this.state);
+    // let [progress, neededSolos] = calculateNeededSolo(
+    //   20,
+    //   2,
+    //   11100,
+    //   31782647,
+    //   1761
+    // );
+    // console.log(progress);
+    // console.log(neededSolos);
     return (
       <Grid container spacing={1}>
         <Grid item sm={12}>
@@ -37,7 +45,7 @@ class BoxCalculator extends Component {
           <BoxProgress progress={progress} />
         </Grid>
         <Grid item sm={12}>
-          <BoxEstimation data={neededSolos} />
+          <BoxEstimation neededSolos={neededSolos} />
         </Grid>
       </Grid>
     );

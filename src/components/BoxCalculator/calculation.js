@@ -51,18 +51,13 @@ function calculateProgress(targetBox, drewBox, currentToken, currentHonor) {
   return progress;
 }
 
-export function calculateNeededSolo(
-  targetBox,
-  drewBox,
-  currentToken,
-  currentHonor,
-  currentMeat
-) {
+export function calculateNeededSolo(data) {
+  console.log(data.targetBox, data.currentToken);
   let progress = calculateProgress(
-    targetBox,
-    drewBox,
-    currentToken,
-    currentHonor
+    data.targetBox,
+    data.drewBox,
+    data.currentToken,
+    data.currentHonor
   );
   let restToken =
     progress.requiredToken -
