@@ -28,7 +28,7 @@ export default function BoxInput({ current, onChange }) {
         <Typography>数据输入</Typography>
       </ExpansionPanelSummary>
       <Divider />
-      <ExpansionPanelDetails>
+      <ExpansionPanelDetails style={{ flexDirection: "column" }}>
         <div>
           <TextField
             name="targetBox"
@@ -36,7 +36,7 @@ export default function BoxInput({ current, onChange }) {
             variant="filled"
             className={classes.margin}
             onChange={onValueChange}
-            value={current.targetBox}
+            value={current.targetBox === null ? "" : current.targetBox}
           />
           <TextField
             name="drewBox"
@@ -44,10 +44,9 @@ export default function BoxInput({ current, onChange }) {
             variant="filled"
             className={classes.margin}
             onChange={onValueChange}
-            value={current.drewBox}
+            value={current.drewBox === null ? "" : current.drewBox}
           />
         </div>
-        <br />
         <div>
           <TextField
             name="currentToken"
@@ -55,7 +54,7 @@ export default function BoxInput({ current, onChange }) {
             variant="filled"
             className={classes.margin}
             onChange={onValueChange}
-            value={current.currentToken}
+            value={current.currentToken === null ? "" : current.currentToken}
           />
           <TextField
             name="currentHonor"
@@ -63,7 +62,7 @@ export default function BoxInput({ current, onChange }) {
             variant="filled"
             className={classes.margin}
             onChange={onValueChange}
-            value={current.currentHonor}
+            value={current.currentHonor === null ? "" : current.currentHonor}
           />
           <TextField
             name="currentMeat"
@@ -71,7 +70,7 @@ export default function BoxInput({ current, onChange }) {
             variant="filled"
             className={classes.margin}
             onChange={onValueChange}
-            value={current.currentMeat}
+            value={current.currentMeat === null ? "" : current.currentMeat}
           />
         </div>
       </ExpansionPanelDetails>

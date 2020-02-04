@@ -17,9 +17,9 @@ class BoxProgress extends Component {
           <TableHead>
             <TableRow>
               <TableCell>进度</TableCell>
-              <TableCell align="right">需求战货</TableCell>
-              <TableCell align="right">已有战货</TableCell>
-              <TableCell align="right">当前进度</TableCell>
+              <TableCell>需求战货</TableCell>
+              <TableCell>已有战货</TableCell>
+              <TableCell>当前进度</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -27,8 +27,8 @@ class BoxProgress extends Component {
               <TableCell component="th" scope="row">
                 总进度
               </TableCell>
-              <TableCell align="right">100</TableCell>
-              <TableCell align="right">20</TableCell>
+              <TableCell>100</TableCell>
+              <TableCell>20</TableCell>
               <TableCell align="right">{(20 / 100) * 100}</TableCell>
             </TableRow>
           </TableBody>
