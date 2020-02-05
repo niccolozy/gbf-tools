@@ -20,14 +20,14 @@ class App extends Component {
   render() {
     return (
       <Grid container>
-        <Grid item sm={12}>
+        <Grid item xs={12}>
           <Header
             tools={this.state.tools}
             currentTool={this.state.currentTool}
             onItemClicked={this.onToolSelected}
           />
         </Grid>
-        <Grid item sm={12}>
+        <Grid item xs={12}>
           <BoxCalculator />
         </Grid>
       </Grid>

@@ -36,15 +36,15 @@ class BoxCalculator extends Component {
     // console.log(neededSolos);
     return (
       <Grid container spacing={1}>
-        <Grid item sm={12}>
+        <Grid item xs={12}>
           <Paper>
             <BoxInput current={this.state} onChange={this.onInputChange} />
           </Paper>
         </Grid>
-        <Grid item sm={12}>
+        <Grid item xs={12}>
           <BoxProgress progress={progress} />
         </Grid>
-        <Grid item sm={12}>
+        <Grid item xs={12}>
           <BoxEstimation neededSolos={neededSolos} />
         </Grid>
       </Grid>
