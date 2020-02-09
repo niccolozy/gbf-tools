@@ -49,6 +49,14 @@ class BoxCalculator extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  componentDidMount = () => {
+    this.setState(JSON.parse(localStorage.getItem("BoxCalculator")));
+  };
+
+  componentDidUpdate = () => {
+    localStorage.setItem("BoxCalculator", JSON.stringify(this.state));
+  };
+
   render() {
     // console.log(this.state);
     const meatChoices = Object.keys(mobInfo).filter(mob => !mobInfo[mob].meat);
