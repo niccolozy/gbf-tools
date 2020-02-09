@@ -35,7 +35,11 @@ export default function BoxProgress({ progress }) {
             <TableCell align="center">
               <LinearProgress
                 variant="determinate"
-                value={total !== 0 ? (completed / total) * 100 : 100}
+                value={
+                  total !== 0 && completed < total
+                    ? (completed / total) * 100
+                    : 100
+                }
               />
               {(total !== 0 ? (completed / total) * 100 : 100).toFixed(2) + "%"}
             </TableCell>

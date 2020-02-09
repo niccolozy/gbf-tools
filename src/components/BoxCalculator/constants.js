@@ -8,7 +8,8 @@ export const mobInfo = {
     soloHonor: 51000,
     AP: 30,
     BP: 1,
-    meat: 0
+    meat: 0,
+    meatGain: 3
   },
   ExPlus: {
     hostToken: 26,
@@ -17,7 +18,8 @@ export const mobInfo = {
     soloHonor: 73000,
     AP: 30,
     BP: 1,
-    meat: 0
+    meat: 0,
+    meatGain: 3.5
   },
   Hell90: {
     hostToken: 45,

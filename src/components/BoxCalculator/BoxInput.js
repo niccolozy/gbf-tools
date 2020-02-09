@@ -33,7 +33,7 @@ export default function BoxInput({ current, onChange }) {
           <TextField
             name="targetBox"
             label="目标箱数"
-            variant="filled"
+            variant="standard"
             className={classes.margin}
             onChange={onValueChange}
             value={current.targetBox === null ? "" : current.targetBox}
@@ -41,7 +41,7 @@ export default function BoxInput({ current, onChange }) {
           <TextField
             name="drewBox"
             label="已刷箱数"
-            variant="filled"
+            variant="standard"
             className={classes.margin}
             onChange={onValueChange}
             value={current.drewBox === null ? "" : current.drewBox}
@@ -51,7 +51,7 @@ export default function BoxInput({ current, onChange }) {
           <TextField
             name="currentToken"
             label="持有战货数"
-            variant="filled"
+            variant="standard"
             className={classes.margin}
             onChange={onValueChange}
             value={current.currentToken === null ? "" : current.currentToken}
@@ -59,7 +59,7 @@ export default function BoxInput({ current, onChange }) {
           <TextField
             name="currentHonor"
             label="累计贡献"
-            variant="filled"
+            variant="standard"
             className={classes.margin}
             onChange={onValueChange}
             value={current.currentHonor === null ? "" : current.currentHonor}
@@ -67,7 +67,7 @@ export default function BoxInput({ current, onChange }) {
           <TextField
             name="currentMeat"
             label="持有肉数量"
-            variant="filled"
+            variant="standard"
             className={classes.margin}
             onChange={onValueChange}
             value={current.currentMeat === null ? "" : current.currentMeat}
