@@ -14,6 +14,20 @@ import crystalImg from "../../assets/crystal.jpg";
 import singleTicketImg from "../../assets/signle-roll-ticket.jpg";
 import tenRollTicketImg from "../../assets/10-roll-ticket.jpg";
 
+const imageStyle = {
+  width: "auto",
+  height: "auto",
+  margin: "auto",
+  maxWidth: "25%",
+  maxHeight: 86.776
+};
+
+const cardStyle = {
+  display: "flex",
+  padding: 10,
+  margin: 5
+};
+
 export default function SparkCalculator(props) {
   const [crystal, setCrystal] = useState(0);
   const [singleRollTicket, setSingleRollTicket] = useState(0);
@@ -44,13 +58,13 @@ export default function SparkCalculator(props) {
 
   return (
     <Grid container spacing={1}>
-      <Grid item xs={12}>
-        <Card style={{ display: "flex", padding: 10 }}>
-          <CardMedia
-            component="img"
-            image={crystalImg}
-            style={{ width: 86.776 }}
-          />
+      <Grid
+        item
+        xs={12}
+        style={{ display: "flex", flexWrap: "wrap", padding: 10 }}
+      >
+        <Card style={cardStyle}>
+          <CardMedia component="img" image={crystalImg} style={imageStyle} />
           <CardContent>
             <TextField
               name="crystal"
@@ -62,11 +76,12 @@ export default function SparkCalculator(props) {
               }}
             />
           </CardContent>
-
+        </Card>
+        <Card style={cardStyle}>
           <CardMedia
             component="img"
             image={singleTicketImg}
-            style={{ width: 86.776 }}
+            style={imageStyle}
           />
           <CardContent>
             <TextField
@@ -79,11 +94,12 @@ export default function SparkCalculator(props) {
               }}
             />
           </CardContent>
-
+        </Card>
+        <Card style={cardStyle}>
           <CardMedia
             component="img"
             image={tenRollTicketImg}
-            style={{ width: 86.776 }}
+            style={imageStyle}
           />
           <CardContent>
             <TextField
