@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { Grid } from "@material-ui/core";
 import Header from "./components/layout/Header";
 import BoxCalculator from "./components/BoxCalculator";
+import SparkCalculator from "./components/SparkCalculator";
+
+const BOX = 0;
+const SPARK = 1;
 
 class App extends Component {
   constructor(props) {
@@ -9,12 +13,12 @@ class App extends Component {
     this.state = {
       open: false,
       tools: props.tools,
-      currentTool: props.tools[0]
+      currentTool: 0
     };
   }
 
   onToolSelected = (e, index) => {
-    this.setState({ currentTool: this.state.tools[index] });
+    this.setState({ currentTool: index });
   };
 
   render() {
@@ -23,12 +27,13 @@ class App extends Component {
         <Grid item xs={12}>
           <Header
             tools={this.state.tools}
-            currentTool={this.state.currentTool}
+            currentTool={this.state.tools[this.state.currentTool]}
             onItemClicked={this.onToolSelected}
           />
         </Grid>
         <Grid item xs={12}>
-          <BoxCalculator />
+          {(this.state.currentTool === BOX && <BoxCalculator />) ||
+            (this.state.currentTool === SPARK && <SparkCalculator />)}
         </Grid>
       </Grid>
     );
