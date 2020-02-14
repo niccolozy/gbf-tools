@@ -1,5 +1,10 @@
-import React, { Component } from "react";
-import { Grid } from "@material-ui/core";
+import React, { useState } from "react";
+import { Grid, CssBaseline } from "@material-ui/core";
+import {
+  createMuiTheme,
+  makeStyles,
+  ThemeProvider
+} from "@material-ui/core/styles";
 import Header from "./components/layout/Header";
 import BoxCalculator from "./components/BoxCalculator";
 import SparkCalculator from "./components/SparkCalculator";
@@ -7,37 +12,35 @@ import SparkCalculator from "./components/SparkCalculator";
 const BOX = 0;
 const SPARK = 1;
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-      tools: props.tools,
-      currentTool: 0
-    };
-  }
+const theme = createMuiTheme();
 
-  onToolSelected = (e, index) => {
-    this.setState({ currentTool: index });
+function App(props) {
+  const [currentTool, setCurrentTool] = useState(0);
+
+  const onToolSelected = (e, index) => {
+    setCurrentTool(index);
   };
 
-  render() {
-    return (
-      <Grid container>
-        <Grid item xs={12}>
-          <Header
-            tools={this.state.tools}
-            currentTool={this.state.tools[this.state.currentTool]}
-            onItemClicked={this.onToolSelected}
-          />
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Grid container>
+          <Grid item xs={12}>
+            <Header
+              tools={props.tools}
+              currentTool={props.tools[currentTool]}
+              onItemClicked={onToolSelected}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            {(currentTool === BOX && <BoxCalculator />) ||
+              (currentTool === SPARK && <SparkCalculator />)}
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          {(this.state.currentTool === BOX && <BoxCalculator />) ||
-            (this.state.currentTool === SPARK && <SparkCalculator />)}
-        </Grid>
-      </Grid>
-    );
-  }
+      </ThemeProvider>
+    </>
+  );
 }
 
 export default App;

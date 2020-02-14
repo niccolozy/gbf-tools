@@ -1,17 +1,24 @@
 import React from "react";
 import {
-  ExpansionPanel,
-  ExpansionPanelSummary,
-  ExpansionPanelDetails,
+  Card,
+  CardHeader,
   TextField,
   Typography,
   Divider
 } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
-  margin: {
+  root: {
+    height: "100%"
+  },
+  header: {
+    padding: theme.spacing(1)
+  },
+  devider: {
+    marginBottom: theme.spacing(1.5)
+  },
+  input: {
     margin: theme.spacing(1)
   }
 }));
@@ -23,57 +30,55 @@ export default function BoxInput({ current, onChange }) {
   };
 
   return (
-    <ExpansionPanel>
-      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography>数据输入</Typography>
-      </ExpansionPanelSummary>
-      <Divider />
-      <ExpansionPanelDetails style={{ flexDirection: "column" }}>
-        <div>
-          <TextField
-            name="targetBox"
-            label="目标箱数"
-            variant="standard"
-            className={classes.margin}
-            onChange={onValueChange}
-            value={current.targetBox === null ? "" : current.targetBox}
-          />
-          <TextField
-            name="drewBox"
-            label="已刷箱数"
-            variant="standard"
-            className={classes.margin}
-            onChange={onValueChange}
-            value={current.drewBox === null ? "" : current.drewBox}
-          />
-        </div>
-        <div>
-          <TextField
-            name="currentToken"
-            label="持有战货数"
-            variant="standard"
-            className={classes.margin}
-            onChange={onValueChange}
-            value={current.currentToken === null ? "" : current.currentToken}
-          />
-          <TextField
-            name="currentHonor"
-            label="累计贡献"
-            variant="standard"
-            className={classes.margin}
-            onChange={onValueChange}
-            value={current.currentHonor === null ? "" : current.currentHonor}
-          />
-          <TextField
-            name="currentMeat"
-            label="持有肉数量"
-            variant="standard"
-            className={classes.margin}
-            onChange={onValueChange}
-            value={current.currentMeat === null ? "" : current.currentMeat}
-          />
-        </div>
-      </ExpansionPanelDetails>
-    </ExpansionPanel>
+    <Card className={classes.root}>
+      <CardHeader
+        className={classes.header}
+        title="数据输入"
+        titleTypographyProps={{ variant: "subtitle1" }}
+      />
+      <Divider className={classes.devider} />
+
+      <TextField
+        name="targetBox"
+        label="目标箱数"
+        variant="outlined"
+        className={classes.input}
+        onChange={onValueChange}
+        value={current.targetBox === null ? "" : current.targetBox}
+      />
+      <TextField
+        name="drewBox"
+        label="已刷箱数"
+        variant="outlined"
+        className={classes.input}
+        onChange={onValueChange}
+        value={current.drewBox === null ? "" : current.drewBox}
+      />
+
+      <TextField
+        name="currentToken"
+        label="持有战货数"
+        variant="outlined"
+        className={classes.input}
+        onChange={onValueChange}
+        value={current.currentToken === null ? "" : current.currentToken}
+      />
+      <TextField
+        name="currentHonor"
+        label="累计贡献"
+        variant="outlined"
+        className={classes.input}
+        onChange={onValueChange}
+        value={current.currentHonor === null ? "" : current.currentHonor}
+      />
+      <TextField
+        name="currentMeat"
+        label="持有肉数量"
+        variant="outlined"
+        className={classes.input}
+        onChange={onValueChange}
+        value={current.currentMeat === null ? "" : current.currentMeat}
+      />
+    </Card>
   );
 }

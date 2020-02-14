@@ -10,23 +10,34 @@ import {
   CardHeader,
   Typography
 } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import crystalImg from "../../assets/crystal.jpg";
 import singleTicketImg from "../../assets/signle-roll-ticket.jpg";
 import tenRollTicketImg from "../../assets/10-roll-ticket.jpg";
 
-const imageStyle = {
-  width: "auto",
-  height: "auto",
-  margin: "auto",
-  maxWidth: "25%",
-  maxHeight: 86.776
-};
-
-const cardStyle = {
-  display: "flex",
-  padding: 10,
-  margin: 5
-};
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    padding: 10
+  },
+  card: {
+    display: "flex",
+    padding: 10,
+    margin: 5,
+    [theme.breakpoints.up("sm")]: {
+      flex: 1
+    }
+    // flex: 1 //between md and lg?
+  },
+  image: {
+    width: "auto",
+    height: "auto",
+    margin: "auto",
+    maxWidth: "25%",
+    maxHeight: 86.776
+  }
+}));
 
 export default function SparkCalculator(props) {
   const [crystal, setCrystal] = useState(0);
@@ -51,6 +62,8 @@ export default function SparkCalculator(props) {
     localStorage.setItem("SparkCalculator", JSON.stringify(state));
   }, [crystal, singleRollTicket, tenRollTicket]);
 
+  const classes = useStyles();
+
   let rolls = Math.floor(
     (crystal + 300 * singleRollTicket + 3000 * tenRollTicket) / 300
   );
@@ -58,13 +71,13 @@ export default function SparkCalculator(props) {
 
   return (
     <Grid container spacing={1}>
-      <Grid
-        item
-        xs={12}
-        style={{ display: "flex", flexWrap: "wrap", padding: 10 }}
-      >
-        <Card style={cardStyle}>
-          <CardMedia component="img" image={crystalImg} style={imageStyle} />
+      <Grid item xs={12} className={classes.root}>
+        <Card className={classes.card}>
+          <CardMedia
+            component="img"
+            image={crystalImg}
+            className={classes.image}
+          />
           <CardContent>
             <TextField
               name="crystal"
@@ -77,11 +90,11 @@ export default function SparkCalculator(props) {
             />
           </CardContent>
         </Card>
-        <Card style={cardStyle}>
+        <Card className={classes.card}>
           <CardMedia
             component="img"
             image={singleTicketImg}
-            style={imageStyle}
+            className={classes.image}
           />
           <CardContent>
             <TextField
@@ -95,11 +108,11 @@ export default function SparkCalculator(props) {
             />
           </CardContent>
         </Card>
-        <Card style={cardStyle}>
+        <Card className={classes.card}>
           <CardMedia
             component="img"
             image={tenRollTicketImg}
-            style={imageStyle}
+            className={classes.image}
           />
           <CardContent>
             <TextField
@@ -118,7 +131,7 @@ export default function SparkCalculator(props) {
         <Card>
           <CardHeader
             title="攒井进度"
-            titleTypographyProps={{ variant: "h5" }}
+            titleTypographyProps={{ variant: "h6" }}
           />
           <Divider />
           <div style={{ padding: 10, display: "flex" }}>
@@ -127,10 +140,10 @@ export default function SparkCalculator(props) {
               value={progress * 100 > 100 ? 100 : progress * 100}
               size={70}
             />
-            <Typography variant="h5" style={{ margin: "auto" }}>
+            <Typography variant="h6" style={{ margin: "auto" }}>
               {(progress * 100).toFixed(2) + "%"}
             </Typography>
-            <Typography variant="h5" style={{ margin: "auto" }}>
+            <Typography variant="h6" style={{ margin: "auto" }}>
               {rolls} / 300抽
             </Typography>
           </div>
