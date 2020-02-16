@@ -62,7 +62,7 @@ export default function BoxProgress({ progress }) {
                       : classes.barIncomplete
                 }}
                 variant="determinate"
-                value={progressPercentage}
+                value={progressPercentage > 100 ? 100 : progressPercentage}
                 style={{ barColorPrimary: { backgroundColor: "#00695c" } }}
               />
               {progressPercentage.toFixed(2) + "%"}
