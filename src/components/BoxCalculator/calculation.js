@@ -27,7 +27,7 @@ function getSoloTokenForMob(mob) {
   );
 }
 
-function getRequiredSolo(mob, targetToken) {
+function getRequiredSolo(mob, targetToken, currentMeat) {
   let result = {};
   result["num"] = Math.ceil(targetToken / getSoloTokenForMob(mob));
   if (result["num"] < 0) {
@@ -38,6 +38,7 @@ function getRequiredSolo(mob, targetToken) {
     result["elixir"] = 0;
   }
   result["meat"] = result["num"] * mob.meat > 0 ? result["num"] * mob.meat : 0;
+  result["hasEnoughMeat"] = currentMeat >= result["meat"];
 
   return result;
 }
@@ -102,7 +103,11 @@ export function calculateNeededSolo(data) {
 
   let neededSolos = {};
   for (let mob of Object.keys(mobInfo)) {
-    neededSolos[mob] = getRequiredSolo(mobInfo[mob], restToken);
+    neededSolos[mob] = getRequiredSolo(
+      mobInfo[mob],
+      restToken,
+      data.currentMeat
+    );
   }
   return [progress, neededSolos];
 }

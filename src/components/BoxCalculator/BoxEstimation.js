@@ -8,6 +8,7 @@ import {
   TableRow,
   Paper
 } from "@material-ui/core";
+import IconText from "./IconText.js";
 
 export default function BoxEstimation({ payload }) {
   return (
@@ -31,7 +32,17 @@ export default function BoxEstimation({ payload }) {
                 <TableCell align="center">{value.num}</TableCell>
                 <TableCell align="center">{value.elixir}</TableCell>
                 {payload.mode === 0 && (
-                  <TableCell align="center">{value.meat}</TableCell>
+                  <TableCell align="center">
+                    {value.hasEnoughMeat ? (
+                      <IconText text={value.meat} msg={""} iconType="success" />
+                    ) : (
+                      <IconText
+                        text={value.meat}
+                        msg={"需要补肉"}
+                        iconType="warning"
+                      />
+                    )}
+                  </TableCell>
                 )}
               </TableRow>
             );

@@ -15,7 +15,6 @@ import { green, blue } from "@material-ui/core/colors";
 const useStyles = makeStyles(theme => ({
   root: {
     height: 8
-    // backgroundColor: lighten("#ff6c5c", 0.5)
   },
   barComplete: {
     borderRadius: 20,

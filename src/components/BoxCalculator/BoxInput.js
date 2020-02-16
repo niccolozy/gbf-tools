@@ -73,7 +73,7 @@ export default function BoxInput({ current, onChange }) {
       />
       <TextField
         name="currentMeat"
-        label="持有肉数量"
+        label="持有肉数"
         variant="outlined"
         className={classes.input}
         onChange={onValueChange}
