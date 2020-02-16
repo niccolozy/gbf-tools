@@ -12,7 +12,29 @@ import SparkCalculator from "./components/SparkCalculator";
 const BOX = 0;
 const SPARK = 1;
 
-const theme = createMuiTheme();
+const theme = createMuiTheme({
+  palette: {
+    // type: 'light',
+    // primary: {
+    //   main: '#00AAE1',
+    //   dark: '#143C8C',
+    //   contrastText: '#fff',
+    // },
+    // secondary: {
+    //   main: '#64B42D',
+    //   dark: '#008732',
+    //   contrastText: '#fff',
+    // },
+    // error: {
+    //   main: '#BD0043',
+    //   contrastText: '#fff',
+    // },
+    // divider: '#D7D6D5',
+    background: {
+      light: "#f0f0f0"
+    }
+  }
+});
 
 function App(props) {
   const [currentTool, setCurrentTool] = useState(0);

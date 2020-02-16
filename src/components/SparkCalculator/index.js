@@ -11,6 +11,7 @@ import {
   Typography
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { green, blue } from "@material-ui/core/colors";
 import crystalImg from "../../assets/crystal.jpg";
 import singleTicketImg from "../../assets/signle-roll-ticket.jpg";
 import tenRollTicketImg from "../../assets/10-roll-ticket.jpg";
@@ -24,9 +25,11 @@ const useStyles = makeStyles(theme => ({
   card: {
     display: "flex",
     padding: 10,
-    margin: 5,
+
+    margin: "auto",
     [theme.breakpoints.up("sm")]: {
-      flex: 1
+      flex: 1,
+      margin: 5
     }
     // flex: 1 //between md and lg?
   },
@@ -136,6 +139,11 @@ export default function SparkCalculator(props) {
           <Divider />
           <div style={{ padding: 10, display: "flex" }}>
             <CircularProgress
+              style={
+                progress * 100 >= 100
+                  ? { color: green[500] }
+                  : { color: blue[700] }
+              }
               variant="static"
               value={progress * 100 > 100 ? 100 : progress * 100}
               size={70}
