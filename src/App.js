@@ -8,6 +8,7 @@ import {
 import Header from "./components/layout/Header";
 import BoxCalculator from "./components/BoxCalculator";
 import SparkCalculator from "./components/SparkCalculator";
+import Footer from "./components/layout/Footer";
 
 const BOX = 0;
 const SPARK = 1;
@@ -60,6 +61,7 @@ function App(props) {
               (currentTool === SPARK && <SparkCalculator />)}
           </Grid>
         </Grid>
+        <Footer />
       </ThemeProvider>
     </>
   );
