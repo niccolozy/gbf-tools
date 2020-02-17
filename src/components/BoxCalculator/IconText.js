@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center"
   },
   outlinedWarning: {
-    color: theme.palette.warning.main,
+    color: theme.palette.error.main,
     fontSize: "large"
   },
   outlinedSuccess: {
