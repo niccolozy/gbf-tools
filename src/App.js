@@ -8,10 +8,12 @@ import {
 import Header from "./components/layout/Header";
 import BoxCalculator from "./components/BoxCalculator";
 import SparkCalculator from "./components/SparkCalculator";
+import ArcarumCalculator from "./components/ArcarumCalculator";
 import Footer from "./components/layout/Footer";
 
 const BOX = 0;
 const SPARK = 1;
+const ARCARUM = 2;
 
 const theme = createMuiTheme({
   palette: {
@@ -58,7 +60,8 @@ function App(props) {
           </Grid>
           <Grid item xs={12}>
             {(currentTool === BOX && <BoxCalculator />) ||
-              (currentTool === SPARK && <SparkCalculator />)}
+              (currentTool === SPARK && <SparkCalculator />) ||
+              (currentTool === ARCARUM && <ArcarumCalculator />)}
           </Grid>
         </Grid>
         <Footer />
