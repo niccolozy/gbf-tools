@@ -1,6 +1,7 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Link, SvgIcon } from "@material-ui/core";
 import TwitterIcon from "@material-ui/icons/Twitter";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -24,6 +25,14 @@ export default function Footer(props) {
       <Toolbar variant="dense">
         <Typography className={classes.text}>简单的GBF小工具合集</Typography>
         <div className={classes.grow} />
+        <Link
+          href="https://github.com/niccolozy/gbf-tools"
+          target="_blank"
+          color="inherit"
+          className={classes.linkIcon}
+        >
+          <GitHubIcon />
+        </Link>
         <Link
           href="https://www.weibo.com/u/2841048814"
           target="_blank"
