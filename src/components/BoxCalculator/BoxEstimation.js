@@ -19,7 +19,7 @@ export default function BoxEstimation({ payload }) {
             <TableCell>还需</TableCell>
             <TableCell align="center">数量</TableCell>
             <TableCell align="center">半红</TableCell>
-            {payload.mode === 0 && <TableCell align="center">肉</TableCell>}
+            <TableCell align="center">肉</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -31,9 +31,9 @@ export default function BoxEstimation({ payload }) {
                 </TableCell>
                 <TableCell align="center">{value.num}</TableCell>
                 <TableCell align="center">{value.elixir}</TableCell>
-                {payload.mode === 0 && (
-                  <TableCell align="center">
-                    {value.hasEnoughMeat ? (
+                <TableCell align="center">
+                  {(payload.mode === 0 &&
+                    (value.hasEnoughMeat ? (
                       <IconText text={value.meat} msg={""} iconType="success" />
                     ) : (
                       <IconText
@@ -41,9 +41,9 @@ export default function BoxEstimation({ payload }) {
                         msg={"需要补肉"}
                         iconType="warning"
                       />
-                    )}
-                  </TableCell>
-                )}
+                    ))) ||
+                    (payload.mode === 1 && value.meat)}
+                </TableCell>
               </TableRow>
             );
           })}

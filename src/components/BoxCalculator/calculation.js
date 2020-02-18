@@ -135,11 +135,13 @@ export function calculateNeededSoloWithMeatRefill(data) {
   );
   neededSolos[data.meatChoice] = {
     num: estimation.numMeat,
-    elixir: estimation.elixirMeat
+    elixir: estimation.elixirMeat,
+    meat: 0
   };
   neededSolos[data.soloChoice] = {
     num: estimation.numHell,
-    elixir: estimation.elixirHell
+    elixir: estimation.elixirHell,
+    meat: estimation.numHell * mobInfo[data.soloChoice].meat
   };
 
   return [progress, neededSolos];
