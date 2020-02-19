@@ -4,7 +4,8 @@ import {
   CardHeader,
   TextField,
   Typography,
-  Divider
+  Divider,
+  useMediaQuery
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -25,6 +26,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function BoxInput({ current, onChange }) {
   const classes = useStyles();
+  const matches = useMediaQuery(theme => theme.breakpoints.up("sm"));
   const onValueChange = e => {
     onChange(e.target.name, Number(e.target.value));
   };
@@ -45,7 +47,7 @@ export default function BoxInput({ current, onChange }) {
         className={classes.input}
         onChange={onValueChange}
         value={current.targetBox === null ? "" : current.targetBox}
-        size="small"
+        size={matches ? "medium" : "small"}
       />
       <TextField
         name="drewBox"
@@ -54,7 +56,7 @@ export default function BoxInput({ current, onChange }) {
         className={classes.input}
         onChange={onValueChange}
         value={current.drewBox === null ? "" : current.drewBox}
-        size="small"
+        size={matches ? "medium" : "small"}
       />
 
       <TextField
@@ -64,7 +66,7 @@ export default function BoxInput({ current, onChange }) {
         className={classes.input}
         onChange={onValueChange}
         value={current.currentToken === null ? "" : current.currentToken}
-        size="small"
+        size={matches ? "medium" : "small"}
       />
       <TextField
         name="currentHonor"
@@ -73,7 +75,7 @@ export default function BoxInput({ current, onChange }) {
         className={classes.input}
         onChange={onValueChange}
         value={current.currentHonor === null ? "" : current.currentHonor}
-        size="small"
+        size={matches ? "medium" : "small"}
       />
       <TextField
         name="currentMeat"
@@ -82,7 +84,7 @@ export default function BoxInput({ current, onChange }) {
         className={classes.input}
         onChange={onValueChange}
         value={current.currentMeat === null ? "" : current.currentMeat}
-        size="small"
+        size={matches ? "medium" : "small"}
       />
     </Card>
   );
