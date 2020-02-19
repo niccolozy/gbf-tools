@@ -15,6 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import BoxInput from "./BoxInput";
 import BoxProgress from "./BoxProgress.js";
 import BoxEstimation from "./BoxEstimation.js";
+import TimeEstimation from "./TimeEstimation.js";
 import {
   calculateNeededSolo,
   calculateNeededSoloWithMeatRefill
@@ -43,24 +44,24 @@ function BoxCalculator(props) {
   const [meatChoice, setMeatChoice] = useState("Ex");
   const [soloChoice, setSoloChoice] = useState("Hell90");
   const classes = useStyles();
-  const matches = useMediaQuery(theme => theme.breakpoints.up("xs"));
 
   const onInputChange = (inputName, value) => {
+    let numValue = isNaN(value) ? 0 : value;
     switch (inputName) {
       case "targetBox":
-        setTargetBox(value);
+        setTargetBox(numValue);
         break;
       case "drewBox":
-        setDrewBox(value);
+        setDrewBox(numValue);
         break;
       case "currentToken":
-        setCurrentToken(value);
+        setCurrentToken(numValue);
         break;
       case "currentHonor":
-        setCurrentHonor(value);
+        setCurrentHonor(numValue);
         break;
       case "currentMeat":
-        setCurrentMeat(value);
+        setCurrentMeat(numValue);
         break;
       default:
     }
@@ -223,6 +224,7 @@ function BoxCalculator(props) {
           </Paper>
 
           <BoxEstimation payload={payload} />
+          <TimeEstimation payload={payload} />
         </Paper>
       </Grid>
     </Grid>

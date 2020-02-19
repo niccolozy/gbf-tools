@@ -16,10 +16,18 @@ export default function BoxEstimation({ payload }) {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>还需</TableCell>
-            <TableCell align="center">数量</TableCell>
-            <TableCell align="center">半红</TableCell>
-            <TableCell align="center">肉</TableCell>
+            <TableCell>
+              <b>战斗预测</b>
+            </TableCell>
+            <TableCell align="center">
+              <b>数量</b>
+            </TableCell>
+            <TableCell align="center">
+              <b>半红</b>
+            </TableCell>
+            <TableCell align="center">
+              <b>肉</b>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

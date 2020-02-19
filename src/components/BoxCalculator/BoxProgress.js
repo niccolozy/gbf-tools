@@ -38,10 +38,18 @@ export default function BoxProgress({ progress }) {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>进度</TableCell>
-            <TableCell align="center">需求战货</TableCell>
-            <TableCell align="center">已完成战货</TableCell>
-            <TableCell align="center">当前进度</TableCell>
+            <TableCell>
+              <b>进度</b>
+            </TableCell>
+            <TableCell align="center">
+              <b>需求战货</b>
+            </TableCell>
+            <TableCell align="center">
+              <b>已完成战货</b>
+            </TableCell>
+            <TableCell align="center">
+              <b>当前进度</b>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -50,7 +58,10 @@ export default function BoxProgress({ progress }) {
               总进度
             </TableCell>
             <TableCell align="center">{total}</TableCell>
-            <TableCell align="center">{completed}</TableCell>
+            <TableCell align="center">
+              {progress.currentToken + progress.drewToken} +{" "}
+              {progress.currentTokenFromHonor}(贡献)
+            </TableCell>
             <TableCell align="center">
               <LinearProgress
                 classes={{

@@ -45,6 +45,7 @@ export default function BoxInput({ current, onChange }) {
         className={classes.input}
         onChange={onValueChange}
         value={current.targetBox === null ? "" : current.targetBox}
+        size="small"
       />
       <TextField
         name="drewBox"
@@ -53,6 +54,7 @@ export default function BoxInput({ current, onChange }) {
         className={classes.input}
         onChange={onValueChange}
         value={current.drewBox === null ? "" : current.drewBox}
+        size="small"
       />
 
       <TextField
@@ -62,6 +64,7 @@ export default function BoxInput({ current, onChange }) {
         className={classes.input}
         onChange={onValueChange}
         value={current.currentToken === null ? "" : current.currentToken}
+        size="small"
       />
       <TextField
         name="currentHonor"
@@ -70,6 +73,7 @@ export default function BoxInput({ current, onChange }) {
         className={classes.input}
         onChange={onValueChange}
         value={current.currentHonor === null ? "" : current.currentHonor}
+        size="small"
       />
       <TextField
         name="currentMeat"
@@ -78,6 +82,7 @@ export default function BoxInput({ current, onChange }) {
         className={classes.input}
         onChange={onValueChange}
         value={current.currentMeat === null ? "" : current.currentMeat}
+        size="small"
       />
     </Card>
   );
