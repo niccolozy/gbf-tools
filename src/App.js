@@ -6,12 +6,14 @@ import {
   ThemeProvider
 } from "@material-ui/core/styles";
 import Header from "./components/layout/Header";
+import ToolList from "./components/ToolList";
 import BoxCalculator from "./components/BoxCalculator";
 import HonorCalculator from "./components/HonorCalculator";
 import SparkCalculator from "./components/SparkCalculator";
 import ArcarumCalculator from "./components/ArcarumCalculator";
 import Footer from "./components/layout/Footer";
 
+const INDEX = -1;
 const BOX = 0;
 const Honor = 1;
 const SPARK = 2;
@@ -19,7 +21,7 @@ const ARCARUM = 3;
 
 const theme = createMuiTheme({
   palette: {
-    // type: 'light',
+    type: "light",
     // primary: {
     //   main: '#00AAE1',
     //   dark: '#143C8C',
@@ -42,7 +44,7 @@ const theme = createMuiTheme({
 });
 
 function App(props) {
-  const [currentTool, setCurrentTool] = useState(0);
+  const [currentTool, setCurrentTool] = useState(-1);
 
   const onToolSelected = (e, index) => {
     setCurrentTool(index);
@@ -56,12 +58,19 @@ function App(props) {
           <Grid item xs={12}>
             <Header
               tools={props.tools}
-              currentTool={props.tools[currentTool]}
+              currentTool={
+                currentTool === INDEX
+                  ? "GBF小工具合集"
+                  : props.tools[currentTool]
+              }
               onItemClicked={onToolSelected}
             />
           </Grid>
           <Grid item xs={12}>
-            {(currentTool === BOX && <BoxCalculator />) ||
+            {(currentTool === INDEX && (
+              <ToolList tools={props.tools} onClick={onToolSelected} />
+            )) ||
+              (currentTool === BOX && <BoxCalculator />) ||
               (currentTool === Honor && <HonorCalculator />) ||
               (currentTool === SPARK && <SparkCalculator />) ||
               (currentTool === ARCARUM && <ArcarumCalculator />)}
