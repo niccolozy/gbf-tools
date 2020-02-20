@@ -7,13 +7,15 @@ import {
 } from "@material-ui/core/styles";
 import Header from "./components/layout/Header";
 import BoxCalculator from "./components/BoxCalculator";
+import HonorCalculator from "./components/HonorCalculator";
 import SparkCalculator from "./components/SparkCalculator";
 import ArcarumCalculator from "./components/ArcarumCalculator";
 import Footer from "./components/layout/Footer";
 
 const BOX = 0;
-const SPARK = 1;
-const ARCARUM = 2;
+const Honor = 1;
+const SPARK = 2;
+const ARCARUM = 3;
 
 const theme = createMuiTheme({
   palette: {
@@ -60,6 +62,7 @@ function App(props) {
           </Grid>
           <Grid item xs={12}>
             {(currentTool === BOX && <BoxCalculator />) ||
+              (currentTool === Honor && <HonorCalculator />) ||
               (currentTool === SPARK && <SparkCalculator />) ||
               (currentTool === ARCARUM && <ArcarumCalculator />)}
           </Grid>

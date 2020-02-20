@@ -12,15 +12,15 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import BoxInput from "./BoxInput.js";
-import BoxProgress from "./BoxProgress.js";
-import BoxEstimation from "./BoxEstimation.js";
-import TimeEstimation from "./TimeEstimation.js";
+import HonorInput from "./HonorInput.js";
+import HonorProgress from "./HonorProgress.js";
+import BoxEstimation from "../BoxCalculator/BoxEstimation.js";
+import TimeEstimation from "../BoxCalculator/TimeEstimation.js";
 import {
-  calculateNeededSolo,
-  calculateNeededSoloWithMeatRefill
-} from "./calculation.js";
-import { mobInfo } from "./constants";
+  calculateNeededSoloForHonor,
+  calculateNeededSoloWithMeatRefillForHonor
+} from "../BoxCalculator/calculation.js";
+import { mobInfo } from "../BoxCalculator/constants.js";
 
 const SOLO = 0;
 const SOLOandMEAT = 1;
@@ -34,10 +34,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function BoxCalculator(props) {
-  const [targetBox, setTargetBox] = useState(null);
-  const [drewBox, setDrewBox] = useState(null);
-  const [currentToken, setCurrentToken] = useState(null);
+function HonorCalculator(props) {
+  const [targetHonor, setTargetHonor] = useState(null);
   const [currentHonor, setCurrentHonor] = useState(null);
   const [currentMeat, setCurrentMeat] = useState(null);
   const [estimationMode, setEstimationMode] = useState(0);
@@ -48,14 +46,8 @@ function BoxCalculator(props) {
   const onInputChange = (inputName, value) => {
     let numValue = isNaN(value) ? 0 : value;
     switch (inputName) {
-      case "targetBox":
-        setTargetBox(numValue);
-        break;
-      case "drewBox":
-        setDrewBox(numValue);
-        break;
-      case "currentToken":
-        setCurrentToken(numValue);
+      case "targetHonor":
+        setTargetHonor(numValue);
         break;
       case "currentHonor":
         setCurrentHonor(numValue);
@@ -84,11 +76,9 @@ function BoxCalculator(props) {
   };
 
   useEffect(() => {
-    let state = JSON.parse(localStorage.getItem("BoxCalculator"));
+    let state = JSON.parse(localStorage.getItem("HonorCalculator"));
     if (state !== null) {
-      setTargetBox(state.targetBox);
-      setDrewBox(state.drewBox);
-      setCurrentToken(state.currentToken);
+      setTargetHonor(state.targetHonor);
       setCurrentHonor(state.currentHonor);
       setCurrentMeat(state.currentMeat);
       setEstimationMode(state.estimationMode);
@@ -99,20 +89,16 @@ function BoxCalculator(props) {
 
   useEffect(() => {
     let state = {
-      targetBox: targetBox,
-      drewBox: drewBox,
-      currentToken: currentToken,
+      targetHonor: targetHonor,
       currentHonor: currentHonor,
       currentMeat: currentMeat,
       estimationMode: estimationMode,
       meatChoice: meatChoice,
       soloChoice: soloChoice
     };
-    localStorage.setItem("BoxCalculator", JSON.stringify(state));
+    localStorage.setItem("HonorCalculator", JSON.stringify(state));
   }, [
-    targetBox,
-    drewBox,
-    currentToken,
+    targetHonor,
     currentHonor,
     currentMeat,
     estimationMode,
@@ -128,9 +114,7 @@ function BoxCalculator(props) {
     neededSolos: null
   };
   let data = {
-    targetBox: targetBox,
-    drewBox: drewBox,
-    currentToken: currentToken,
+    targetHonor: targetHonor,
     currentHonor: currentHonor,
     currentMeat: currentMeat,
     estimationMode: estimationMode,
@@ -140,13 +124,16 @@ function BoxCalculator(props) {
 
   switch (estimationMode) {
     case SOLO:
-      [payload.progress, payload.neededSolos] = calculateNeededSolo(data);
+      [payload.progress, payload.neededSolos] = calculateNeededSoloForHonor(
+        data,
+        "honor"
+      );
       break;
     case SOLOandMEAT:
       [
         payload.progress,
         payload.neededSolos
-      ] = calculateNeededSoloWithMeatRefill(data);
+      ] = calculateNeededSoloWithMeatRefillForHonor(data, "honor");
       break;
     default:
       break;
@@ -155,12 +142,14 @@ function BoxCalculator(props) {
   return (
     <Grid container spacing={1}>
       <Grid item sm={3} xs={12}>
-        <BoxInput current={data} onChange={onInputChange} />
+        <HonorInput current={data} onChange={onInputChange} />
       </Grid>
 
       <Grid item sm={9} xs={12}>
         <Paper className={classes.outputZone}>
-          <BoxProgress progress={payload.progress} />
+          <HonorProgress
+            progress={{ target: targetHonor, current: currentHonor }}
+          />
 
           <Paper>
             <Tabs value={estimationMode} onChange={onModeChange} centered>
@@ -231,4 +220,4 @@ function BoxCalculator(props) {
   );
 }
 
-export default BoxCalculator;
+export default HonorCalculator;
