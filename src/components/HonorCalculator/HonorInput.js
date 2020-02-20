@@ -3,7 +3,6 @@ import {
   Card,
   CardHeader,
   TextField,
-  Typography,
   Divider,
   useMediaQuery
 } from "@material-ui/core";

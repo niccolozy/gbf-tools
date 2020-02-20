@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { Grid, CssBaseline } from "@material-ui/core";
-import {
-  createMuiTheme,
-  makeStyles,
-  ThemeProvider
-} from "@material-ui/core/styles";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Header from "./components/layout/Header";
 import ToolList from "./components/ToolList";
 import BoxCalculator from "./components/BoxCalculator";

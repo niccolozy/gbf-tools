@@ -31,7 +31,6 @@ const useStyles = makeStyles(theme => ({
       flex: 1,
       margin: 5
     }
-    // flex: 1 //between md and lg?
   },
   image: {
     width: "auto",

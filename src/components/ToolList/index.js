@@ -4,9 +4,7 @@ import { Typography, Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    //padding: theme.spacing(1)
-  },
+  root: {},
   button: {
     margin: theme.spacing(1)
   }
