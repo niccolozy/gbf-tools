@@ -139,13 +139,16 @@ function BoxCalculator(props) {
 
   switch (estimationMode) {
     case SOLO:
-      [payload.progress, payload.neededSolos] = calculateNeededSolo(data);
+      [payload.progress, payload.neededSolos] = calculateNeededSolo(
+        data,
+        "soloToken"
+      );
       break;
     case SOLOandMEAT:
       [
         payload.progress,
         payload.neededSolos
-      ] = calculateNeededSoloWithMeatRefill(data);
+      ] = calculateNeededSoloWithMeatRefill(data, "soloToken");
       break;
     default:
       break;

@@ -16,8 +16,8 @@ import HonorProgress from "./HonorProgress.js";
 import BoxEstimation from "../BoxCalculator/BoxEstimation.js";
 import TimeEstimation from "../BoxCalculator/TimeEstimation.js";
 import {
-  calculateNeededSoloForHonor,
-  calculateNeededSoloWithMeatRefillForHonor
+  calculateNeededSolo,
+  calculateNeededSoloWithMeatRefill
 } from "../BoxCalculator/calculation.js";
 import { mobInfo } from "../BoxCalculator/constants.js";
 
@@ -123,16 +123,16 @@ function HonorCalculator(props) {
 
   switch (estimationMode) {
     case SOLO:
-      [payload.progress, payload.neededSolos] = calculateNeededSoloForHonor(
+      [payload.progress, payload.neededSolos] = calculateNeededSolo(
         data,
-        "honor"
+        "soloHonor"
       );
       break;
     case SOLOandMEAT:
       [
         payload.progress,
         payload.neededSolos
-      ] = calculateNeededSoloWithMeatRefillForHonor(data, "honor");
+      ] = calculateNeededSoloWithMeatRefill(data, "soloHonor");
       break;
     default:
       break;
@@ -146,9 +146,7 @@ function HonorCalculator(props) {
 
       <Grid item sm={9} xs={12}>
         <Paper className={classes.outputZone}>
-          <HonorProgress
-            progress={{ target: targetHonor, current: currentHonor }}
-          />
+          <HonorProgress progress={payload.progress} />
 
           <Paper>
             <Tabs value={estimationMode} onChange={onModeChange} centered>

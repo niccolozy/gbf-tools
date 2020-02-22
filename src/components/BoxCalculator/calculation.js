@@ -1,5 +1,4 @@
 import { tokenPerBox, ratioHonorToToken, mobInfo } from "./constants.js";
-import { func } from "prop-types";
 
 function getTokenForBox(boxIndex) {
   if (boxIndex < 5) {
@@ -19,18 +18,25 @@ function getTotalTokenToBox(boxIndex) {
   return total;
 }
 
-function getSoloTokenForMob(mob) {
-  return (
-    mob.hostToken +
-    mob.victoryToken +
-    mob.mvpToken +
-    mob.soloHonor * ratioHonorToToken
-  );
+function getIncomeForMob(mob, incomeType) {
+  switch (incomeType) {
+    case "soloHonor":
+      return mob.soloHonor;
+    case "soloToken":
+      return (
+        mob.hostToken +
+        mob.victoryToken +
+        mob.mvpToken +
+        mob.soloHonor * ratioHonorToToken
+      );
+    default:
+      return 0;
+  }
 }
 
-function getRequiredSoloForToken(mob, targetToken, currentMeat) {
+function getRequiredSolo(mob, incomeType, target, currentMeat) {
   let result = {};
-  result["num"] = Math.ceil(targetToken / getSoloTokenForMob(mob));
+  result["num"] = Math.ceil(target / getIncomeForMob(mob, incomeType));
   if (result["num"] < 0) {
     result["num"] = 0;
   }
@@ -41,199 +47,103 @@ function getRequiredSoloForToken(mob, targetToken, currentMeat) {
   result["meat"] = result["num"] * mob.meat > 0 ? result["num"] * mob.meat : 0;
   result["hasEnoughMeat"] = currentMeat >= result["meat"];
 
-  return result;
-}
-
-function getRequiredSoloForHonor(mob, targetHonor, currentMeat) {
-  let result = {};
-  result["num"] = Math.ceil(targetHonor / mob.soloHonor);
-  if (result["num"] < 0) {
-    result["num"] = 0;
-  }
-  result["elixir"] = Math.ceil((mob.AP * result["num"]) / 75);
-  if (result["elixir"] < 0) {
-    result["elixir"] = 0;
-  }
-  result["meat"] = result["num"] * mob.meat > 0 ? result["num"] * mob.meat : 0;
-  result["hasEnoughMeat"] = currentMeat >= result["meat"];
-
-  return result;
-}
-
-function getRequiredSolo(mob, target, currentMeat, mode = "token") {
-  if (mode === "token") {
-    return getRequiredSoloForToken(mob, target, currentMeat);
-  } else if (mode === "honor") {
-    return getRequiredSoloForHonor(mob, target, currentMeat);
-  }
-}
-
-function getRequiredSoloWithMeatRefillForToken(
-  mobMeat,
-  mobHell,
-  targetToken,
-  currentMeat
-) {
-  let result = {};
-  result["numMeat"] = Math.ceil(
-    (targetToken - (currentMeat / mobHell.meat) * getSoloTokenForMob(mobHell)) /
-      (getSoloTokenForMob(mobMeat) +
-        (mobMeat.meatGain / mobHell.meat) * getSoloTokenForMob(mobHell))
-  );
-  if (result["numMeat"] < 0) {
-    result["numMeat"] = 0;
-  }
-  result["numHell"] =
-    result["numMeat"] > 0
-      ? Math.floor(
-          (currentMeat + result["numMeat"] * mobMeat.meatGain) / mobHell.meat
-        )
-      : Math.ceil(targetToken / getSoloTokenForMob(mobHell));
-  if (result["numHell"] < 0) {
-    result["numHell"] = 0;
-  }
-  result["elixirMeat"] = Math.ceil((mobMeat.AP * result["numMeat"]) / 75);
-  result["elixirHell"] = Math.ceil((mobHell.AP * result["numHell"]) / 75);
-  if (result["elixirMeat"] < 0) {
-    result["elixirMeat"] = 0;
-  }
-  if (result["elixirHell"] < 0) {
-    result["elixirHell"] = 0;
-  }
-  return result;
-}
-
-function getRequiredSoloWithMeatRefillForHonor(
-  mobMeat,
-  mobHell,
-  targetHornor,
-  currentMeat
-) {
-  let result = {};
-  result["numMeat"] = Math.ceil(
-    (targetHornor - (currentMeat / mobHell.meat) * mobHell.soloHonor) /
-      (mobMeat.soloHonor +
-        (mobMeat.meatGain / mobHell.meat) * mobHell.soloHonor)
-  );
-  if (result["numMeat"] < 0) {
-    result["numMeat"] = 0;
-  }
-  result["numHell"] =
-    result["numMeat"] > 0
-      ? Math.floor(
-          (currentMeat + result["numMeat"] * mobMeat.meatGain) / mobHell.meat
-        )
-      : Math.ceil(targetHornor / mobHell.soloHonor);
-  if (result["numHell"] < 0) {
-    result["numHell"] = 0;
-  }
-  result["elixirMeat"] = Math.ceil((mobMeat.AP * result["numMeat"]) / 75);
-  result["elixirHell"] = Math.ceil((mobHell.AP * result["numHell"]) / 75);
-  if (result["elixirMeat"] < 0) {
-    result["elixirMeat"] = 0;
-  }
-  if (result["elixirHell"] < 0) {
-    result["elixirHell"] = 0;
-  }
   return result;
 }
 
 function getRequiredSoloWithMeatRefill(
   mobMeat,
   mobHell,
+  incomeType,
   target,
-  currentMeat,
-  mode = "token"
+  currentMeat
 ) {
-  if (mode === "token") {
-    return getRequiredSoloWithMeatRefillForToken(
-      mobMeat,
-      mobHell,
-      target,
-      currentMeat
-    );
-  } else if (mode === "honor") {
-    return getRequiredSoloWithMeatRefillForHonor(
-      mobMeat,
-      mobHell,
-      target,
-      currentMeat
-    );
-  }
-}
-
-function calculateProgress(targetBox, drewBox, currentToken, currentHonor) {
-  let progress = {
-    requiredToken: getTotalTokenToBox(targetBox),
-    currentToken: currentToken,
-    drewToken: getTotalTokenToBox(drewBox),
-    currentTokenFromHonor: Math.floor(currentHonor * ratioHonorToToken)
-  };
-  return progress;
-}
-
-export function calculateNeededSolo(data, mode = "token") {
-  let progress = calculateProgress(
-    data.targetBox,
-    data.drewBox,
-    data.currentToken,
-    data.currentHonor
+  let result = {};
+  result["numMeat"] = Math.ceil(
+    (target -
+      (currentMeat / mobHell.meat) * getIncomeForMob(mobHell, incomeType)) /
+      (getIncomeForMob(mobMeat, incomeType) +
+        (mobMeat.meatGain / mobHell.meat) *
+          getIncomeForMob(mobHell, incomeType))
   );
-  let restToken =
-    progress.requiredToken -
-    progress.drewToken -
-    progress.currentToken -
-    progress.currentTokenFromHonor;
+  if (result["numMeat"] < 0) {
+    result["numMeat"] = 0;
+  }
+  result["numHell"] =
+    result["numMeat"] > 0
+      ? Math.floor(
+          (currentMeat + result["numMeat"] * mobMeat.meatGain) / mobHell.meat
+        )
+      : Math.ceil(target / getIncomeForMob(mobHell, incomeType));
+  if (result["numHell"] < 0) {
+    result["numHell"] = 0;
+  }
+  result["elixirMeat"] = Math.ceil((mobMeat.AP * result["numMeat"]) / 75);
+  result["elixirHell"] = Math.ceil((mobHell.AP * result["numHell"]) / 75);
+  if (result["elixirMeat"] < 0) {
+    result["elixirMeat"] = 0;
+  }
+  if (result["elixirHell"] < 0) {
+    result["elixirHell"] = 0;
+  }
+  return result;
+}
+
+function getProgressForIncome(data, incomeType) {
+  let progress = {};
+  let rest = 0;
+  switch (incomeType) {
+    case "soloHonor":
+      progress = {
+        total: data.targetHonor,
+        completed: data.currentHonor
+      };
+      rest = progress.total - progress.completed;
+      break;
+    case "soloToken":
+      progress = {
+        total: getTotalTokenToBox(data.targetBox),
+        completed: {
+          fromDrop: data.currentToken + getTotalTokenToBox(data.drewBox),
+          fromHonor: Math.floor(data.currentHonor * ratioHonorToToken)
+        }
+      };
+      rest =
+        progress.total -
+        progress.completed.fromDrop -
+        progress.completed.fromHonor;
+      break;
+    default:
+  }
+  return [progress, rest];
+}
+
+export function calculateNeededSolo(data, incomeType) {
+  let [progress, target] = getProgressForIncome(data, incomeType);
 
   let neededSolos = {};
   for (let mob of Object.keys(mobInfo)) {
     neededSolos[mob] = getRequiredSolo(
       mobInfo[mob],
-      restToken,
-      data.currentMeat,
-      mode
+      incomeType,
+      target,
+      data.currentMeat
     );
   }
   return [progress, neededSolos];
 }
 
-export function calculateNeededSoloForHonor(data, mode = "honor") {
-  let restHonor = data.targetHonor - data.currentHonor;
-
-  let neededSolos = {};
-  for (let mob of Object.keys(mobInfo)) {
-    neededSolos[mob] = getRequiredSolo(
-      mobInfo[mob],
-      restHonor,
-      data.currentMeat,
-      mode
-    );
-  }
-  return [{}, neededSolos];
-}
-
-export function calculateNeededSoloWithMeatRefill(data, mode = "token") {
-  let progress = calculateProgress(
-    data.targetBox,
-    data.drewBox,
-    data.currentToken,
-    data.currentHonor
-  );
-  let restToken =
-    progress.requiredToken -
-    progress.drewToken -
-    progress.currentToken -
-    progress.currentTokenFromHonor;
-
+export function calculateNeededSoloWithMeatRefill(data, incomeType) {
+  let [progress, target] = getProgressForIncome(data, incomeType);
   let neededSolos = {};
 
   let estimation = getRequiredSoloWithMeatRefill(
     mobInfo[data.meatChoice],
     mobInfo[data.soloChoice],
-    restToken,
-    data.currentMeat,
-    mode
+    incomeType,
+    target,
+    data.currentMeat
   );
+  console.log(estimation);
   neededSolos[data.meatChoice] = {
     num: estimation.numMeat,
     elixir: estimation.elixirMeat,
@@ -246,33 +156,4 @@ export function calculateNeededSoloWithMeatRefill(data, mode = "token") {
   };
 
   return [progress, neededSolos];
-}
-
-export function calculateNeededSoloWithMeatRefillForHonor(
-  data,
-  mode = "honor"
-) {
-  let restHonor = data.targetHonor - data.currentHonor;
-
-  let neededSolos = {};
-
-  let estimation = getRequiredSoloWithMeatRefill(
-    mobInfo[data.meatChoice],
-    mobInfo[data.soloChoice],
-    restHonor,
-    data.currentMeat,
-    mode
-  );
-  neededSolos[data.meatChoice] = {
-    num: estimation.numMeat,
-    elixir: estimation.elixirMeat,
-    meat: 0
-  };
-  neededSolos[data.soloChoice] = {
-    num: estimation.numHell,
-    elixir: estimation.elixirHell,
-    meat: estimation.numHell * mobInfo[data.soloChoice].meat
-  };
-
-  return [{}, neededSolos];
 }

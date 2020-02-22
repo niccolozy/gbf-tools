@@ -28,10 +28,12 @@ const useStyles = makeStyles(theme => ({
 
 export default function BoxProgress({ progress }) {
   const classes = useStyles();
-  let total = progress.requiredToken;
-  let completed =
-    progress.currentToken + progress.drewToken + progress.currentTokenFromHonor;
-  let progressPercentage = total !== 0 ? (completed / total) * 100 : 100;
+  let progressPercentage =
+    progress.total !== 0
+      ? ((progress.completed.fromDrop + progress.completed.fromHonor) /
+          progress.total) *
+        100
+      : 100;
 
   return (
     <TableContainer component={Paper}>
@@ -57,10 +59,10 @@ export default function BoxProgress({ progress }) {
             <TableCell component="th" scope="row">
               总进度
             </TableCell>
-            <TableCell align="center">{total}</TableCell>
+            <TableCell align="center">{progress.total}</TableCell>
             <TableCell align="center">
-              {progress.currentToken + progress.drewToken} +{" "}
-              {progress.currentTokenFromHonor}(贡献)
+              {progress.completed.fromDrop} + {progress.completed.fromHonor}
+              (贡献)
             </TableCell>
             <TableCell align="center">
               <LinearProgress
