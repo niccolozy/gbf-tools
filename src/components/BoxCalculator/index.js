@@ -7,7 +7,8 @@ import {
   Select,
   MenuItem,
   Typography,
-  FormControl
+  FormControl,
+  Divider
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -163,7 +164,7 @@ function BoxCalculator(props) {
       <Grid item sm={9} xs={12}>
         <Paper className={classes.outputZone}>
           <BoxProgress progress={payload.progress} />
-
+          <Divider />
           <Paper>
             <Tabs value={estimationMode} onChange={onModeChange} centered>
               <Tab value={SOLO} label="Solo单一关卡" />
@@ -226,6 +227,7 @@ function BoxCalculator(props) {
           </Paper>
 
           <BoxEstimation payload={payload} />
+          <Divider />
           <TimeEstimation payload={payload} />
         </Paper>
       </Grid>
