@@ -11,6 +11,7 @@ import {
   ListItemText
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import HomeIcon from "@material-ui/icons/Home";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
 class Header extends Component {
@@ -34,9 +35,14 @@ class Header extends Component {
     this.props.onItemClicked(e, index);
   };
 
+  handleHomeClick = e => {
+    this.props.onItemClicked(e, -1);
+  };
+
   render() {
     const handleDrawerOpen = this.handleDrawerOpen;
     const handleDrawerClose = this.handleDrawerClose;
+    const handleHomeClick = this.handleHomeClick;
     const open = this.state.open;
     return (
       <>
@@ -45,9 +51,12 @@ class Header extends Component {
             <IconButton color="inherit" edge="start" onClick={handleDrawerOpen}>
               <MenuIcon />
             </IconButton>
-            <Typography variant="h5" noWrap>
+            <Typography variant="h5" style={{ flexGrow: 1 }}>
               {this.props.currentTool}
             </Typography>
+            <IconButton color="inherit" onClick={handleHomeClick}>
+              <HomeIcon />
+            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer variant="persistent" anchor="left" open={open}>
