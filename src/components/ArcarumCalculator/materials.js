@@ -1,87 +1,66 @@
-const arcarumMaterials = [
-  "Sephira Stone",
-  "Astra",
-  "Idean",
-  "Verum Proof",
-  "Haze",
-  "Arcarum Fragment",
-  "Sephira Evolite"
-];
-
-const otherMaterials = [
-  "Basic Omega Anima",
-  "Flawless Prism",
-  "Quartz",
-  "Rainbow Prism",
-  "Tier 1 Summon Anima",
-  "Legendary Merit",
-  "Tier 2 Summon Anima",
-  "Silver Centrum",
-  "Sunlight Stone",
-  "Primarch Anima",
-  "Omega II Omega Anima",
-  "Co-op Rotating Showdown Item",
-  "Trial Fragment",
-  "Genesis Fragment",
-  "Primeval Horn"
-];
-
-class Material {
-  constructor(name, icon, quantity) {
-    this.name = name;
-    this.icon = icon;
-    this.quantity = quantity;
-  }
-}
+import * as matImg from "../../assets/materials";
+export { matImg };
 
 const makeMaterial = (name, icon, quantity) => {
   return { name: name, icon: icon, quantity: quantity };
 };
 
 export const SephiraStone = quantity => {
-  return makeMaterial("Sephira Stone", null, quantity);
+  return makeMaterial("Sephira Stone", matImg.Arcarum.Sephira_Stone, quantity);
 };
 
 export const SephiraEvolite = quantity => {
-  return makeMaterial("Sephira Evolite", null, quantity);
+  return makeMaterial(
+    "Sephira Evolite",
+    matImg.Arcarum.Sephira_Evolite,
+    quantity
+  );
 };
 
 export const FlawlessPrism = quantity => {
-  return makeMaterial("Flawless Prism", null, quantity);
+  return makeMaterial("Flawless Prism", matImg.Other.Flawless_Prism, quantity);
 };
 
 export const RainbowPrism = quantity => {
-  return makeMaterial("Rainbow Prism", null, quantity);
+  return makeMaterial("Rainbow Prism", matImg.Other.Rainbow_Prism, quantity);
 };
 
 export const LegendaryMerit = quantity => {
-  return makeMaterial("Legendary Merit", null, quantity);
+  return makeMaterial(
+    "Legendary Merit",
+    matImg.Other.Legendary_Merit,
+    quantity
+  );
 };
 
 export const SilverCentrum = quantity => {
-  return makeMaterial("Silver Centrum", null, quantity);
+  return makeMaterial("Silver Centrum", matImg.Other.Silver_Centrum, quantity);
 };
 
 export const SunlightStone = quantity => {
-  return makeMaterial("Sunlight Stone", null, quantity);
+  return makeMaterial("Sunlight Stone", matImg.Other.Sunlight_Stone, quantity);
 };
 
 export const GenesisFragment = quantity => {
-  return makeMaterial("Genesis Fragment", null, quantity);
+  return makeMaterial(
+    "Genesis Fragment",
+    matImg.Other.Genesis_Fragment,
+    quantity
+  );
 };
 
 export const PrimevalHorn = quantity => {
-  return makeMaterial("Primeval Horn", null, quantity);
+  return makeMaterial("Primeval Horn", matImg.Other.Primeval_Horn, quantity);
 };
 
 export const Astra = (element, quantity) => {
   let elementTable = {
-    fire: { name: "Flameborne Astra", icon: null },
-    water: { name: "Aquaborne Astra", icon: null },
-    earth: { name: "Earthborne Astra", icon: null },
-    wind: { name: "Windborne Astra", icon: null },
-    light: { name: "Lightborne Astra", icon: null },
-    dark: { name: "Darkborne Astra", icon: null }
+    fire: { name: "Flameborne Astra", icon: matImg.Arcarum.Flameborne_Astra },
+    water: { name: "Aquaborne Astra", icon: matImg.Arcarum.Aquaborne_Astra },
+    earth: { name: "Earthborne Astra", icon: matImg.Arcarum.Earthborne_Astra },
+    wind: { name: "Windborne Astra", icon: matImg.Arcarum.Windborne_Astra },
+    light: { name: "Lightborne Astra", icon: matImg.Arcarum.Lightborne_Astra },
+    dark: { name: "Darkborne Astra", icon: matImg.Arcarum.Darkborne_Astra }
   };
 
   return makeMaterial(
@@ -93,16 +72,22 @@ export const Astra = (element, quantity) => {
 
 export const Idean = (summon, quantity) => {
   let summonTable = {
-    Justice: { name: "Justice Idean", icon: null },
-    HangedMan: { name: "Hanged Man Idean", icon: null },
-    Death: { name: "Death Idean", icon: null },
-    Temperance: { name: "Temperance Idean", icon: null },
-    Devil: { name: "Devil Idean", icon: null },
-    Tower: { name: "Tower Idean", icon: null },
-    Star: { name: "Star Idean", icon: null },
-    Moon: { name: "Moon Idean", icon: null },
-    Sun: { name: "Sun Idean", icon: null },
-    Judgement: { name: "Judgement Idean", icon: null }
+    Justice: { name: "Justice Idean", icon: matImg.Arcarum.Justice_Idean },
+    HangedMan: {
+      name: "Hanged Man Idean",
+      icon: matImg.Arcarum.Hanged_Man_Idean
+    },
+    Death: { name: "Death Idean", icon: matImg.Arcarum.Death_Idean },
+    Temperance: {
+      name: "Temperance Idean",
+      icon: matImg.Arcarum.Temperance_Idean
+    },
+    Devil: { name: "Devil Idean", icon: matImg.Arcarum.Devil_Idean },
+    Tower: { name: "Tower Idean", icon: matImg.Arcarum.Tower_Idean },
+    Star: { name: "Star Idean", icon: matImg.Arcarum.Star_Idean },
+    Moon: { name: "Moon Idean", icon: matImg.Arcarum.Moon },
+    Sun: { name: "Sun Idean", icon: matImg.Arcarum.Sun_Idean },
+    Judgement: { name: "Judgement Idean", icon: matImg.Arcarum.Judgement_Idean }
   };
 
   return makeMaterial(
@@ -114,10 +99,16 @@ export const Idean = (summon, quantity) => {
 
 export const VerumProof = (element, quantity) => {
   let elementTable = {
-    fire: { name: "Fire Verum Proof", icon: null },
-    water: { name: "Water Verum Proof", icon: null },
-    earth: { name: "Earth Verum Proof", icon: null },
-    wind: { name: "Wind Verum Proof", icon: null }
+    fire: { name: "Fire Verum Proof", icon: matImg.Arcarum.Fire_Verum_Proof },
+    water: {
+      name: "Water Verum Proof",
+      icon: matImg.Arcarum.Water_Verum_Proof
+    },
+    earth: {
+      name: "Earth Verum Proof",
+      icon: matImg.Arcarum.Earth_Verum_Proof
+    },
+    wind: { name: "Wind Verum Proof", icon: matImg.Arcarum.Wind_Verum_Proof }
   };
 
   return makeMaterial(
@@ -129,8 +120,8 @@ export const VerumProof = (element, quantity) => {
 
 export const Haze = (element, quantity) => {
   let elementTable = {
-    light: { name: "Aurora Haze", icon: null },
-    dark: { name: "Chaotic Haze", icon: null }
+    light: { name: "Aurora Haze", icon: matImg.Arcarum.Aurora_Haze },
+    dark: { name: "Chaotic Haze", icon: matImg.Arcarum.Chaotic_Haze }
   };
 
   return makeMaterial(
@@ -142,9 +133,12 @@ export const Haze = (element, quantity) => {
 
 export const ArcarumFragment = (element, quantity) => {
   let elementTable = {
-    red: { name: "Aquila Fragment", icon: null },
-    green: { name: "Bellator Fragment", icon: null },
-    blue: { name: "Celsus Fragment", icon: null }
+    red: { name: "Aquila Fragment", icon: matImg.Arcarum.Aquila_Fragment },
+    green: {
+      name: "Bellator Fragment",
+      icon: matImg.Arcarum.Bellator_Fragment
+    },
+    blue: { name: "Celsus Fragment", icon: matImg.Arcarum.Celsus_Fragment }
   };
 
   return makeMaterial(
@@ -156,12 +150,27 @@ export const ArcarumFragment = (element, quantity) => {
 
 export const OmegaIAnima = (element, quantity) => {
   let elementTable = {
-    fire: { name: "Colossus Omega Anima", icon: null },
-    water: { name: "Leviathan Omega Anima", icon: null },
-    earth: { name: "Yggdrasil Omega Anima", icon: null },
-    wind: { name: "Tiamat Omega Anima", icon: null },
-    light: { name: "Luminiera Omega Anima", icon: null },
-    dark: { name: "Celeste Omega Anima", icon: null }
+    fire: {
+      name: "Colossus Omega Anima",
+      icon: matImg.Anima.Celeste_Omega_Anima
+    },
+    water: {
+      name: "Leviathan Omega Anima",
+      icon: matImg.Anima.Leviathan_Omega_Anima
+    },
+    earth: {
+      name: "Yggdrasil Omega Anima",
+      icon: matImg.Anima.Yggdrasil_Omega_Anima
+    },
+    wind: { name: "Tiamat Omega Anima", icon: matImg.Anima.Tiamat_Omega_Anima },
+    light: {
+      name: "Luminiera Omega Anima",
+      icon: matImg.Anima.Luminiera_Omega_Anima
+    },
+    dark: {
+      name: "Celeste Omega Anima",
+      icon: matImg.Anima.Celeste_Omega_Anima
+    }
   };
 
   return makeMaterial(
@@ -173,12 +182,24 @@ export const OmegaIAnima = (element, quantity) => {
 
 export const OmegaIIAnima = (element, quantity) => {
   let elementTable = {
-    fire: { name: "Shiva Omega Anima", icon: null },
-    water: { name: "Europa Omega Anima", icon: null },
-    earth: { name: "Alexiel Omega Anima", icon: null },
-    wind: { name: "Grimnir Omega Anima", icon: null },
-    light: { name: "Metatron Omega Anima", icon: null },
-    dark: { name: "Avatar Omega Anima", icon: null }
+    fire: { name: "Shiva Omega Anima", icon: matImg.Anima.Shiva_Omega_Anima },
+    water: {
+      name: "Europa Omega Anima",
+      icon: matImg.Anima.Europa_Omega_Anima
+    },
+    earth: {
+      name: "Alexiel Omega Anima",
+      icon: matImg.Anima.Alexiel_Omega_Anima
+    },
+    wind: {
+      name: "Grimnir Omega Anima",
+      icon: matImg.Anima.Grimnir_Omega_Anima
+    },
+    light: {
+      name: "Metatron Omega Anima",
+      icon: matImg.Anima.Metatron_Omega_Anima
+    },
+    dark: { name: "Avatar Omega Anima", icon: matImg.Anima.Avatar_Omega_Anima }
   };
 
   return makeMaterial(
@@ -190,12 +211,12 @@ export const OmegaIIAnima = (element, quantity) => {
 
 export const Quartz = (element, quantity) => {
   let elementTable = {
-    fire: { name: "Fire Quartz", icon: null },
-    water: { name: "Water Quartz", icon: null },
-    earth: { name: "Earth Quartz", icon: null },
-    wind: { name: "Wind Quartz", icon: null },
-    light: { name: "Light Quartz", icon: null },
-    dark: { name: "Dark Quartz", icon: null }
+    fire: { name: "Fire Quartz", icon: matImg.Quartz.Fire_Quartz },
+    water: { name: "Water Quartz", icon: matImg.Quartz.Water_Quartz },
+    earth: { name: "Earth Quartz", icon: matImg.Quartz.earth },
+    wind: { name: "Wind Quartz", icon: matImg.Quartz.Wind_Quartz },
+    light: { name: "Light Quartz", icon: matImg.Quartz.Light_Quartz },
+    dark: { name: "Dark Quartz", icon: matImg.Quartz.Dark_Quartz }
   };
 
   return makeMaterial(
@@ -207,12 +228,21 @@ export const Quartz = (element, quantity) => {
 
 export const SummonIAnima = (element, quantity) => {
   let elementTable = {
-    fire: { name: "Twin Elements Anima", icon: null },
-    water: { name: "Macula Marius Anima", icon: null },
-    earth: { name: "Medusa Anima", icon: null },
-    wind: { name: "Nezha Anima", icon: null },
-    light: { name: "Apollo Anima", icon: null },
-    dark: { name: "Dark Angel Olivia Anima", icon: null }
+    fire: {
+      name: "Twin Elements Anima",
+      icon: matImg.Anima.Twin_Elements_Anima
+    },
+    water: {
+      name: "Macula Marius Anima",
+      icon: matImg.Anima.Macula_Marius_Anima
+    },
+    earth: { name: "Medusa Anima", icon: matImg.Anima.Medusa_Anima },
+    wind: { name: "Nezha Anima", icon: matImg.Anima.Nezha_Anima },
+    light: { name: "Apollo Anima", icon: matImg.Anima.Apollo_Anima },
+    dark: {
+      name: "Dark Angel Olivia Anima",
+      icon: matImg.Anima.Dark_Angel_Olivia_Anima
+    }
   };
 
   return makeMaterial(
@@ -224,12 +254,12 @@ export const SummonIAnima = (element, quantity) => {
 
 export const SummonIIAnima = (element, quantity) => {
   let elementTable = {
-    fire: { name: "Athena Anima", icon: null },
-    water: { name: "Grani Anima", icon: null },
-    earth: { name: "Baal Anima", icon: null },
-    wind: { name: "Garuda Anima", icon: null },
-    light: { name: "Odin Anima", icon: null },
-    dark: { name: "Lich Anima", icon: null }
+    fire: { name: "Athena Anima", icon: matImg.Anima.Athena_Anima },
+    water: { name: "Grani Anima", icon: matImg.Anima.Grani_Anima },
+    earth: { name: "Baal Anima", icon: matImg.Anima.Baal_Anima },
+    wind: { name: "Garuda Anima", icon: matImg.Anima.Garuda_Anima },
+    light: { name: "Odin Anima", icon: matImg.Anima.Odin_Anima },
+    dark: { name: "Lich Anima", icon: matImg.Anima.Lich_Anima }
   };
 
   return makeMaterial(
@@ -241,10 +271,10 @@ export const SummonIIAnima = (element, quantity) => {
 
 export const PrimarchAnima = (element, quantity) => {
   let elementTable = {
-    fire: { name: "Michael Anima", icon: null },
-    water: { name: "Gabriel Anima", icon: null },
-    earth: { name: "Uriel Anima", icon: null },
-    wind: { name: "Raphael Anima", icon: null }
+    fire: { name: "Michael Anima", icon: matImg.Anima.Michael_Anima },
+    water: { name: "Gabriel Anima", icon: matImg.Anima.Gabriel_Anima },
+    earth: { name: "Uriel Anima", icon: matImg.Anima.Uriel_Anima },
+    wind: { name: "Raphael Anima", icon: matImg.Anima.Raphael_Anima }
   };
 
   return makeMaterial(
@@ -256,12 +286,12 @@ export const PrimarchAnima = (element, quantity) => {
 
 export const CoopShowdownItem = (element, quantity) => {
   let elementTable = {
-    fire: { name: "Infernal Garnet", icon: null },
-    water: { name: "Frozen Hell Prism", icon: null },
-    earth: { name: "Evil Judge Crystal", icon: null },
-    wind: { name: "Horseman's Plate", icon: null },
-    light: { name: "Halo Light Quartz", icon: null },
-    dark: { name: "Phantom Demon Jewel", icon: null }
+    fire: { name: "Infernal Garnet", icon: matImg.Coop.Infernal_Garnet },
+    water: { name: "Frozen Hell Prism", icon: matImg.Coop.Frozen_Hell_Prism },
+    earth: { name: "Evil Judge Crystal", icon: matImg.Coop.Evil_Judge_Crystal },
+    wind: { name: "Horseman's Plate", icon: matImg.Coop.Horseman_Plate },
+    light: { name: "Halo Light Quartz", icon: matImg.Coop.Halo_Light_Quartz },
+    dark: { name: "Phantom Demon Jewel", icon: matImg.Coop.Phantom_Demon_Jewel }
   };
 
   return makeMaterial(
@@ -273,10 +303,13 @@ export const CoopShowdownItem = (element, quantity) => {
 
 export const TrialFragment = (element, quantity) => {
   let elementTable = {
-    fire: { name: "Hellfire Fragment", icon: null },
-    water: { name: "Deluge Fragment", icon: null },
-    earth: { name: "Wasteland Fragment", icon: null },
-    wind: { name: "Typhoon Fragment", icon: null }
+    fire: { name: "Hellfire Fragment", icon: matImg.Other.Hellfire_Fragment },
+    water: { name: "Deluge Fragment", icon: matImg.Other.Deluge_Fragment },
+    earth: {
+      name: "Wasteland Fragment",
+      icon: matImg.Other.Wasteland_Fragment
+    },
+    wind: { name: "Typhoon Fragment", icon: matImg.Other.Typhoon_Fragment }
   };
 
   return makeMaterial(
@@ -288,16 +321,16 @@ export const TrialFragment = (element, quantity) => {
 
 export const QuestMaterial = (element, quantity) => {
   let elementTable = {
-    Justice: { name: "Toxic Tulip", icon: null },
-    HangedMan: { name: "Bestia Fruit", icon: null },
-    Death: { name: "Jumbo Beast Bone", icon: null },
-    Temperance: { name: "Kluger Herb", icon: null },
-    Devil: { name: "Rhem Pepper", icon: null },
-    Tower: { name: "Broken Teacup", icon: null },
-    Star: { name: "Rusty Eave", icon: null },
-    Moon: { name: "Translucent Silk", icon: null },
-    Sun: { name: "Meditative Sutra", icon: null },
-    Judgement: { name: "Dusty Book", icon: null }
+    Justice: { name: "Toxic Tulip", icon: matImg.Quest.Toxic_Tulip },
+    HangedMan: { name: "Bestia Fruit", icon: matImg.Quest.Bestia_Fruit },
+    Death: { name: "Jumbo Beast Bone", icon: matImg.Quest.Jumbo_Beast_Bone },
+    Temperance: { name: "Kluger Herb", icon: matImg.Quest.Kluger_Herb },
+    Devil: { name: "Rhem Pepper", icon: matImg.Quest.Rhem_Pepper },
+    Tower: { name: "Broken Teacup", icon: matImg.Quest.Broken_Teacup },
+    Star: { name: "Rusty Eave", icon: matImg.Quest.Rusty_Eave },
+    Moon: { name: "Translucent Silk", icon: matImg.Quest.Translucent_Silk },
+    Sun: { name: "Meditative Sutra", icon: matImg.Quest.Meditative_Sutra },
+    Judgement: { name: "Dusty Book", icon: matImg.Quest.Dusty_Book }
   };
 
   return makeMaterial(

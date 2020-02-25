@@ -12,9 +12,9 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { green, blue } from "@material-ui/core/colors";
-import crystalImg from "../../assets/crystal.jpg";
-import singleTicketImg from "../../assets/signle-roll-ticket.jpg";
-import tenRollTicketImg from "../../assets/10-roll-ticket.jpg";
+import crystalImg from "../../assets/draws/crystal.jpg";
+import singleTicketImg from "../../assets/draws/signle-roll-ticket.jpg";
+import tenRollTicketImg from "../../assets/draws/10-roll-ticket.jpg";
 
 const useStyles = makeStyles(theme => ({
   root: {

@@ -226,7 +226,7 @@ const stepCost = {
   }
 };
 
-const aggregateStepCost = (summon, currentStep, targetStep) => {
+export const aggregateStepCost = (summon, currentStep, targetStep) => {
   let totalArcarum = new Map();
   let totalOther = new Map();
 
@@ -254,7 +254,7 @@ const aggregateStepCost = (summon, currentStep, targetStep) => {
   return { arcarum: totalArcarum, other: totalOther };
 };
 
-const aggregateSummonCost = plans => {
+export const aggregateSummonCost = plans => {
   let totalArcarum = new Map();
   let totalOther = new Map();
 

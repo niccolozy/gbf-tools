@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Card } from "@material-ui/core";
+import * as cost from "./arcarumCosts.js";
 
 export default function ArcarumCalculator(props) {
   return (
