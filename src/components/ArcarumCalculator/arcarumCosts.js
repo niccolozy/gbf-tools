@@ -220,9 +220,20 @@ const stepCost = {
     let costList = [
       materials.SephiraEvolite(1),
       materials.SephiraStone(30),
-      materials.Idean(summon, 20),
-      materials.Astra(element, 206)
+      materials.Idean(summon, 22),
+      materials.Astra(element, 206),
+      materials.Haze(getElementForHaze(element), 3)
     ];
+
+    if (element === "light") {
+      costList.push(materials.VerumProof("fire", 10));
+      costList.push(materials.VerumProof("wind", 10));
+    } else if (element === "dark") {
+      costList.push(materials.VerumProof("water", 10));
+      costList.push(materials.VerumProof("earth", 10));
+    } else {
+      costList.push(materials.VerumProof(element, 20));
+    }
 
     return makeCostDict(costList);
   }
