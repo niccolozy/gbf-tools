@@ -56,7 +56,7 @@ export default function MaterialTable({
               <b>已有</b>
             </TableCell>
             <TableCell align="left" className={classes.cell}>
-              <b>所需</b>
+              <b>仍需</b>
             </TableCell>
           </TableRow>
         </TableHead>
