@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Grid, Button } from "@material-ui/core";
+import { Typography, Grid, Button, Divider } from "@material-ui/core";
+import { Card, CardHeader, CardContent } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -32,6 +33,17 @@ export default function ToolList({ tools, onClick }) {
           </Grid>
         );
       })}
+      <Grid item xs={12}>
+        <Card>
+          <CardHeader title="更新" />
+          <Divider />
+          <CardContent>
+            <Typography variant="body1">
+              <b>2020-03-02</b> 转世进度统计测试版上线
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
     </Grid>
   );
 }

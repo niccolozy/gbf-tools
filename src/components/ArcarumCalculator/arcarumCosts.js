@@ -33,253 +33,238 @@ function getElementForFragment(summon) {
   else return "blue";
 }
 
+function makeCostDict(costList) {
+  let dict = {};
+  costList.forEach(material => {
+    if (dict[material.type]) {
+      dict[material.type].push(material);
+    } else {
+      dict[material.type] = [];
+      dict[material.type].push(material);
+    }
+  });
+  return dict;
+}
+
 const stepCost = {
   [SR0]: (summon, element) => {
-    let arcarumMaterials = [
-      new materials.SephiraStone(2),
-      new materials.Astra(element, 3),
-      new materials.Idean(summon, 2),
-      new materials.Haze(getElementForHaze(element), 1)
-    ];
-    let otherMaterials = [
-      new materials.FlawlessPrism(100),
-      new materials.OmegaIAnima(element, 30)
+    let costList = [
+      materials.SephiraStone(2),
+      materials.Astra(element, 3),
+      materials.Idean(summon, 2),
+      materials.Haze(getElementForHaze(element), 1),
+      materials.FlawlessPrism(100),
+      materials.OmegaIAnima(element, 30)
     ];
 
     //deal with light and dark corner cases
     if (element === "light") {
-      arcarumMaterials.push(new materials.VerumProof("fire", 3));
-      arcarumMaterials.push(new materials.VerumProof("wind", 3));
+      costList.push(materials.VerumProof("fire", 3));
+      costList.push(materials.VerumProof("wind", 3));
     } else if (element === "dark") {
-      arcarumMaterials.push(new materials.VerumProof("water", 3));
-      arcarumMaterials.push(new materials.VerumProof("earth", 3));
+      costList.push(materials.VerumProof("water", 3));
+      costList.push(materials.VerumProof("earth", 3));
     } else {
-      arcarumMaterials.push(new materials.VerumProof(element, 6));
+      costList.push(materials.VerumProof(element, 6));
     }
-    return { arcarum: arcarumMaterials, other: otherMaterials };
+    return makeCostDict(costList);
   },
 
   [SR1]: (summon, element) => {
-    let arcarumMaterials = [
-      new materials.SephiraStone(5),
-      new materials.Astra(element, 5),
-      new materials.Idean(summon, 3),
-      new materials.Haze(getElementForHaze(element), 3)
-    ];
-    let otherMaterials = [
-      new materials.RainbowPrism(100),
-      new materials.Quartz(element, 100)
+    let costList = [
+      materials.SephiraStone(5),
+      materials.Astra(element, 5),
+      materials.Idean(summon, 3),
+      materials.Haze(getElementForHaze(element), 3),
+      materials.RainbowPrism(100),
+      materials.Quartz(element, 100)
     ];
 
     //deal with light and dark corner cases
     if (element === "light") {
-      arcarumMaterials.push(new materials.VerumProof("fire", 8));
-      arcarumMaterials.push(new materials.VerumProof("wind", 8));
+      costList.push(materials.VerumProof("fire", 8));
+      costList.push(materials.VerumProof("wind", 8));
     } else if (element === "dark") {
-      arcarumMaterials.push(new materials.VerumProof("water", 8));
-      arcarumMaterials.push(new materials.VerumProof("earth", 8));
+      costList.push(materials.VerumProof("water", 8));
+      costList.push(materials.VerumProof("earth", 8));
     } else {
-      arcarumMaterials.push(new materials.VerumProof(element, 16));
+      costList.push(materials.VerumProof(element, 16));
     }
-    return { arcarum: arcarumMaterials, other: otherMaterials };
+    return makeCostDict(costList);
   },
 
   [SR2]: (summon, element) => {
-    let arcarumMaterials = [
-      new materials.SephiraStone(10),
-      new materials.Astra(element, 10),
-      new materials.Idean(summon, 5),
-      new materials.Haze(getElementForHaze(element), 7)
+    let costList = [
+      materials.SephiraStone(10),
+      materials.Astra(element, 10),
+      materials.Idean(summon, 5),
+      materials.Haze(getElementForHaze(element), 7),
+      materials.SummonIAnima(element, 30)
     ];
-    let otherMaterials = [new materials.SummonIAnima(element, 30)];
 
     //deal with light and dark corner cases
     if (element === "light") {
-      arcarumMaterials.push(new materials.VerumProof("fire", 15));
-      arcarumMaterials.push(new materials.VerumProof("wind", 15));
+      costList.push(materials.VerumProof("fire", 15));
+      costList.push(materials.VerumProof("wind", 15));
     } else if (element === "dark") {
-      arcarumMaterials.push(new materials.VerumProof("water", 15));
-      arcarumMaterials.push(new materials.VerumProof("earth", 15));
+      costList.push(materials.VerumProof("water", 15));
+      costList.push(materials.VerumProof("earth", 15));
     } else {
-      arcarumMaterials.push(new materials.VerumProof(element, 30));
+      costList.push(materials.VerumProof(element, 30));
     }
-    return { arcarum: arcarumMaterials, other: otherMaterials };
+    return makeCostDict(costList);
   },
 
   [SR3]: (summon, element) => {
-    let arcarumMaterials = [
-      new materials.SephiraStone(15),
-      new materials.Astra(element, 15),
-      new materials.Idean(summon, 7),
-      new materials.Haze(getElementForHaze(element), 16)
-    ];
-    let otherMaterials = [
-      new materials.LegendaryMerit(3),
-      new materials.SummonIIAnima(element, 30)
+    let costList = [
+      materials.SephiraStone(15),
+      materials.Astra(element, 15),
+      materials.Idean(summon, 7),
+      materials.Haze(getElementForHaze(element), 16),
+      materials.LegendaryMerit(3),
+      materials.SummonIIAnima(element, 30)
     ];
 
     //deal with light and dark corner cases
     if (element === "light") {
-      arcarumMaterials.push(new materials.VerumProof("fire", 25));
-      arcarumMaterials.push(new materials.VerumProof("wind", 25));
+      costList.push(materials.VerumProof("fire", 25));
+      costList.push(materials.VerumProof("wind", 25));
     } else if (element === "dark") {
-      arcarumMaterials.push(new materials.VerumProof("water", 25));
-      arcarumMaterials.push(new materials.VerumProof("earth", 25));
+      costList.push(materials.VerumProof("water", 25));
+      costList.push(materials.VerumProof("earth", 25));
     } else {
-      arcarumMaterials.push(new materials.VerumProof(element, 50));
+      costList.push(materials.VerumProof(element, 50));
     }
-    return { arcarum: arcarumMaterials, other: otherMaterials };
+    return makeCostDict(costList);
   },
 
   [SSR3]: (summon, element) => {
-    let arcarumMaterials = [
-      new materials.SephiraStone(30),
-      new materials.Astra(element, 30),
-      new materials.Idean(summon, 15),
-      new materials.Haze(getElementForHaze(element), 24)
-    ];
-    let otherMaterials = [
-      new materials.SilverCentrum(5),
-      new materials.SunlightStone(1)
+    let costList = [
+      materials.SephiraStone(30),
+      materials.Astra(element, 30),
+      materials.Idean(summon, 15),
+      materials.Haze(getElementForHaze(element), 24),
+      materials.SilverCentrum(5),
+      materials.SunlightStone(1)
     ];
 
     //deal with light and dark corner cases
     if (element === "light") {
-      arcarumMaterials.push(new materials.VerumProof("fire", 40));
-      arcarumMaterials.push(new materials.VerumProof("wind", 40));
-      otherMaterials.push(new materials.PrimarchAnima("fire", 10));
-      otherMaterials.push(new materials.PrimarchAnima("wind", 10));
+      costList.push(materials.VerumProof("fire", 40));
+      costList.push(materials.VerumProof("wind", 40));
+      costList.push(materials.PrimarchAnima("fire", 10));
+      costList.push(materials.PrimarchAnima("wind", 10));
     } else if (element === "dark") {
-      arcarumMaterials.push(new materials.VerumProof("water", 40));
-      arcarumMaterials.push(new materials.VerumProof("earth", 40));
-      otherMaterials.push(new materials.PrimarchAnima("water", 10));
-      otherMaterials.push(new materials.PrimarchAnima("earth", 10));
+      costList.push(materials.VerumProof("water", 40));
+      costList.push(materials.VerumProof("earth", 40));
+      costList.push(materials.PrimarchAnima("water", 10));
+      costList.push(materials.PrimarchAnima("earth", 10));
     } else {
-      arcarumMaterials.push(new materials.VerumProof(element, 80));
-      otherMaterials.push(new materials.PrimarchAnima(element, 20));
+      costList.push(materials.VerumProof(element, 80));
+      costList.push(materials.PrimarchAnima(element, 20));
     }
-    return { arcarum: arcarumMaterials, other: otherMaterials };
+    return makeCostDict(costList);
   },
 
   [SSR4]: (summon, element) => {
-    let arcarumMaterials = [
-      new materials.SephiraStone(45),
-      new materials.Astra(element, 45),
-      new materials.Idean(summon, 25),
-      new materials.Haze(getElementForHaze(element), 32),
-      new materials.ArcarumFragment(getElementForFragment(summon), 10)
+    let costList = [
+      materials.SephiraStone(45),
+      materials.Astra(element, 45),
+      materials.Idean(summon, 25),
+      materials.Haze(getElementForHaze(element), 32),
+      materials.ArcarumFragment(getElementForFragment(summon), 10),
+      materials.OmegaIIAnima(element, 10)
     ];
-    let otherMaterials = [new materials.OmegaIIAnima(element, 10)];
 
     //deal with light and dark corner cases
     if (element === "light") {
-      arcarumMaterials.push(new materials.VerumProof("fire", 60));
-      arcarumMaterials.push(new materials.VerumProof("wind", 60));
+      costList.push(materials.VerumProof("fire", 60));
+      costList.push(materials.VerumProof("wind", 60));
     } else if (element === "dark") {
-      arcarumMaterials.push(new materials.VerumProof("water", 60));
-      arcarumMaterials.push(new materials.VerumProof("earth", 60));
+      costList.push(materials.VerumProof("water", 60));
+      costList.push(materials.VerumProof("earth", 60));
     } else {
-      arcarumMaterials.push(new materials.VerumProof(element, 120));
+      costList.push(materials.VerumProof(element, 120));
     }
-    return { arcarum: arcarumMaterials, other: otherMaterials };
+    return makeCostDict(costList);
   },
 
   [SSR5]: (summon, element) => {
-    let arcarumMaterials = [
-      new materials.ArcarumFragment(getElementForFragment(summon), 20)
-    ];
-    let otherMaterials = [
-      new materials.CoopShowdownItem(element, 100),
-      new materials.GenesisFragment(80),
-      new materials.PrimevalHorn(10),
-      new materials.QuestMaterial(summon, 50)
+    let costList = [
+      materials.ArcarumFragment(getElementForFragment(summon), 20),
+      materials.CoopShowdownItem(element, 100),
+      materials.GenesisFragment(80),
+      materials.PrimevalHorn(10),
+      materials.QuestMaterial(summon, 50)
     ];
 
     //deal with light and dark corner cases
     if (element === "light") {
-      arcarumMaterials.push(new materials.VerumProof("fire", 125));
-      arcarumMaterials.push(new materials.VerumProof("wind", 125));
-      otherMaterials.push(new materials.TrialFragment("fire", 25));
-      otherMaterials.push(new materials.TrialFragment("wind", 25));
+      costList.push(materials.VerumProof("fire", 125));
+      costList.push(materials.VerumProof("wind", 125));
+      costList.push(materials.TrialFragment("fire", 25));
+      costList.push(materials.TrialFragment("wind", 25));
     } else if (element === "dark") {
-      arcarumMaterials.push(new materials.VerumProof("water", 125));
-      arcarumMaterials.push(new materials.VerumProof("earth", 125));
-      otherMaterials.push(new materials.TrialFragment("water", 25));
-      otherMaterials.push(new materials.TrialFragment("earth", 25));
+      costList.push(materials.VerumProof("water", 125));
+      costList.push(materials.VerumProof("earth", 125));
+      costList.push(materials.TrialFragment("water", 25));
+      costList.push(materials.TrialFragment("earth", 25));
     } else {
-      arcarumMaterials.push(new materials.VerumProof(element, 250));
-      otherMaterials.push(new materials.TrialFragment(element, 50));
+      costList.push(materials.VerumProof(element, 250));
+      costList.push(materials.TrialFragment(element, 50));
     }
-    return { arcarum: arcarumMaterials, other: otherMaterials };
+    return makeCostDict(costList);
   },
 
   [EVOKER]: (summon, element) => {
-    let arcarumMaterials = [
-      new materials.SephiraEvolite(1),
+    let costList = [
+      materials.SephiraEvolite(1),
       materials.SephiraStone(30),
-      new materials.Idean(summon, 20),
-      new materials.Astra(element, 206)
+      materials.Idean(summon, 20),
+      materials.Astra(element, 206)
     ];
-    let otherMaterials = [];
 
-    return { arcarum: arcarumMaterials, other: otherMaterials };
+    return makeCostDict(costList);
   }
 };
 
 export const aggregateStepCost = (summon, currentStep, targetStep) => {
-  let totalArcarum = new Map();
-  let totalOther = new Map();
+  let totalCost = {};
 
   for (let step = currentStep + 1; step <= targetStep; step++) {
     let cost = stepCost[step](summon, summonToElement[summon]);
-    // console.log(cost.arcarum, cost.other);
-
-    cost.arcarum.forEach(mat => {
-      if (totalArcarum.has(mat.name)) {
-        // console.log(mat, totalArcarum[mat.name]);
-        totalArcarum.get(mat.name).quantity += mat.quantity;
-      } else {
-        totalArcarum.set(mat.name, mat);
+    Object.entries(cost).forEach(([type, list]) => {
+      if (!totalCost[type]) {
+        totalCost[type] = {};
       }
-    });
-
-    cost.other.forEach(mat => {
-      if (totalOther.has(mat.name)) {
-        totalOther.get(mat.name).quantity += mat.quantity;
-      } else {
-        totalOther.set(mat.name, mat);
-      }
+      list.forEach(mat => {
+        if (totalCost[type][mat.name]) {
+          totalCost[type][mat.name].quantity += mat.quantity;
+        } else {
+          totalCost[type][mat.name] = mat;
+        }
+      });
     });
   }
-  return { arcarum: totalArcarum, other: totalOther };
+  return totalCost;
 };
 
 export const aggregateSummonCost = plans => {
-  let totalArcarum = new Map();
-  let totalOther = new Map();
-
-  plans.forEach(plan => {
-    let cost = aggregateStepCost(
-      plan.summon,
-      plan.currentStep,
-      plan.targetStep
-    );
-    cost.arcarum.forEach(mat => {
-      if (totalArcarum.has(mat.name)) {
-        // console.log(mat, totalArcarum[mat.name]);
-        totalArcarum.get(mat.name).quantity += mat.quantity;
-      } else {
-        totalArcarum.set(mat.name, mat);
+  let totalCost = {};
+  Object.entries(plans).map(([summon, plan]) => {
+    let cost = aggregateStepCost(summon, plan.current, plan.target);
+    Object.entries(cost).forEach(([type, list]) => {
+      if (!totalCost[type]) {
+        totalCost[type] = {};
       }
-    });
-    cost.other.forEach(mat => {
-      if (totalOther.has(mat.name)) {
-        totalOther.get(mat.name).quantity += mat.quantity;
-      } else {
-        totalOther.set(mat.name, mat);
-      }
+      Object.entries(list).forEach(([name, mat]) => {
+        if (totalCost[type][mat.name]) {
+          totalCost[type][mat.name].quantity += mat.quantity;
+        } else {
+          totalCost[type][mat.name] = mat;
+        }
+      });
     });
   });
-
-  return { arcarum: totalArcarum, other: totalOther };
+  return totalCost;
 };

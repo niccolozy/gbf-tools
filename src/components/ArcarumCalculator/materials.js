@@ -1,56 +1,89 @@
 import * as matImg from "../../assets/materials";
 export { matImg };
 
-const makeMaterial = (name, icon, quantity) => {
-  return { name: name, icon: icon, quantity: quantity };
+const makeMaterial = (name, icon, type, quantity) => {
+  return { name: name, icon: icon, type: type, quantity: quantity };
 };
 
 export const SephiraStone = quantity => {
-  return makeMaterial("Sephira Stone", matImg.Arcarum.Sephira_Stone, quantity);
+  return makeMaterial(
+    "Sephira Stone",
+    matImg.Arcarum.Sephira_Stone,
+    "important",
+    quantity
+  );
 };
 
 export const SephiraEvolite = quantity => {
   return makeMaterial(
     "Sephira Evolite",
     matImg.Arcarum.Sephira_Evolite,
+    "important",
     quantity
   );
 };
 
 export const FlawlessPrism = quantity => {
-  return makeMaterial("Flawless Prism", matImg.Other.Flawless_Prism, quantity);
+  return makeMaterial(
+    "Flawless Prism",
+    matImg.Other.Flawless_Prism,
+    "other",
+    quantity
+  );
 };
 
 export const RainbowPrism = quantity => {
-  return makeMaterial("Rainbow Prism", matImg.Other.Rainbow_Prism, quantity);
+  return makeMaterial(
+    "Rainbow Prism",
+    matImg.Other.Rainbow_Prism,
+    "other",
+    quantity
+  );
 };
 
 export const LegendaryMerit = quantity => {
   return makeMaterial(
     "Legendary Merit",
     matImg.Other.Legendary_Merit,
+    "other",
     quantity
   );
 };
 
 export const SilverCentrum = quantity => {
-  return makeMaterial("Silver Centrum", matImg.Other.Silver_Centrum, quantity);
+  return makeMaterial(
+    "Silver Centrum",
+    matImg.Other.Silver_Centrum,
+    "raid",
+    quantity
+  );
 };
 
 export const SunlightStone = quantity => {
-  return makeMaterial("Sunlight Stone", matImg.Other.Sunlight_Stone, quantity);
+  return makeMaterial(
+    "Sunlight Stone",
+    matImg.Other.Sunlight_Stone,
+    "important",
+    quantity
+  );
 };
 
 export const GenesisFragment = quantity => {
   return makeMaterial(
     "Genesis Fragment",
     matImg.Other.Genesis_Fragment,
+    "raid",
     quantity
   );
 };
 
 export const PrimevalHorn = quantity => {
-  return makeMaterial("Primeval Horn", matImg.Other.Primeval_Horn, quantity);
+  return makeMaterial(
+    "Primeval Horn",
+    matImg.Other.Primeval_Horn,
+    "raid",
+    quantity
+  );
 };
 
 export const Astra = (element, quantity) => {
@@ -66,6 +99,7 @@ export const Astra = (element, quantity) => {
   return makeMaterial(
     elementTable[element].name,
     elementTable[element].icon,
+    "astra",
     quantity
   );
 };
@@ -85,7 +119,7 @@ export const Idean = (summon, quantity) => {
     Devil: { name: "Devil Idean", icon: matImg.Arcarum.Devil_Idean },
     Tower: { name: "Tower Idean", icon: matImg.Arcarum.Tower_Idean },
     Star: { name: "Star Idean", icon: matImg.Arcarum.Star_Idean },
-    Moon: { name: "Moon Idean", icon: matImg.Arcarum.Moon },
+    Moon: { name: "Moon Idean", icon: matImg.Arcarum.Moon_Idean },
     Sun: { name: "Sun Idean", icon: matImg.Arcarum.Sun_Idean },
     Judgement: { name: "Judgement Idean", icon: matImg.Arcarum.Judgement_Idean }
   };
@@ -93,6 +127,7 @@ export const Idean = (summon, quantity) => {
   return makeMaterial(
     summonTable[summon].name,
     summonTable[summon].icon,
+    "idean",
     quantity
   );
 };
@@ -114,6 +149,7 @@ export const VerumProof = (element, quantity) => {
   return makeMaterial(
     elementTable[element].name,
     elementTable[element].icon,
+    "arcarum",
     quantity
   );
 };
@@ -127,6 +163,7 @@ export const Haze = (element, quantity) => {
   return makeMaterial(
     elementTable[element].name,
     elementTable[element].icon,
+    "arcarum",
     quantity
   );
 };
@@ -144,6 +181,7 @@ export const ArcarumFragment = (element, quantity) => {
   return makeMaterial(
     elementTable[element].name,
     elementTable[element].icon,
+    "arcarum",
     quantity
   );
 };
@@ -176,6 +214,7 @@ export const OmegaIAnima = (element, quantity) => {
   return makeMaterial(
     elementTable[element].name,
     elementTable[element].icon,
+    "raid",
     quantity
   );
 };
@@ -205,6 +244,7 @@ export const OmegaIIAnima = (element, quantity) => {
   return makeMaterial(
     elementTable[element].name,
     elementTable[element].icon,
+    "raid",
     quantity
   );
 };
@@ -213,7 +253,7 @@ export const Quartz = (element, quantity) => {
   let elementTable = {
     fire: { name: "Fire Quartz", icon: matImg.Quartz.Fire_Quartz },
     water: { name: "Water Quartz", icon: matImg.Quartz.Water_Quartz },
-    earth: { name: "Earth Quartz", icon: matImg.Quartz.earth },
+    earth: { name: "Earth Quartz", icon: matImg.Quartz.Earth_Quartz },
     wind: { name: "Wind Quartz", icon: matImg.Quartz.Wind_Quartz },
     light: { name: "Light Quartz", icon: matImg.Quartz.Light_Quartz },
     dark: { name: "Dark Quartz", icon: matImg.Quartz.Dark_Quartz }
@@ -222,6 +262,7 @@ export const Quartz = (element, quantity) => {
   return makeMaterial(
     elementTable[element].name,
     elementTable[element].icon,
+    "other",
     quantity
   );
 };
@@ -248,6 +289,7 @@ export const SummonIAnima = (element, quantity) => {
   return makeMaterial(
     elementTable[element].name,
     elementTable[element].icon,
+    "raid",
     quantity
   );
 };
@@ -265,6 +307,7 @@ export const SummonIIAnima = (element, quantity) => {
   return makeMaterial(
     elementTable[element].name,
     elementTable[element].icon,
+    "raid",
     quantity
   );
 };
@@ -280,6 +323,7 @@ export const PrimarchAnima = (element, quantity) => {
   return makeMaterial(
     elementTable[element].name,
     elementTable[element].icon,
+    "raid",
     quantity
   );
 };
@@ -297,6 +341,7 @@ export const CoopShowdownItem = (element, quantity) => {
   return makeMaterial(
     elementTable[element].name,
     elementTable[element].icon,
+    "coop",
     quantity
   );
 };
@@ -315,6 +360,7 @@ export const TrialFragment = (element, quantity) => {
   return makeMaterial(
     elementTable[element].name,
     elementTable[element].icon,
+    "other",
     quantity
   );
 };
@@ -336,6 +382,7 @@ export const QuestMaterial = (element, quantity) => {
   return makeMaterial(
     elementTable[element].name,
     elementTable[element].icon,
+    "other",
     quantity
   );
 };
