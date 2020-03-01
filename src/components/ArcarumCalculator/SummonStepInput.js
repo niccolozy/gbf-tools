@@ -56,7 +56,7 @@ export default function SummonStepInput({ trackedSummons, onStepChange }) {
                 <b>召唤石</b>
               </TableCell>
               <TableCell align="center">
-                <b>当前进度</b>
+                <b>已完成进度</b>
               </TableCell>
               <TableCell align="center">
                 <b>目标进度</b>
