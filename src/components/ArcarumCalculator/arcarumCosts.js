@@ -29,7 +29,7 @@ function getElementForHaze(element) {
 
 function getElementForFragment(summon) {
   if (["HangedMan", "Devil", "Sun"].includes(summon)) return "red";
-  else if (["Star", "Moon", "Judgement"].includes(summon)) return "green";
+  else if (["Justice", "Moon", "Judgement"].includes(summon)) return "green";
   else return "blue";
 }
 
