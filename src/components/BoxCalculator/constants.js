@@ -1,4 +1,4 @@
-export const tokenPerBox = [1600, 2400, 2400, 2400, 2000, 6000];
+export const tokenPerBox = [1600, 2400, 2400, 2400, 2000, 6000, 10000, 15000];
 export const ratioHonorToToken = 6000 / 100000000;
 export const mobInfo = {
   Ex: {

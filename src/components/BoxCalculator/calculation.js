@@ -5,8 +5,12 @@ function getTokenForBox(boxIndex) {
     return tokenPerBox[boxIndex - 1];
   } else if (boxIndex < 45) {
     return tokenPerBox[4];
-  } else {
+  } else if (boxIndex === 45) {
     return tokenPerBox[5];
+  } else if (boxIndex < 81) {
+    return tokenPerBox[6];
+  } else {
+    return tokenPerBox[7];
   }
 }
 
