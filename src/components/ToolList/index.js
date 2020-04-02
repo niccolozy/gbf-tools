@@ -39,7 +39,7 @@ export default function ToolList({ tools, onClick }) {
           <Divider />
           <CardContent>
             <Typography variant="body1">
-              <b>2020-03-02</b> 根据四月号更新战货箱改动{" "}
+              <b>2020-04-03</b> 根据四月号更新战货箱改动{" "}
             </Typography>
             <List dense={true}>
               <ListItem>1-44箱 不变</ListItem>
