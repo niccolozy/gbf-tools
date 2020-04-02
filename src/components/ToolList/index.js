@@ -46,7 +46,7 @@ export default function ToolList({ tools, onClick }) {
               <ListItem>
                 第45箱 6000战货 ---- <b>存疑</b>
               </ListItem>
-              <ListItem>45-80箱 10000战货</ListItem>
+              <ListItem>46-80箱 10000战货</ListItem>
               <ListItem>81箱及以上 15000战货</ListItem>
             </List>
 
