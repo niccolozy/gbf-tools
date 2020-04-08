@@ -3,14 +3,12 @@ import { tokenPerBox, ratioHonorToToken, mobInfo } from "./constants.js";
 function getTokenForBox(boxIndex) {
   if (boxIndex < 5) {
     return tokenPerBox[boxIndex - 1];
-  } else if (boxIndex < 45) {
+  } else if (boxIndex < 46) {
     return tokenPerBox[4];
-  } else if (boxIndex === 45) {
-    return tokenPerBox[5];
   } else if (boxIndex < 81) {
-    return tokenPerBox[6];
+    return tokenPerBox[5];
   } else {
-    return tokenPerBox[7];
+    return tokenPerBox[6];
   }
 }
 

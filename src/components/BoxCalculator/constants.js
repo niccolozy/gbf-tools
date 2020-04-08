@@ -1,4 +1,4 @@
-export const tokenPerBox = [1600, 2400, 2400, 2400, 2000, 6000, 10000, 15000];
+export const tokenPerBox = [1600, 2400, 2400, 2400, 2000, 10000, 15000];
 export const ratioHonorToToken = 6000 / 100000000;
 export const mobInfo = {
   Ex: {
@@ -49,8 +49,8 @@ export const mobInfo = {
     meat: 20
   },
   Hell150: {
-    hostToken: 100,
-    victoryToken: 68,
+    hostToken: 120,
+    victoryToken: 85,
     mvpToken: 52,
     soloHonor: 3600000,
     AP: 50,
