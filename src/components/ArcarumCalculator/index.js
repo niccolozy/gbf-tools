@@ -53,10 +53,11 @@ export default function ArcarumCalculator(props) {
     setSummonTracker(newTracker);
   };
 
-  const trackedSummons = Object.keys(summonTracker)
-    .filter(key => summonTracker[key].track)
-    .reduce((res, key) => ((res[key] = summonTracker[key]), res), {});
-
+  const trackList = Object.keys(summonTracker).filter(
+    key => summonTracker[key].track
+  );
+  let trackedSummons = {};
+  trackList.forEach(summon => (trackedSummons[summon] = summonTracker[summon]));
   const list = aggregateSummonCost(trackedSummons);
 
   return (

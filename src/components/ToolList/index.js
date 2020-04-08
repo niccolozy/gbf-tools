@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Typography, Grid, Button, Divider } from "@material-ui/core";
-import { Paper, Card, CardHeader, CardContent } from "@material-ui/core";
-import { List, ListItem, ListItemText } from "@material-ui/core";
+import { Card, CardHeader, CardContent } from "@material-ui/core";
+import { List, ListItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({

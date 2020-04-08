@@ -1,5 +1,5 @@
 import * as materials from "./materials";
-const UNOBTAINED = 0;
+// const UNOBTAINED = 0;
 const SR0 = 1;
 const SR1 = 2;
 const SR2 = 3;
@@ -275,6 +275,7 @@ export const aggregateSummonCost = plans => {
           totalCost[type][mat.name] = mat;
         }
       });
+      return;
     });
   });
   return totalCost;
