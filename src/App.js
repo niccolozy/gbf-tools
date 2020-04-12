@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, CssBaseline } from "@material-ui/core";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Header from "./components/layout/Header";
@@ -15,40 +15,48 @@ const Honor = 1;
 const SPARK = 2;
 const ARCARUM = 3;
 
-const theme = createMuiTheme({
+const lightTheme = createMuiTheme({
   palette: {
     type: "light",
-    // primary: {
-    //   main: '#00AAE1',
-    //   dark: '#143C8C',
-    //   contrastText: '#fff',
-    // },
-    // secondary: {
-    //   main: '#64B42D',
-    //   dark: '#008732',
-    //   contrastText: '#fff',
-    // },
-    // error: {
-    //   main: '#BD0043',
-    //   contrastText: '#fff',
-    // },
-    // divider: '#D7D6D5',
     background: {
       light: "#f0f0f0"
     }
   }
 });
 
+const darkTheme = createMuiTheme({
+  palette: {
+    type: "dark"
+  }
+});
+
 function App(props) {
   const [currentTool, setCurrentTool] = useState(-1);
+  const [currentTheme, setcurrentTheme] = useState("light");
+
+  useEffect(() => {
+    let storedTheme = JSON.parse(localStorage.getItem("currentTheme"));
+    if (storedTheme !== null) {
+      setcurrentTheme(storedTheme);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("currentTheme", JSON.stringify(currentTheme));
+  }, [currentTheme]);
 
   const onToolSelected = (e, index) => {
     setCurrentTool(index);
   };
 
+  const onThemeToggled = (e, isLight) => {
+    if (isLight) setcurrentTheme("dark");
+    else setcurrentTheme("light");
+  };
+
   return (
     <>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={currentTheme === "light" ? lightTheme : darkTheme}>
         <CssBaseline />
         <Grid container>
           <Grid item xs={12}>
@@ -59,7 +67,9 @@ function App(props) {
                   ? "GBF小工具合集"
                   : props.tools[currentTool]
               }
+              currentTheme={currentTheme}
               onItemClicked={onToolSelected}
+              onThemeToggled={onThemeToggled}
             />
           </Grid>
           <Grid item xs={12}>

@@ -13,6 +13,9 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import RefreshIcon from "@material-ui/icons/Refresh";
+import Brightness5OutlinedIcon from "@material-ui/icons/Brightness5Outlined";
+import Brightness2OutlinedIcon from "@material-ui/icons/Brightness2Outlined";
 
 class Header extends Component {
   constructor(props) {
@@ -39,10 +42,15 @@ class Header extends Component {
     this.props.onItemClicked(e, -1);
   };
 
+  handleThemeToggle = e => {
+    this.props.onThemeToggled(e, this.props.currentTheme === "light");
+  };
+
   render() {
     const handleDrawerOpen = this.handleDrawerOpen;
     const handleDrawerClose = this.handleDrawerClose;
     const handleHomeClick = this.handleHomeClick;
+    const handleThemeToggle = this.handleThemeToggle;
     const open = this.state.open;
     return (
       <>
@@ -51,9 +59,23 @@ class Header extends Component {
             <IconButton color="inherit" edge="start" onClick={handleDrawerOpen}>
               <MenuIcon />
             </IconButton>
-            <Typography variant="h5" style={{ flexGrow: 1 }}>
+            <Typography variant="subtitle1" style={{ flexGrow: 1 }}>
               {this.props.currentTool}
             </Typography>
+            <Typography variant="subtitle2">强制更新-></Typography>
+            <IconButton
+              color="inherit"
+              onClick={() => window.location.reload(true)}
+            >
+              <RefreshIcon />
+            </IconButton>
+            <IconButton color="inherit" onClick={handleThemeToggle}>
+              {this.props.currentTheme === "light" ? (
+                <Brightness2OutlinedIcon />
+              ) : (
+                <Brightness5OutlinedIcon />
+              )}
+            </IconButton>
             <IconButton color="inherit" onClick={handleHomeClick}>
               <HomeIcon />
             </IconButton>
