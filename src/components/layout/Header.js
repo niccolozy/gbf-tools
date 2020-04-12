@@ -62,7 +62,6 @@ class Header extends Component {
             <Typography variant="subtitle1" style={{ flexGrow: 1 }}>
               {this.props.currentTool}
             </Typography>
-            <Typography variant="subtitle2">强制更新-></Typography>
             <IconButton
               color="inherit"
               onClick={() => window.location.reload(true)}
