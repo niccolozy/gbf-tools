@@ -46,12 +46,47 @@ class Header extends Component {
     this.props.onThemeToggled(e, this.props.currentTheme === "light");
   };
 
+  checkWaitingServiceWorker = () => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let registration of registrations) {
+          const waitingServiceWorker = registration.waiting;
+          if (waitingServiceWorker) {
+            return true;
+          }
+        }
+      });
+    }
+    return false;
+  };
+
+  forceUpdateServiceWorker = () => {
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+      for (let registration of registrations) {
+        const waitingServiceWorker = registration.waiting;
+        if (waitingServiceWorker) {
+          waitingServiceWorker.addEventListener("statechange", event => {
+            if (event.target.state === "activated") {
+              window.location.reload(true);
+            }
+          });
+          waitingServiceWorker.postMessage({ type: "SKIP_WAITING" });
+        } else {
+          window.location.reload(true);
+        }
+      }
+    });
+  };
+
   render() {
     const handleDrawerOpen = this.handleDrawerOpen;
     const handleDrawerClose = this.handleDrawerClose;
     const handleHomeClick = this.handleHomeClick;
     const handleThemeToggle = this.handleThemeToggle;
+    const checkWaitingServiceWorker = this.checkWaitingServiceWorker;
+    const forceUpdateServiceWorker = this.forceUpdateServiceWorker;
     const open = this.state.open;
+
     return (
       <>
         <AppBar position="static">
@@ -62,11 +97,10 @@ class Header extends Component {
             <Typography variant="subtitle1" style={{ flexGrow: 1 }}>
               {this.props.currentTool}
             </Typography>
-            <IconButton
-              color="inherit"
-              onClick={() => window.location.reload(true)}
-            >
-              <RefreshIcon />
+            <IconButton color="inherit" onClick={forceUpdateServiceWorker}>
+              <RefreshIcon
+                color={checkWaitingServiceWorker() ? "secondary" : "inherit"}
+              />
             </IconButton>
             <IconButton color="inherit" onClick={handleThemeToggle}>
               {this.props.currentTheme === "light" ? (
