@@ -39,6 +39,14 @@ export default function ToolList({ tools, onClick }) {
           <Divider />
           <CardContent>
             <Typography variant="body1">
+              <b>2020-04-18</b> 修正Hell150贡献{" "}
+            </Typography>
+            <List dense={true}>
+              <ListItem>Hell150单刷总贡献上调：3600000 -> 4100000</ListItem>
+            </List>
+            <Divider />
+
+            <Typography variant="body1">
               <b>2020-04-12</b> 添加强制更新和夜间模式按钮{" "}
             </Typography>
             <List dense={true}>

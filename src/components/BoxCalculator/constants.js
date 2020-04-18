@@ -52,7 +52,7 @@ export const mobInfo = {
     hostToken: 120,
     victoryToken: 85,
     mvpToken: 52,
-    soloHonor: 3600000,
+    soloHonor: 4100000,
     AP: 50,
     BP: 3,
     meat: 20
