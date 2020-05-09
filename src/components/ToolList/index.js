@@ -38,6 +38,14 @@ export default function ToolList({ tools, onClick }) {
           <CardHeader title="更新" />
           <Divider />
           <CardContent>
+          <Typography variant="body1">
+              <b>2020-05-09</b> 攒井进度页面添加出货概率计算{" "}
+            </Typography>
+            <List dense={true}>
+              <ListItem>让冰冷的概率统计帮你攒井.jpg</ListItem>
+            </List>
+            <Divider />
+
             <Typography variant="body1">
               <b>2020-04-18</b> 修正Hell150贡献{" "}
             </Typography>
