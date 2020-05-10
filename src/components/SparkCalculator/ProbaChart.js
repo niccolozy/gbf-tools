@@ -9,7 +9,7 @@ import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
   } from 'recharts';
 
-import {checkProbaFormat, checkRollFormat, geoDistCDF, binomialDist} from "./utils"
+import {checkProbaFormat, checkRollFormat, geoDistCDF, geoDistCDFReversed, binomialDist} from "./utils"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -72,6 +72,9 @@ export default function ProbaChart({ props }) {
     }
 
     if (Number(targetProba) > 0) {
+      let maxRoll = geoDistCDFReversed(Number(targetProba) / 100, 0.99);
+      if (rollStep < maxRoll / 100)
+        rollStep = Math.floor(maxRoll / 10000)*100;
       while(cdfArray.length === 0 || cdfArray[cdfArray.length - 1].累进出货概率 < 0.99) {
         cdfArray.push({抽卡次数: currentRoll+"抽", 累进出货概率: geoDistCDF(Number(targetProba) / 100, currentRoll), 平均出货期望: Number(targetProba) / 100 * currentRoll});
         currentRoll += rollStep;

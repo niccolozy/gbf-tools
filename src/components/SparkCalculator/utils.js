@@ -10,6 +10,10 @@ export const checkRollFormat = value => {
     return true;
   }
 
+export const geoDistCDFReversed= (p, target) => {
+    return Math.log(1-target) / Math.log(1-p);
+}
+
 export const geoDistCDF = (p, k) => {
     return 1 - (1 - p) ** k;
 }
