@@ -54,7 +54,6 @@ export default function ProbaChart({ props }) {
   let successEstimation = null;
   let failProbability = null;
   let cdfArray = [];
-  let currentRoll = 0;
   let rollStep = 10;
   let binomialArray = [];
 
@@ -73,11 +72,11 @@ export default function ProbaChart({ props }) {
 
     if (Number(targetProba) > 0) {
       let maxRoll = geoDistCDFReversed(Number(targetProba) / 100, 0.99);
-      if (rollStep < maxRoll / 100)
-        rollStep = Math.floor(maxRoll / 10000)*100;
-      while(cdfArray.length === 0 || cdfArray[cdfArray.length - 1].累进出货概率 < 0.99) {
+      if (rollStep < maxRoll / 100) {
+        rollStep = 10 ** (Math.floor(Math.log10(maxRoll)) - 1);
+      }
+      for (let currentRoll = 0; currentRoll <= maxRoll; currentRoll += rollStep){
         cdfArray.push({抽卡次数: currentRoll+"抽", 累进出货概率: geoDistCDF(Number(targetProba) / 100, currentRoll), 平均出货期望: Number(targetProba) / 100 * currentRoll});
-        currentRoll += rollStep;
       }
     }
   }
