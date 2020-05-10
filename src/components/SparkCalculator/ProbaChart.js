@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import {
   Card, CardHeader, Divider, TextField, Grid, Typography, Container
 } from "@material-ui/core";
+import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
   } from 'recharts';
 
-import {checkProbaFormat, checkRollFormat, geoDistCDF} from "./utils"
+import {checkProbaFormat, checkRollFormat, geoDistCDF, binomialDist} from "./utils"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -55,12 +56,19 @@ export default function ProbaChart({ props }) {
   let cdfArray = [];
   let currentRoll = 0;
   let rollStep = 10;
+  let binomialArray = [];
 
   if (!isWrongProba) {
     if (!isWrongRoll) {
       failProbability = (1 - Number(targetProba) / 100) ** targetRoll;
       successProbability = 1 - failProbability;
       successEstimation = Number(targetProba) / 100 * targetRoll;
+      if (Number(targetProba) > 0){
+        for (let i = 0; i <= 2 * successEstimation || binomialDist(i, Number(targetProba) / 100, targetRoll) > 0.01; i++){
+          let p = binomialDist(i, Number(targetProba) / 100, targetRoll);
+          binomialArray.push({出货次数: i+"次", 出货x次概率: p});
+        }
+      }
     }
 
     if (Number(targetProba) > 0) {
@@ -70,8 +78,6 @@ export default function ProbaChart({ props }) {
       }
     }
   }
-  console.log(cdfArray, cdfArray.length);
-  console.log(successProbability, successEstimation);
 
   return (
     <Card>
@@ -83,6 +89,14 @@ export default function ProbaChart({ props }) {
       <Divider />
 
       <Grid container className={classes.root}>
+        <Grid item xs={12}>
+          <Alert severity="info">
+            计算卡池概率为p的SSR在抽卡n次时的出货可能性。同时基于几何分布和二项分布给出：<br/>
+            1.抽卡x次前能出货的累计概率 <br/>
+            2.目标抽卡次数下出货k次的概率分布 <br/>
+            (也能用来计算Raid掉率，比如概率设为2.5%相当于计算自发超巴出金率)
+          </Alert>
+        </Grid>
         <Grid item xs={12} sm={3}>
           <TextField
             name="p"
@@ -134,31 +148,55 @@ export default function ProbaChart({ props }) {
         </Grid>
         <Card>
           <CardHeader
-            title="出货概率累计分布曲线(几何分布)"
+            title="概率分布曲线"
             titleTypographyProps={{ variant: "h6" }}
           />
+          <Grid container>
           {!isWrongProba && (
-
+              <Grid item xs={12} sm={6}>
+                <Container maxWidth="sm">
+                  <ResponsiveContainer width='100%' aspect={4/3.0}>
+                    <LineChart
+                      data={cdfArray}
+                      margin={{
+                          top: 5, right: 30, left: 20, bottom: 5,
+                      }}
+                    >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="抽卡次数" />
+                    <YAxis yAxisId="left" />
+                    <YAxis yAxisId="right" orientation="right" />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" yAxisId="left" dataKey="累进出货概率" stroke="#8884d8" activeDot={{ r: 4 }} />
+                    <Line type="monotone" yAxisId="right" dataKey="平均出货期望" stroke="#82ca9d" />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </Container>
+              </Grid>
+          )}
+          {!isWrongProba && !isWrongRoll && (
+            <Grid item xs={12} sm={6}>
               <Container maxWidth="sm">
                 <ResponsiveContainer width='100%' aspect={4/3.0}>
                   <LineChart
-                    data={cdfArray}
+                    data={binomialArray}
                     margin={{
                         top: 5, right: 30, left: 20, bottom: 5,
                     }}
                   >
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="抽卡次数" />
+                  <XAxis dataKey="出货次数" />
                   <YAxis yAxisId="left" />
-                  <YAxis yAxisId="right" orientation="right" />
                   <Tooltip />
                   <Legend />
-                  <Line type="monotone" yAxisId="left" dataKey="累进出货概率" stroke="#8884d8" activeDot={{ r: 4 }} />
-                  <Line type="monotone" yAxisId="right" dataKey="平均出货期望" stroke="#82ca9d" />
+                  <Line type="monotone" yAxisId="left" dataKey="出货x次概率" stroke="#8884d8" activeDot={{ r: 4 }} />
                   </LineChart>
                 </ResponsiveContainer>
               </Container>
-          )}
+            </Grid>
+            )}
+          </Grid>
       </Card>
     </Card>
   ); 
