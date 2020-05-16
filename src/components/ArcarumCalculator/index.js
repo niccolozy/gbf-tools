@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
-import { aggregateSummonCost } from "./arcarumCosts.js";
+import { resolveSummons, summonFactory } from "./arcarumCosts.js";
 import ArcarumBanner from "./ArcarumBanner";
 import SummonStepInput from "./SummonStepInput";
 import MaterialEstimation from "./MaterialEstimation";
@@ -18,7 +18,7 @@ const SUMMONLIST = [
   "Judgement"
 ];
 
-export default function ArcarumCalculator(props) {
+export default function ArcarumCalculator() {
   let initTracker = {};
   SUMMONLIST.forEach(summon => {
     initTracker[summon] = {
@@ -56,9 +56,9 @@ export default function ArcarumCalculator(props) {
   const trackList = Object.keys(summonTracker).filter(
     key => summonTracker[key].track
   );
-  let trackedSummons = {};
-  trackList.forEach(summon => (trackedSummons[summon] = summonTracker[summon]));
-  const list = aggregateSummonCost(trackedSummons);
+
+  let trackedSummons = trackList.map(name => ({name: name, icon: summonFactory(name, summonTracker[name].current).icon, ...summonTracker[name]}));
+  let materials = resolveSummons(trackedSummons);
 
   return (
     <Grid
@@ -85,7 +85,7 @@ export default function ArcarumCalculator(props) {
       </Grid>
 
       <Grid item xs={12}>
-        <MaterialEstimation materials={list} />
+        <MaterialEstimation materials={materials} />
       </Grid>
     </Grid>
   );

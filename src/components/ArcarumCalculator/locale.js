@@ -1,32 +1,26 @@
+import { ArcarumPriorities } from "./arcarumCosts";
+
 export const localeStrings = {
   materialType: {
-    important: {
-      zh: "关键素材",
+    [ArcarumPriorities.RARE]: {
+      zh: "稀有素材",
+      en: "Rare Materials"
+    },
+    [ArcarumPriorities.IMPORTANT]: {
+      zh: "重要转世素材",
       en: "Important Materials"
     },
-    astra: {
-      zh: "属性精",
-      en: "Astra"
+    [ArcarumPriorities.OTHERARCARUM]: {
+      zh: "其它转世素材",
+      en: "Other Arcarum Materials"
     },
-    idean: {
-      zh: "Idean",
-      en: "Idean"
+    [ArcarumPriorities.OTHER]: {
+      zh: "其它素材",
+      en: "Other Materials"
     },
-    arcarum: {
-      zh: "转世",
-      en: "Arcarum"
-    },
-    raid: {
-      zh: "多人战",
-      en: "Raid"
-    },
-    other: {
-      zh: "其它",
-      en: "Other"
-    },
-    coop: {
-      zh: "共斗",
-      en: "Coop"
+    [ArcarumPriorities.BASIC]: {
+      zh: "基础素材",
+      en: "Basic Materials"
     }
   }
 };

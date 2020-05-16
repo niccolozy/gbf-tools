@@ -6,7 +6,7 @@ import {
   Divider,
   FormControl,
   Select,
-  MenuItem
+  MenuItem,
 } from "@material-ui/core";
 import {
   Table,
@@ -16,7 +16,7 @@ import {
   TableRow
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import * as summonImg from "../../assets/ArcarumSummons";
+import propTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   cell: {
@@ -64,18 +64,14 @@ export default function SummonStepInput({ trackedSummons, onStepChange }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {Object.entries(trackedSummons).map(([summon, progress]) => {
+            {trackedSummons.map(({name, icon, current, target}) => {
               return (
-                <TableRow key={summon}>
+                <TableRow key={name}>
                   <TableCell className={classes.cell}>
                     <img
-                      alt={summon}
+                      alt={name}
                       className={classes.image}
-                      src={
-                        progress.current < 5
-                          ? summonImg[summon + "_SR"]
-                          : summonImg[summon + "_SSR"]
-                      }
+                      src={icon}
                     />
                   </TableCell>
                   <TableCell className={classes.cell} align="center">
@@ -85,8 +81,8 @@ export default function SummonStepInput({ trackedSummons, onStepChange }) {
                     >
                       <Select
                         name="current"
-                        value={progress.current}
-                        onChange={e => onStepChange(e, summon)}
+                        value={current}
+                        onChange={e => onStepChange(e, name)}
                       >
                         {stepChoices.map((step, index) => {
                           return (
@@ -105,12 +101,12 @@ export default function SummonStepInput({ trackedSummons, onStepChange }) {
                     >
                       <Select
                         name="target"
-                        value={progress.target}
-                        onChange={e => onStepChange(e, summon)}
+                        value={target}
+                        onChange={e => onStepChange(e, name)}
                       >
                         {stepChoices.map((step, index) => {
                           return (
-                            index >= progress.current && (
+                            index >= current && (
                               <MenuItem key={step} value={index}>
                                 {step}
                               </MenuItem>
@@ -129,3 +125,13 @@ export default function SummonStepInput({ trackedSummons, onStepChange }) {
     </Card>
   );
 }
+
+SummonStepInput.propTypes ={
+  trackedSummons: propTypes.arrayOf(propTypes.shape({
+    name: propTypes.string,
+    icon: propTypes.string,
+    current: propTypes.number,
+    target: propTypes.number
+  })),
+  onStepChange: propTypes.func
+};

@@ -1,5 +1,4 @@
 import React from "react";
-import { Typography, TextField } from "@material-ui/core";
 import {
   Table,
   TableBody,
@@ -7,7 +6,8 @@ import {
   TableHead,
   TableRow
 } from "@material-ui/core";
-import { localeStrings } from "./locale";
+import TaskRow from "./TaskRow";
+import propTypes from "prop-types";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -50,7 +50,7 @@ export default function MaterialTable({
         <TableHead>
           <TableRow>
             <TableCell className={classes.iconCell}>
-              <b>{localeStrings.materialType[type].zh}</b>
+              <b>{type}</b>
             </TableCell>
             <TableCell align="left" className={classes.cell}>
               <b>已有</b>
@@ -61,44 +61,24 @@ export default function MaterialTable({
           </TableRow>
         </TableHead>
         <TableBody>
-          {Object.entries(materials).map(([name, material]) => {
-            return (
-              <TableRow key={name}>
-                <TableCell className={classes.iconCell}>
-                  <div className={classes.iconDiv}>
-                    <img
-                      alt={name + " icon"}
-                      className={classes.image}
-                      src={material.icon}
-                    />
-                    <Typography className={classes.text} variant="body2">
-                      {material.name}
-                    </Typography>
-                  </div>
-                </TableCell>
-                <TableCell align="left" className={classes.cell}>
-                  <TextField
-                    name={name}
-                    className={classes.input}
-                    onChange={onValueChange}
-                    inputProps={{
-                      style: { textAlign: "center", fontSize: 15 }
-                    }}
-                    value={inventory[name] || ""}
-                  />
-                </TableCell>
-                <TableCell align="left" className={classes.cell}>
-                  {inventory[material.name]
-                    ? material.quantity - inventory[material.name] >= 0
-                      ? material.quantity - inventory[material.name]
-                      : 0
-                    : material.quantity}
-                </TableCell>
-              </TableRow>
-            );
-          })}
+          {materials.map( ({item, quantity}) => (
+            <TaskRow key={item.name} item={item} needed={quantity} finished={inventory[item.name]} onValueChange={onValueChange} />
+          ))}
         </TableBody>
       </Table>
     </>
   );
 }
+
+MaterialTable.propTypes ={
+  type: propTypes.string,
+  materials: propTypes.arrayOf(
+    propTypes.shape({
+      item: propTypes.object,
+      quantity: propTypes.number,
+      priority: propTypes.number
+    })
+  ),
+  inventory: propTypes.object,
+  onValueChange: propTypes.func
+};

@@ -1,5 +1,15 @@
-import * as materials from "./materials";
-// const UNOBTAINED = 0;
+import * as treasures from "../../utils/Items/treasures";
+import { makeMaterial, makeItem, resolveMaterials } from "../../utils/Items/Item";
+import { 
+  HazeRouter, 
+  VerumProofRouter, 
+  PrimarchAnimaRouter, 
+  ArcarumFragmentRouter, 
+  TrialFragmentRouter, 
+  WorldMaterialRouter 
+} from "./arcarumMaterialRouter";
+
+const UNOBTAINED = 0;
 const SR0 = 1;
 const SR1 = 2;
 const SR2 = 3;
@@ -8,6 +18,14 @@ const SSR3 = 5;
 const SSR4 = 6;
 const SSR5 = 7;
 const EVOKER = 8;
+
+export const ArcarumPriorities = {
+  RARE:1,
+  IMPORTANT:2,
+  OTHERARCARUM:3,
+  OTHER:4,
+  BASIC:Number.MAX_SAFE_INTEGER
+};
 
 const summonToElement = {
   Justice: "water",
@@ -22,261 +40,184 @@ const summonToElement = {
   Judgement: "wind"
 };
 
-function getElementForHaze(element) {
-  if (["fire", "wind", "light"].includes(element)) return "light";
-  else return "dark";
-}
+const SRSummonId = {
+  Justice: 2030081000,
+  HangedMan: 2030085000,
+  Death: 2030089000,
+  Temperance: 2030093000,
+  Devil: 2030097000,
+  Tower: 2030101000,
+  Star: 2030105000,
+  Moon: 2030109000,
+  Sun: 2030113000,
+  Judgement: 2030117000
+};
 
-function getElementForFragment(summon) {
-  if (["HangedMan", "Devil", "Sun"].includes(summon)) return "red";
-  else if (["Justice", "Moon", "Judgement"].includes(summon)) return "green";
-  else return "blue";
-}
+const SSRSummonId = {
+  Justice: 2040313000,
+  HangedMan: 2040314000,
+  Death: 2040315000,
+  Temperance: 2040316000,
+  Devil: 2040317000,
+  Tower: 2040318000,
+  Star: 2040319000,
+  Moon: 2040320000,
+  Sun: 2040321000,
+  Judgement: 2040322000
+};
 
-function makeCostDict(costList) {
-  let dict = {};
-  costList.forEach(material => {
-    if (dict[material.type]) {
-      dict[material.type].push(material);
-    } else {
-      dict[material.type] = [];
-      dict[material.type].push(material);
-    }
-  });
-  return dict;
-}
+const SR0Summon = name => {
+  let element = summonToElement[name];
+  let list = [];
+  list.push(makeMaterial(treasures.SephiraStone, 2, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.Astra(summonToElement[name]), 3, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.Idean(name), 2, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.FlawlessPrism, 100));
+  list.push(makeMaterial(treasures.MagnaIOmegaAnima(element), 30));
+  // Router returns an array of materials
+  list.push(...HazeRouter(element, 1));
+  list.push(...VerumProofRouter(element, 6));
 
-const stepCost = {
-  [SR0]: (summon, element) => {
-    let costList = [
-      materials.SephiraStone(2),
-      materials.Astra(element, 3),
-      materials.Idean(summon, 2),
-      materials.Haze(getElementForHaze(element), 1),
-      materials.FlawlessPrism(100),
-      materials.OmegaIAnima(element, 30)
-    ];
+  return makeItem(SRSummonId[name], name, "summon/m", {isCrafted:true, craftMaterials:list});
+};
 
-    //deal with light and dark corner cases
-    if (element === "light") {
-      costList.push(materials.VerumProof("fire", 3));
-      costList.push(materials.VerumProof("wind", 3));
-    } else if (element === "dark") {
-      costList.push(materials.VerumProof("water", 3));
-      costList.push(materials.VerumProof("earth", 3));
-    } else {
-      costList.push(materials.VerumProof(element, 6));
-    }
-    return makeCostDict(costList);
-  },
+const SR1Summon = name => {
+  let element = summonToElement[name];
+  let list = [];
+  list.push(makeMaterial(treasures.SephiraStone, 5, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.Astra(element), 5, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.Idean(name), 3, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.RainbowPrism, 100));
+  list.push(makeMaterial(treasures.Quartz(element), 100, ArcarumPriorities.OTHER));
 
-  [SR1]: (summon, element) => {
-    let costList = [
-      materials.SephiraStone(5),
-      materials.Astra(element, 5),
-      materials.Idean(summon, 3),
-      materials.Haze(getElementForHaze(element), 3),
-      materials.RainbowPrism(100),
-      materials.Quartz(element, 100)
-    ];
+  list.push(...HazeRouter(element, 3));
+  list.push(...VerumProofRouter(element, 16));
 
-    //deal with light and dark corner cases
-    if (element === "light") {
-      costList.push(materials.VerumProof("fire", 8));
-      costList.push(materials.VerumProof("wind", 8));
-    } else if (element === "dark") {
-      costList.push(materials.VerumProof("water", 8));
-      costList.push(materials.VerumProof("earth", 8));
-    } else {
-      costList.push(materials.VerumProof(element, 16));
-    }
-    return makeCostDict(costList);
-  },
+  return makeItem(SRSummonId[name], name, "summon/m", {isCrafted:true, craftMaterials:list});
+};
 
-  [SR2]: (summon, element) => {
-    let costList = [
-      materials.SephiraStone(10),
-      materials.Astra(element, 10),
-      materials.Idean(summon, 5),
-      materials.Haze(getElementForHaze(element), 7),
-      materials.SummonIAnima(element, 30)
-    ];
+const SR2Summon = name => {
+  let element = summonToElement[name];
+  let list = [];
+  list.push(makeMaterial(treasures.SephiraStone, 10, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.Astra(element), 10, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.Idean(name), 5, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.SummonIAnima(element), 30));
 
-    //deal with light and dark corner cases
-    if (element === "light") {
-      costList.push(materials.VerumProof("fire", 15));
-      costList.push(materials.VerumProof("wind", 15));
-    } else if (element === "dark") {
-      costList.push(materials.VerumProof("water", 15));
-      costList.push(materials.VerumProof("earth", 15));
-    } else {
-      costList.push(materials.VerumProof(element, 30));
-    }
-    return makeCostDict(costList);
-  },
+  list.push(...HazeRouter(element, 7));
+  list.push(...VerumProofRouter(element, 30));
 
-  [SR3]: (summon, element) => {
-    let costList = [
-      materials.SephiraStone(15),
-      materials.Astra(element, 15),
-      materials.Idean(summon, 7),
-      materials.Haze(getElementForHaze(element), 16),
-      materials.LegendaryMerit(3),
-      materials.SummonIIAnima(element, 30)
-    ];
+  return makeItem(SRSummonId[name], name, "summon/m", {isCrafted:true, craftMaterials:list});
+};
 
-    //deal with light and dark corner cases
-    if (element === "light") {
-      costList.push(materials.VerumProof("fire", 25));
-      costList.push(materials.VerumProof("wind", 25));
-    } else if (element === "dark") {
-      costList.push(materials.VerumProof("water", 25));
-      costList.push(materials.VerumProof("earth", 25));
-    } else {
-      costList.push(materials.VerumProof(element, 50));
-    }
-    return makeCostDict(costList);
-  },
+const SR3Summon = name => {
+  let element = summonToElement[name];
+  let list = [];
+  list.push(makeMaterial(treasures.SephiraStone, 15, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.Astra(element), 15, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.Idean(name), 7, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.LegendaryMerit, 3));
+  list.push(makeMaterial(treasures.SummonIIAnima(element), 30));
 
-  [SSR3]: (summon, element) => {
-    let costList = [
-      materials.SephiraStone(30),
-      materials.Astra(element, 30),
-      materials.Idean(summon, 15),
-      materials.Haze(getElementForHaze(element), 24),
-      materials.SilverCentrum(5),
-      materials.SunlightStone(1)
-    ];
+  list.push(...HazeRouter(element, 16));
+  list.push(...VerumProofRouter(element, 50));
 
-    //deal with light and dark corner cases
-    if (element === "light") {
-      costList.push(materials.VerumProof("fire", 40));
-      costList.push(materials.VerumProof("wind", 40));
-      costList.push(materials.PrimarchAnima("fire", 10));
-      costList.push(materials.PrimarchAnima("wind", 10));
-    } else if (element === "dark") {
-      costList.push(materials.VerumProof("water", 40));
-      costList.push(materials.VerumProof("earth", 40));
-      costList.push(materials.PrimarchAnima("water", 10));
-      costList.push(materials.PrimarchAnima("earth", 10));
-    } else {
-      costList.push(materials.VerumProof(element, 80));
-      costList.push(materials.PrimarchAnima(element, 20));
-    }
-    return makeCostDict(costList);
-  },
+  return makeItem(SRSummonId[name], name, "summon/m", {isCrafted:true, craftMaterials:list});
+};
 
-  [SSR4]: (summon, element) => {
-    let costList = [
-      materials.SephiraStone(45),
-      materials.Astra(element, 45),
-      materials.Idean(summon, 25),
-      materials.Haze(getElementForHaze(element), 32),
-      materials.ArcarumFragment(getElementForFragment(summon), 10),
-      materials.OmegaIIAnima(element, 10)
-    ];
+const SSR3Summon = name => {
+  let element = summonToElement[name];
+  let list = [];
+  list.push(makeMaterial(treasures.SephiraStone, 30, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.Astra(element), 30, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.Idean(name), 15, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.SilverCentrum, 5, ArcarumPriorities.OTHER));
+  list.push(makeMaterial(treasures.SunlightStone, 1, ArcarumPriorities.RARE));
 
-    //deal with light and dark corner cases
-    if (element === "light") {
-      costList.push(materials.VerumProof("fire", 60));
-      costList.push(materials.VerumProof("wind", 60));
-    } else if (element === "dark") {
-      costList.push(materials.VerumProof("water", 60));
-      costList.push(materials.VerumProof("earth", 60));
-    } else {
-      costList.push(materials.VerumProof(element, 120));
-    }
-    return makeCostDict(costList);
-  },
+  list.push(...HazeRouter(element, 24));
+  list.push(...VerumProofRouter(element, 80));
+  list.push(...PrimarchAnimaRouter(element, 20));
 
-  [SSR5]: (summon, element) => {
-    let costList = [
-      materials.ArcarumFragment(getElementForFragment(summon), 20),
-      materials.CoopShowdownItem(element, 100),
-      materials.GenesisFragment(80),
-      materials.PrimevalHorn(10),
-      materials.QuestMaterial(summon, 50)
-    ];
+  return makeItem(SSRSummonId[name], name, "summon/m", {isCrafted:true, craftMaterials:list});
+};
 
-    //deal with light and dark corner cases
-    if (element === "light") {
-      costList.push(materials.VerumProof("fire", 125));
-      costList.push(materials.VerumProof("wind", 125));
-      costList.push(materials.TrialFragment("fire", 25));
-      costList.push(materials.TrialFragment("wind", 25));
-    } else if (element === "dark") {
-      costList.push(materials.VerumProof("water", 125));
-      costList.push(materials.VerumProof("earth", 125));
-      costList.push(materials.TrialFragment("water", 25));
-      costList.push(materials.TrialFragment("earth", 25));
-    } else {
-      costList.push(materials.VerumProof(element, 250));
-      costList.push(materials.TrialFragment(element, 50));
-    }
-    return makeCostDict(costList);
-  },
+const SSR4Summon = name => {
+  let element = summonToElement[name];
+  let list = [];
+  list.push(makeMaterial(treasures.SephiraStone, 45, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.Astra(element), 45, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.Idean(name), 25, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.MagnaIIOmegaAnima(element), 10, ArcarumPriorities.OTHER));
 
-  [EVOKER]: (summon, element) => {
-    let costList = [
-      materials.SephiraEvolite(1),
-      materials.SephiraStone(30),
-      materials.Idean(summon, 22),
-      materials.Astra(element, 206),
-      materials.Haze(getElementForHaze(element), 3)
-    ];
+  list.push(...HazeRouter(element, 32));
+  list.push(...VerumProofRouter(element, 120));
+  list.push(...ArcarumFragmentRouter(name, 10));
 
-    if (element === "light") {
-      costList.push(materials.VerumProof("fire", 10));
-      costList.push(materials.VerumProof("wind", 10));
-    } else if (element === "dark") {
-      costList.push(materials.VerumProof("water", 10));
-      costList.push(materials.VerumProof("earth", 10));
-    } else {
-      costList.push(materials.VerumProof(element, 20));
-    }
+  return makeItem(SSRSummonId[name], name, "summon/m", {isCrafted:true, craftMaterials:list});
+};
 
-    return makeCostDict(costList);
+const SSR5Summon = name => {
+  let element = summonToElement[name];
+  let list = [];
+
+  list.push(makeMaterial(treasures.CoopShowdownItem(element), 100));
+  list.push(makeMaterial(treasures.GenesisFragment, 80));
+  list.push(makeMaterial(treasures.PrimevalHorn, 10));
+
+  list.push(...ArcarumFragmentRouter(name, 20));
+  list.push(...VerumProofRouter(element, 250));
+  list.push(...TrialFragmentRouter(element, 50));
+  list.push(...WorldMaterialRouter(name, 50));
+
+  return makeItem(SSRSummonId[name], name, "summon/m", {isCrafted:true, craftMaterials:list});
+};
+
+const Evoker = name => {
+  let element = summonToElement[name];
+  let list = [];
+
+  list.push(makeMaterial(treasures.SephiraEvolite, 1, ArcarumPriorities.RARE));
+  list.push(makeMaterial(treasures.SephiraStone, 30, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.Idean(name), 22, ArcarumPriorities.IMPORTANT));
+  list.push(makeMaterial(treasures.Astra(element), 206, ArcarumPriorities.IMPORTANT));
+  list.push(...HazeRouter(element, 3));
+  list.push(...VerumProofRouter(element, 20));
+
+  return makeItem(SSRSummonId[name], name, "summon/m", {isCrafted:true, craftMaterials:list});
+};
+
+export const summonFactory = (name, step) => {
+  switch(step) {
+    case UNOBTAINED:
+    case SR0:
+      return SR0Summon(name);
+    case SR1:
+      return SR1Summon(name);
+    case SR2:
+      return SR2Summon(name);
+    case SR3:
+      return SR3Summon(name);
+    case SSR3:
+      return SSR3Summon(name);
+    case SSR4:
+      return SSR4Summon(name);
+    case SSR5:
+      return SSR5Summon(name);
+    case EVOKER:
+      return Evoker(name);
+    default:
+      console.log("Wrong step for summon ", name);
   }
 };
 
-export const aggregateStepCost = (summon, currentStep, targetStep) => {
-  let totalCost = {};
-
-  for (let step = currentStep + 1; step <= targetStep; step++) {
-    let cost = stepCost[step](summon, summonToElement[summon]);
-    Object.entries(cost).forEach(([type, list]) => {
-      if (!totalCost[type]) {
-        totalCost[type] = {};
-      }
-      list.forEach(mat => {
-        if (totalCost[type][mat.name]) {
-          totalCost[type][mat.name].quantity += mat.quantity;
-        } else {
-          totalCost[type][mat.name] = mat;
-        }
-      });
-    });
-  }
-  return totalCost;
-};
-
-export const aggregateSummonCost = plans => {
-  let totalCost = {};
-  Object.entries(plans).map(([summon, plan]) => {
-    let cost = aggregateStepCost(summon, plan.current, plan.target);
-    Object.entries(cost).forEach(([type, list]) => {
-      if (!totalCost[type]) {
-        totalCost[type] = {};
-      }
-      Object.entries(list).forEach(([name, mat]) => {
-        if (totalCost[type][mat.name]) {
-          totalCost[type][mat.name].quantity += mat.quantity;
-        } else {
-          totalCost[type][mat.name] = mat;
-        }
-      });
-      return;
+export const resolveSummons = (plans) => {
+  let targets = [];
+  plans.forEach(plan => {
+    let {name, current, target} = plan;
+    Array.from({length: target - current}, (_, i) => i+current+1).forEach(i => {
+      targets.push(makeMaterial(summonFactory(name, i),1));
     });
   });
-  return totalCost;
+  let virtual_target = makeItem(-1, "fake", "", {isCrafted:true, craftMaterials:targets});
+  return resolveMaterials(makeMaterial(virtual_target, 1));
 };
