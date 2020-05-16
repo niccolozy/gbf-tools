@@ -1,0 +1,159 @@
+import {makeItem, makeMaterial} from "../Item";
+import {Quartz} from "./Uncap";
+
+export const PrimevalHorn = makeItem(79, "Primeval Horn", "item/article/s");
+
+export const SilverCentrum = makeItem(107, "Silver Centrum", "item/article/s");
+
+export const GenesisFragment = makeItem(535, "Genesis Fragment", "item/article/s");
+
+// Magna I Omega Anima
+const TiamatOmegaAnima = makeItem(18, "Tiamat Omega Anima", "item/article/s");
+const ColossusOmegaAnima = makeItem(19, "Colossus Omega Anima", "item/article/s");
+const LeviathanOmegaAnima = makeItem(20, "Leviathan Omega Anima", "item/article/s");
+const YggdrasilOmegaAnima = makeItem(21, "Yggdrasil Omega Anima", "item/article/s");
+const LuminieraOmegaAnima = makeItem(26, "Luminiera Omega Anima", "item/article/s");
+const CelesteOmegaAnima = makeItem(31, "Celeste Omega Anima", "item/article/s");
+export const MagnaIOmegaAnima = element => {
+  switch (element) {
+    case "fire":
+      return ColossusOmegaAnima;
+    case "water":
+      return LeviathanOmegaAnima;
+    case "earth":
+      return YggdrasilOmegaAnima;
+    case "wind":
+      return TiamatOmegaAnima;
+    case "light":
+      return LuminieraOmegaAnima;
+    case "dark":
+      return CelesteOmegaAnima;
+    default:
+      console.log(`Wrong element for Magna I Omega Anima: ${element}`);
+  }
+};
+
+// Summon I Anima
+const TwinElementsAnima = makeItem(64, "Twin Elements Anima", "item/article/s");
+const MaculaMariusAnima = makeItem(60, "Macula Marius Anima", "item/article/s");
+const MedusaAnima = makeItem(62, "Medusa Anima", "item/article/s");
+const NezhaAnima = makeItem(65, "Nezha Anima", "item/article/s");
+const ApolloAnima = makeItem(66, "Apollo Anima", "item/article/s");
+const DarkAngelOliviaAnima = makeItem(63, "Dark Angel Olivia Anima", "item/article/s");
+export const SummonIAnima = element => {
+  switch (element) {
+    case "fire":
+      return TwinElementsAnima;
+    case "water":
+      return MaculaMariusAnima;
+    case "earth":
+      return MedusaAnima;
+    case "wind":
+      return NezhaAnima;
+    case "light":
+      return ApolloAnima;
+    case "dark":
+      return DarkAngelOliviaAnima;
+    default:
+      console.log(`Wrong element for Summon I Anima: ${element}`);
+  }
+};
+
+// Summon II Anima
+const AthenaAnima = makeItem(85, "Athena Anima", "item/article/s");
+const GraniAnima = makeItem(68, "Grani Anima", "item/article/s");
+const BaalAnima = makeItem(87, "Baal Anima", "item/article/s");
+const GarudaAnima = makeItem(92, "Garuda Anima", "item/article/s");
+const OdinAnima = makeItem(67, "Odin Anima", "item/article/s");
+const LichAnima = makeItem(72, "Lich Anima", "item/article/s");
+export const SummonIIAnima = element => {
+  switch (element) {
+    case "fire":
+      return AthenaAnima;
+    case "water":
+      return GraniAnima;
+    case "earth":
+      return BaalAnima;
+    case "wind":
+      return GarudaAnima;
+    case "light":
+      return OdinAnima;
+    case "dark":
+      return LichAnima;
+    default:
+      console.log(`Wrong element for Summon II Anima: ${element}`);
+  }
+};
+
+// Primarch Anima
+const MichaelAnima = makeItem(506, "Michael Anima", "item/article/s");
+const GabrielAnima = makeItem(507, "Gabriel Anima", "item/article/s");
+const UrielAnima = makeItem(508, "Uriel Anima", "item/article/s");
+const RaphaelAnima = makeItem(509, "Raphael Anima", "item/article/s");
+export const PrimarchAnima = element => {
+  switch (element) {
+    case "fire":
+      return MichaelAnima;
+    case "water":
+      return GabrielAnima;
+    case "earth":
+      return UrielAnima;
+    case "wind":
+      return RaphaelAnima;
+    default:
+      console.log(`Wrong element for Primarch Anima: ${element}`);
+  }
+};
+
+// Magna II Anima
+const ShivaAnima = makeItem(510, "Shiva Anima", "item/article/s");
+const EuropaAnima = makeItem(512, "Europa Anima", "item/article/s");
+const AlexielAnima = makeItem(514, "Alexiel Anima", "item/article/s");
+const GrimnirAnima = makeItem(516, "Grimnir Anima", "item/article/s");
+const MetatronAnima = makeItem(518, "Metatron Anima", "item/article/s");
+const AvatarAnima = makeItem(520, "Avatar Anima", "item/article/s");
+export const MagnaIIAnima = element => {
+  switch (element) {
+    case "fire":
+      return ShivaAnima;
+    case "water":
+      return EuropaAnima;
+    case "earth":
+      return AlexielAnima;
+    case "wind":
+      return GrimnirAnima;
+    case "light":
+      return MetatronAnima;
+    case "dark":
+      return AvatarAnima;
+    default:
+      console.log(`Wrong element for Magna II Anima: ${element}`);
+  }
+};
+
+// Magna II Omega Anima
+const ShivaOmegaAnima = makeItem(511, "Shiva Omega Anima", "item/article/s", {isBuyable:true, exchangeMaterials:[makeMaterial(ShivaAnima, 10), makeMaterial(Quartz("fire"), 30)]});
+const EuropaOmegaAnima = makeItem(513, "Europa Omega Anima", "item/article/s", {isBuyable:true, exchangeMaterials:[makeMaterial(EuropaAnima, 10), makeMaterial(Quartz("water"), 30)]});
+const AlexielOmegaAnima = makeItem(515, "Alexiel Omega Anima", "item/article/s", {isBuyable:true, exchangeMaterials:[makeMaterial(AlexielAnima, 10), makeMaterial(Quartz("earth"), 30)]});
+const GrimnirOmegaAnima = makeItem(517, "Grimnir Omega Anima", "item/article/s", {isBuyable:true, exchangeMaterials:[makeMaterial(GrimnirAnima, 10), makeMaterial(Quartz("wind"), 30)]});
+const MetatronOmegaAnima = makeItem(519, "Metatron Omega Anima", "item/article/s", {isBuyable:true, exchangeMaterials:[makeMaterial(MetatronAnima, 10), makeMaterial(Quartz("light"), 30)]});
+const AvatarOmegaAnima = makeItem(521, "Avatar Omega Anima", "item/article/s", {isBuyable:true, exchangeMaterials:[makeMaterial(AvatarAnima, 10), makeMaterial(Quartz("dark"), 30)]});
+export const MagnaIIOmegaAnima = element => {
+  switch (element) {
+    case "fire":
+      return ShivaOmegaAnima;
+    case "water":
+      return EuropaOmegaAnima;
+    case "earth":
+      return AlexielOmegaAnima;
+    case "wind":
+      return GrimnirOmegaAnima;
+    case "light":
+      return MetatronOmegaAnima;
+    case "dark":
+      return AvatarOmegaAnima;
+    default:
+      console.log(`Wrong element for Magna II Omega Anima: ${element}`);
+  }
+};
+
