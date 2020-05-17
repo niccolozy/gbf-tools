@@ -38,7 +38,19 @@ export default function ToolList({ tools, onClick }) {
           <CardHeader title="更新" />
           <Divider />
           <CardContent>
-          <Typography variant="body1">
+            <Typography variant="body1">
+              <b>2020-05-17</b> 转世材料页面更新{" "}
+            </Typography>
+            <List dense={true}>
+              <ListItem>后台材料逻辑更新&emsp;<s>重构火葬场</s></ListItem>
+              <ListItem>材料及召唤石图片资源替换为GBF官方CDN链接</ListItem>
+              <ListItem>材料名称添加英文wiki导航链接</ListItem>
+              <ListItem>已完成材料以绿色区别显示</ListItem>
+              <ListItem>侧边栏导航添加首页</ListItem>
+            </List>
+            <Divider />
+
+            <Typography variant="body1">
               <b>2020-05-09</b> 攒井进度页面添加出货概率计算{" "}
             </Typography>
             <List dense={true}>
