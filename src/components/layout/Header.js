@@ -94,14 +94,17 @@ class Header extends Component {
             <IconButton color="inherit" edge="start" onClick={handleDrawerOpen}>
               <MenuIcon />
             </IconButton>
+
             <Typography variant="subtitle1" style={{ flexGrow: 1 }}>
               {this.props.currentTool}
             </Typography>
+
             <IconButton color="inherit" onClick={forceUpdateServiceWorker}>
               <RefreshIcon
                 color={checkWaitingServiceWorker() ? "secondary" : "inherit"}
               />
             </IconButton>
+
             <IconButton color="inherit" onClick={handleThemeToggle}>
               {this.props.currentTheme === "light" ? (
                 <Brightness2OutlinedIcon />
@@ -109,9 +112,11 @@ class Header extends Component {
                 <Brightness5OutlinedIcon />
               )}
             </IconButton>
+
             <IconButton color="inherit" onClick={handleHomeClick}>
               <HomeIcon />
             </IconButton>
+
           </Toolbar>
         </AppBar>
         <Drawer variant="persistent" anchor="left" open={open}>
@@ -122,6 +127,14 @@ class Header extends Component {
           </div>
           <Divider />
           <List>
+            <ListItem
+                button
+                key="首页"
+                selected={this.props.currentTool === -1}
+                onClick={e => this.handleItemClick(e, -1)}
+            >
+              <ListItemText primary="首页" />
+            </ListItem>
             {this.props.tools.map((text, index) => (
               <ListItem
                 button

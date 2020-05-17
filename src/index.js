@@ -4,7 +4,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <App tools={["古战场刷箱", "古战场荣誉", "攒井进度", "转世进度(测试)"]} />,
+  <App tools={["古战场刷箱", "古战场荣誉", "攒井进度", "转世材料", "子弹材料(施工中)"]} />,
   document.getElementById("root")
 );
 
