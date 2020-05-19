@@ -4,6 +4,7 @@ import { resolveSummons, summonFactory } from "./arcarumCosts.js";
 import ArcarumBanner from "./ArcarumBanner";
 import SummonStepInput from "./SummonStepInput";
 import MaterialEstimation from "./MaterialEstimation";
+import useLocalStorageState from "../../utils/storage";
 
 const SUMMONLIST = [
   "Justice",
@@ -18,6 +19,27 @@ const SUMMONLIST = [
   "Judgement"
 ];
 
+const TOGGLETRACKING = "TOGGLETRACKING";
+const CHANGESTEP = "CHANGESTEP";
+const reducer = action => (state, prop) => {
+  switch (action.type) {
+    case TOGGLETRACKING: {
+      let newTracker = { ...state };
+      newTracker[action.summon].track = !newTracker[action.summon].track;
+      return newTracker;
+    }
+    case CHANGESTEP: {
+      let newTracker = { ...state };
+      newTracker[action.summon][action.target] = action.value;
+      if (newTracker[action.summon].current > newTracker[action.summon].target)
+        newTracker[action.summon].target = newTracker[action.summon].current;
+      return newTracker;
+    }
+    default:
+      throw new Error("Unknown operation for summon tracking change: " + action);
+  }
+};
+
 export default function ArcarumCalculator() {
   let initTracker = {};
   SUMMONLIST.forEach(summon => {
@@ -27,30 +49,23 @@ export default function ArcarumCalculator() {
       target: 8
     };
   });
-  const [summonTracker, setSummonTracker] = useState(initTracker);
-  useEffect(() => {
-    let state = JSON.parse(localStorage.getItem("ArcarumCalculator"));
-    if (state !== null) {
-      setSummonTracker(state);
-    }
-  }, []);
 
-  useEffect(() => {
-    localStorage.setItem("ArcarumCalculator", JSON.stringify(summonTracker));
-  }, [summonTracker]);
+  const [summonTracker, setSummonTracker] = useLocalStorageState("ArcarumCalculator", initTracker);
 
   const onBannerClick = summon => {
-    let newTracker = { ...summonTracker };
-    newTracker[summon].track = !newTracker[summon].track;
-    setSummonTracker(newTracker);
+    setSummonTracker(reducer({
+      type:TOGGLETRACKING, 
+      summon:summon
+    }));
   };
+
   const onStepChange = (e, summon) => {
-    let newTracker = { ...summonTracker };
-    newTracker[summon][e.target.name] = e.target.value;
-    if (newTracker[summon].current > newTracker[summon].target) {
-      newTracker[summon].target = newTracker[summon].current;
-    }
-    setSummonTracker(newTracker);
+    setSummonTracker(reducer({
+      type: CHANGESTEP, 
+      summon:summon,
+      target: e.target.name,
+      value: e.target.value
+    }));
   };
 
   const trackList = Object.keys(summonTracker).filter(
