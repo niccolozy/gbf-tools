@@ -1,6 +1,6 @@
-import { useReducer } from "react";
+import React, { useReducer, createContext } from "react";
 
-const useLocalStorageState = (key, reducer, initialValue) => {
+export const useLocalStorageState = (key, reducer, initialValue) => {
   let [state, dispatch] = useReducer(reducer, initialValue, initialValue => {
     try {
       let item = JSON.parse(localStorage.getItem(key));
@@ -24,4 +24,27 @@ const useLocalStorageState = (key, reducer, initialValue) => {
   return [state, dispatchStorage];
 };
 
-export default useLocalStorageState;
+export const LocalInventoryContext = createContext();
+
+export const inventoryActions = {
+  CHANGEAMOUNT: "CHANGEAMOUNT"
+};
+
+const inventoryReducer = (state, action) => {
+  switch (action.type) {
+    case inventoryActions.CHANGEAMOUNT:
+      return { ...state, [action.item]: action.quantity };
+    default:
+      return state;
+  }
+};
+
+export const LocalInventoryContextProvider = (props) => {
+  let [inventory, dispatchInventory] = useLocalStorageState("Inventory", inventoryReducer, {});
+
+  return (
+    <LocalInventoryContext.Provider value={{inventory, dispatchInventory}}>
+      {props.children}
+    </LocalInventoryContext.Provider>
+  );
+};

@@ -39,9 +39,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function MaterialTable({
   type,
-  materials,
-  inventory,
-  onValueChange
+  materials
 }) {
   const classes = useStyles();
   return (
@@ -62,7 +60,7 @@ export default function MaterialTable({
         </TableHead>
         <TableBody>
           {materials.map( ({item, quantity}) => (
-            <TaskRow key={item.name} item={item} needed={quantity} finished={inventory[item.name]} onValueChange={onValueChange} />
+            <TaskRow key={item.name} item={item} needed={quantity} />
           ))}
         </TableBody>
       </Table>

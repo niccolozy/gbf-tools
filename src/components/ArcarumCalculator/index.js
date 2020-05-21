@@ -4,7 +4,7 @@ import { resolveSummons, summonFactory } from "./arcarumCosts.js";
 import ArcarumBanner from "./ArcarumBanner";
 import SummonStepInput from "./SummonStepInput";
 import MaterialEstimation from "./MaterialEstimation";
-import useLocalStorageState from "../../utils/storage";
+import { useLocalStorageState } from "../../utils/storage";
 
 const SUMMONLIST = [
   "Justice",

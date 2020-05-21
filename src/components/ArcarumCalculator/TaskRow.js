@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { TextField } from "@material-ui/core";
 import {
   TableCell,
@@ -8,6 +8,7 @@ import IconNameCell from "./IconNameCell";
 
 import { makeStyles } from "@material-ui/core/styles";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import { LocalInventoryContext, inventoryActions } from "../../utils/storage";
 
 const useStyles = makeStyles(theme => ({
   completed: {
@@ -27,12 +28,12 @@ const useStyles = makeStyles(theme => ({
 
 export default function TaskRow({
   item,
-  needed,
-  finished,
-  onValueChange
+  needed
 }) {
   const classes = useStyles();
+  const { inventory, dispatchInventory } = useContext(LocalInventoryContext);
   let remain = needed;
+  let finished = inventory[item.name];
   if(!isNaN(Number(finished)))
     remain -= finished;
   return (
@@ -43,7 +44,11 @@ export default function TaskRow({
           <TextField
             name={item.name}
             className={classes.input}
-            onChange={onValueChange}
+            onChange={ e => dispatchInventory({
+              type: inventoryActions.CHANGEAMOUNT,
+              item: e.target.name,
+              quantity: e.target.value
+            })}
             inputProps={{
               style: { textAlign: "center", fontSize: 15 }
             }}
