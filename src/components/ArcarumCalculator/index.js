@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Grid } from "@material-ui/core";
 import { resolveSummons, summonFactory } from "./arcarumCosts.js";
 import ArcarumBanner from "./ArcarumBanner";
@@ -21,18 +21,35 @@ const SUMMONLIST = [
 
 const TOGGLETRACKING = "TOGGLETRACKING";
 const CHANGESTEP = "CHANGESTEP";
-const reducer = action => (state, prop) => {
+
+const TrackerReducer = (state, action) => {
   switch (action.type) {
     case TOGGLETRACKING: {
-      let newTracker = { ...state };
-      newTracker[action.summon].track = !newTracker[action.summon].track;
+      let newTracker = { 
+        ...state, 
+        [action.summon]: {
+          ...state[action.summon], 
+          track: !state[action.summon].track
+        }
+      };
       return newTracker;
     }
     case CHANGESTEP: {
-      let newTracker = { ...state };
-      newTracker[action.summon][action.target] = action.value;
-      if (newTracker[action.summon].current > newTracker[action.summon].target)
-        newTracker[action.summon].target = newTracker[action.summon].current;
+      let newTracker = { 
+        ...state,
+        [action.summon]: {
+          ...state[action.summon],
+          ...(action.target==="current" && {
+            current: action.value, 
+            // target step shouldn't be smaller than current step
+            // overwrite with new current step if it's the case
+            ...(action.value > state[action.summon].target && {
+              target: action.value
+            })
+          }),
+          ...(action.target==="target" && { target: action.value })
+        }
+      };
       return newTracker;
     }
     default:
@@ -50,22 +67,22 @@ export default function ArcarumCalculator() {
     };
   });
 
-  const [summonTracker, setSummonTracker] = useLocalStorageState("ArcarumCalculator", initTracker);
+  const [summonTracker, dispatchSummonTracker] = useLocalStorageState("ArcarumCalculator", TrackerReducer, initTracker);
 
   const onBannerClick = summon => {
-    setSummonTracker(reducer({
+    dispatchSummonTracker({
       type:TOGGLETRACKING, 
       summon:summon
-    }));
+    });
   };
 
   const onStepChange = (e, summon) => {
-    setSummonTracker(reducer({
+    dispatchSummonTracker({
       type: CHANGESTEP, 
       summon:summon,
       target: e.target.name,
       value: e.target.value
-    }));
+    });
   };
 
   const trackList = Object.keys(summonTracker).filter(

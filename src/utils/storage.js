@@ -1,7 +1,7 @@
-import { useState, useCallback } from "react";
+import { useReducer } from "react";
 
-const useLocalStorageState = (key, initialValue) => {
-  let [state, setState] = useState(() => {
+const useLocalStorageState = (key, reducer, initialValue) => {
+  let [state, dispatch] = useReducer(reducer, initialValue, initialValue => {
     try {
       let item = JSON.parse(localStorage.getItem(key));
       return item ? item : initialValue;
@@ -10,18 +10,18 @@ const useLocalStorageState = (key, initialValue) => {
     }
   });
 
-  const updateState = useCallback( valueOrFunc => {
+  const dispatchStorage = action => {
     try {
-      const newState = typeof valueOrFunc === "function" ? valueOrFunc(state) : valueOrFunc;
+      const newState = reducer(state, action);
 
       localStorage.setItem(key, JSON.stringify(newState));
-      setState(newState);
+      dispatch(action);
     } catch (error) {
       console.log(error);
     }
-  }, [key, state]);
+  };
 
-  return [state, updateState];
+  return [state, dispatchStorage];
 };
 
 export default useLocalStorageState;
