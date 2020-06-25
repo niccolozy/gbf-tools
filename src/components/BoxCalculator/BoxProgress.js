@@ -34,6 +34,7 @@ export default function BoxProgress({ progress }) {
           progress.total) *
         100
       : 100;
+  let rest = progress.total - progress.completed.fromDrop - progress.completed.fromHonor;
 
   return (
     <TableContainer component={Paper}>
@@ -79,6 +80,12 @@ export default function BoxProgress({ progress }) {
               />
               {progressPercentage.toFixed(2) + "%"}
             </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell component="th" scope="row">
+              待刷战货
+            </TableCell>
+            <TableCell align="center">{rest > 0 ? rest : 0}</TableCell>
           </TableRow>
         </TableBody>
       </Table>
