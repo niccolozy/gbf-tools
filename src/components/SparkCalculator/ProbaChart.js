@@ -6,10 +6,10 @@ import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import {
-    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
-  } from 'recharts';
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
+} from 'recharts';
 
-import {checkProbaFormat, checkRollFormat, geoDistCDF, geoDistCDFReversed, binomialDist} from "./utils"
+import {checkProbaFormat, checkRollFormat, geoDistCDF, geoDistCDFReversed, binomialDist} from "./utils";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,7 +48,7 @@ export default function ProbaChart({ props }) {
       warningSetter(true);
     }
     valueSetter(e.target.value);
-  }
+  };
 
   let successProbability = null;
   let successEstimation = null;
@@ -110,7 +110,7 @@ export default function ProbaChart({ props }) {
               endAdornment: <InputAdornment position="end"><b>%</b></InputAdornment>,
             }}
             error={isWrongProba}
-            onChange={e => {onInputChange(e, checkProbaFormat, setTargetProba, setIsWrongProba)}}
+            onChange={e => {onInputChange(e, checkProbaFormat, setTargetProba, setIsWrongProba);}}
           />
         </Grid>
         
@@ -122,14 +122,14 @@ export default function ProbaChart({ props }) {
             variant="outlined"
             value={targetRoll}
             error={isWrongRoll}
-            onChange={e => {onInputChange(e, checkRollFormat, setTargetRoll, setIsWrongRoll)}}
+            onChange={e => {onInputChange(e, checkRollFormat, setTargetRoll, setIsWrongRoll);}}
           />
         </Grid>
 
         <Grid item xs={12} sm={3}>
           <Typography variant="body1" className={classes.text}>
             { (isWrongProba || isWrongRoll) ? "输入数据有误，请输入正确的概率和抽卡次数" :
-                                              "出货至少一次概率：" + Math.floor(successProbability * 10000) / 100 + 
+              "出货至少一次概率：" + Math.floor(successProbability * 10000) / 100 + 
                                               "%, 出货次数期望: " + successEstimation.toFixed(2)}
           </Typography>
         </Grid>
@@ -147,23 +147,23 @@ export default function ProbaChart({ props }) {
             </Typography>
           </Grid>
         )}
-        </Grid>
-        <Card>
-          <CardHeader
-            title="概率分布曲线"
-            titleTypographyProps={{ variant: "h6" }}
-          />
-          <Grid container>
+      </Grid>
+      <Card>
+        <CardHeader
+          title="概率分布曲线"
+          titleTypographyProps={{ variant: "h6" }}
+        />
+        <Grid container>
           {!isWrongProba && (
-              <Grid item xs={12} sm={6}>
-                <Container maxWidth="sm">
-                  <ResponsiveContainer width='100%' aspect={4/3.0}>
-                    <LineChart
-                      data={cdfArray}
-                      margin={{
-                          top: 5, right: 30, left: 20, bottom: 5,
-                      }}
-                    >
+            <Grid item xs={12} sm={6}>
+              <Container maxWidth="sm">
+                <ResponsiveContainer width='100%' aspect={4/3.0}>
+                  <LineChart
+                    data={cdfArray}
+                    margin={{
+                      top: 5, right: 30, left: 20, bottom: 5,
+                    }}
+                  >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="抽卡次数" />
                     <YAxis yAxisId="left" />
@@ -172,10 +172,10 @@ export default function ProbaChart({ props }) {
                     <Legend />
                     <Line type="monotone" yAxisId="left" dataKey="累进出货概率" stroke="#8884d8" activeDot={{ r: 4 }} />
                     <Line type="monotone" yAxisId="right" dataKey="平均出货期望" stroke="#82ca9d" />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </Container>
-              </Grid>
+                  </LineChart>
+                </ResponsiveContainer>
+              </Container>
+            </Grid>
           )}
           {!isWrongProba && !isWrongRoll && (
             <Grid item xs={12} sm={6}>
@@ -184,21 +184,21 @@ export default function ProbaChart({ props }) {
                   <LineChart
                     data={binomialArray}
                     margin={{
-                        top: 5, right: 30, left: 20, bottom: 5,
+                      top: 5, right: 30, left: 20, bottom: 5,
                     }}
                   >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="出货次数" />
-                  <YAxis yAxisId="left" />
-                  <Tooltip />
-                  <Legend />
-                  <Line type="monotone" yAxisId="left" dataKey="出货x次概率" stroke="#8884d8" activeDot={{ r: 4 }} />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="出货次数" />
+                    <YAxis yAxisId="left" />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" yAxisId="left" dataKey="出货x次概率" stroke="#8884d8" activeDot={{ r: 4 }} />
                   </LineChart>
                 </ResponsiveContainer>
               </Container>
             </Grid>
-            )}
-          </Grid>
+          )}
+        </Grid>
       </Card>
     </Card>
   ); 

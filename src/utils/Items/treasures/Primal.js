@@ -6,6 +6,7 @@ export const PrimevalHorn = makeItem(79, "Primeval Horn", "item");
 export const SilverCentrum = makeItem(107, "Silver Centrum", "item");
 
 export const GenesisFragment = makeItem(535, "Genesis Fragment", "item");
+export const Meteorite = makeItem(137, "Meteorite", "item");
 
 // Magna I Omega Anima
 const TiamatOmegaAnima = makeItem(18, "Tiamat Omega Anima", "item");
@@ -30,6 +31,31 @@ export const MagnaIOmegaAnima = element => {
       return CelesteOmegaAnima;
     default:
       console.log(`Wrong element for Magna I Omega Anima: ${element}`);
+  }
+};
+
+const ResoluteReactor = makeItem(47, "Resolute Reactor", "item/article/s");
+const FannedFin = makeItem(48, "Fanned Fin", "item/article/s");
+const GenesisBud = makeItem(49, "Genesis Bud", "item/article/s");
+const GreenDragonEye = makeItem(32, "Green Dragon Eye", "item/article/s");
+const PrimalBit = makeItem(50, "Primal Bit", "item/article/s");
+const BlackFogSphere = makeItem(51, "Black Fog Sphere", "item/article/s");
+export const MagnaIDropItem = element => {
+  switch (element) {
+    case "fire":
+      return ResoluteReactor;
+    case "water":
+      return FannedFin;
+    case "earth":
+      return GenesisBud;
+    case "wind":
+      return GreenDragonEye;
+    case "light":
+      return PrimalBit;
+    case "dark":
+      return BlackFogSphere;
+    default:
+      console.log(`Wrong element for Magna I Drop Item: ${element}`);
   }
 };
 
