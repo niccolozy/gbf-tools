@@ -1,11 +1,12 @@
-const iconUrl = (id, type) => { return `http://game-a.granbluefantasy.jp/assets_en/img/sp/assets/${type}/${id}.jpg`; };
+// const iconUrl = (id, type) => { return `http://game-a.granbluefantasy.jp/assets_en/img/sp/assets/${type}/${id}.jpg`; };
+const images = require.context("../../assets", true);
 
 export const makeItem = (ingameId, name, type, {isCrafted=false, craftMaterials=null, isBuyable=false, exchangeMaterials=null} = {}) => {
   return { 
     id: ingameId,
     type: type, 
     name: name, 
-    icon: iconUrl(ingameId, type),
+    icon: ingameId > 0 ? images("./"+type+"/"+ingameId+".jpg") : null,
     isCrafted: isCrafted,
     craftMaterials: craftMaterials,
     isBuyable: isBuyable,

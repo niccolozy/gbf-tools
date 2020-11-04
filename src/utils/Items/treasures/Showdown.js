@@ -1,12 +1,12 @@
 import {makeItem} from "../Item";
 
 // Anima
-const IfritAnima = makeItem(10018, "Ifrit Anima", "item/article/s");
-const CocytusAnima = makeItem(10005, "Cocytus Anima", "item/article/s");
-const VohuManahAnima = makeItem(10011, "Vohu Manah Anima", "item/article/s");
-const SagittariusAnima = makeItem(10027, "Sagittarius Anima", "item/article/s");
-const CorowAnima = makeItem(10046, "Corow Anima", "item/article/s");
-const DiabloAnima = makeItem(10065, "Diablo Anima", "item/article/s");
+const IfritAnima = makeItem(10018, "Ifrit Anima", "item");
+const CocytusAnima = makeItem(10005, "Cocytus Anima", "item");
+const VohuManahAnima = makeItem(10011, "Vohu Manah Anima", "item");
+const SagittariusAnima = makeItem(10027, "Sagittarius Anima", "item");
+const CorowAnima = makeItem(10046, "Corow Anima", "item");
+const DiabloAnima = makeItem(10065, "Diablo Anima", "item");
 export const Anima = element => {
   switch (element) {
     case "fire":
@@ -27,12 +27,12 @@ export const Anima = element => {
 };
 
 // Coop Showdown Item
-const InfernalGarnet = makeItem(20611, "Infernal Garnet", "item/article/s");
-const FrozenHellPrism = makeItem(20621, "Frozen Hell Prism", "item/article/s");
-const EvilJudgeCrystal = makeItem(20631, "Evil Judge Crystal", "item/article/s");
-const HorsemansPlate = makeItem(20641, "Horseman's Plate", "item/article/s");
-const HaloLightQuartz = makeItem(20651, "Halo Light Quartz", "item/article/s");
-const PhantomDemonJewel = makeItem(20661, "Phantom Demon Jewel", "item/article/s");
+const InfernalGarnet = makeItem(20611, "Infernal Garnet", "item");
+const FrozenHellPrism = makeItem(20621, "Frozen Hell Prism", "item");
+const EvilJudgeCrystal = makeItem(20631, "Evil Judge Crystal", "item");
+const HorsemansPlate = makeItem(20641, "Horseman's Plate", "item");
+const HaloLightQuartz = makeItem(20651, "Halo Light Quartz", "item");
+const PhantomDemonJewel = makeItem(20661, "Phantom Demon Jewel", "item");
 export const CoopShowdownItem = element => {
   switch (element) {
     case "fire":

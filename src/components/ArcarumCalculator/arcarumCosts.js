@@ -78,7 +78,7 @@ const SR0Summon = name => {
   list.push(...HazeRouter(element, 1));
   list.push(...VerumProofRouter(element, 6));
 
-  return makeItem(SRSummonId[name], name, "summon/m", {isCrafted:true, craftMaterials:list});
+  return makeItem(SRSummonId[name], name, "summon", {isCrafted:true, craftMaterials:list});
 };
 
 const SR1Summon = name => {
@@ -93,7 +93,7 @@ const SR1Summon = name => {
   list.push(...HazeRouter(element, 3));
   list.push(...VerumProofRouter(element, 16));
 
-  return makeItem(SRSummonId[name], name, "summon/m", {isCrafted:true, craftMaterials:list});
+  return makeItem(SRSummonId[name], name, "summon", {isCrafted:true, craftMaterials:list});
 };
 
 const SR2Summon = name => {
@@ -107,7 +107,7 @@ const SR2Summon = name => {
   list.push(...HazeRouter(element, 7));
   list.push(...VerumProofRouter(element, 30));
 
-  return makeItem(SRSummonId[name], name, "summon/m", {isCrafted:true, craftMaterials:list});
+  return makeItem(SRSummonId[name], name, "summon", {isCrafted:true, craftMaterials:list});
 };
 
 const SR3Summon = name => {
@@ -122,7 +122,7 @@ const SR3Summon = name => {
   list.push(...HazeRouter(element, 16));
   list.push(...VerumProofRouter(element, 50));
 
-  return makeItem(SRSummonId[name], name, "summon/m", {isCrafted:true, craftMaterials:list});
+  return makeItem(SRSummonId[name], name, "summon", {isCrafted:true, craftMaterials:list});
 };
 
 const SSR3Summon = name => {
@@ -138,7 +138,7 @@ const SSR3Summon = name => {
   list.push(...VerumProofRouter(element, 80));
   list.push(...PrimarchAnimaRouter(element, 20));
 
-  return makeItem(SSRSummonId[name], name, "summon/m", {isCrafted:true, craftMaterials:list});
+  return makeItem(SSRSummonId[name], name, "summon", {isCrafted:true, craftMaterials:list});
 };
 
 const SSR4Summon = name => {
@@ -153,7 +153,7 @@ const SSR4Summon = name => {
   list.push(...VerumProofRouter(element, 120));
   list.push(...ArcarumFragmentRouter(name, 10));
 
-  return makeItem(SSRSummonId[name], name, "summon/m", {isCrafted:true, craftMaterials:list});
+  return makeItem(SSRSummonId[name], name, "summon", {isCrafted:true, craftMaterials:list});
 };
 
 const SSR5Summon = name => {
@@ -169,7 +169,7 @@ const SSR5Summon = name => {
   list.push(...TrialFragmentRouter(element, 50));
   list.push(...WorldMaterialRouter(name, 50));
 
-  return makeItem(SSRSummonId[name], name, "summon/m", {isCrafted:true, craftMaterials:list});
+  return makeItem(SSRSummonId[name], name, "summon", {isCrafted:true, craftMaterials:list});
 };
 
 const Evoker = name => {
@@ -183,7 +183,7 @@ const Evoker = name => {
   list.push(...HazeRouter(element, 3));
   list.push(...VerumProofRouter(element, 20));
 
-  return makeItem(SSRSummonId[name], name, "summon/m", {isCrafted:true, craftMaterials:list});
+  return makeItem(SSRSummonId[name], name, "summon", {isCrafted:true, craftMaterials:list});
 };
 
 export const summonFactory = (name, step) => {

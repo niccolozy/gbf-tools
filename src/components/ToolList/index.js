@@ -39,6 +39,13 @@ export default function ToolList({ tools, onClick }) {
           <Divider />
           <CardContent>
             <Typography variant="body1">
+              <b>2020-11-04</b> 移除GBF官方图片资源http外链{" "}
+            </Typography>
+            <List dense={true}>
+            </List>
+            <Divider />
+
+            <Typography variant="body1">
               <b>2020-05-17</b> 转世材料页面更新{" "}
             </Typography>
             <List dense={true}>
