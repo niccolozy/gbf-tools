@@ -16,6 +16,7 @@ export const SteelLiquid = makeItem(71, "Steel Liquid", "item");
 
 export const BastionBlock = makeItem(120, "Bastion Block", "item");
 export const CorrodedCartridge = makeItem(121, "Corroded Cartridge", "item");
+export const RawGemstone = makeItem(124, "Raw Gemstone", "item");
 export const GraySandstone = makeItem(125, "Gray Sandstone", "item");
 export const KlugerHerb = makeItem(126, "Kluger Herb", "item");
 export const MeditativeSutra = makeItem(127, "Meditative Sutra", "item");

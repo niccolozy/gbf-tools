@@ -2,6 +2,8 @@ import { makeItem, makeMaterial } from "../../utils/Items/Item";
 import * as World from "../../utils/Items/treasures/World"; 
 import * as Uncap from "../../utils/Items/treasures/Uncap"; 
 import * as Primal from "../../utils/Items/treasures/Primal"; 
+import { makeFullMetalJacket, makePiercer } from "./RifleBullet";
+import { makeIronBullet } from "./ParabellumBullet";
 
 const Shotshell = makeItem(
   30101,
@@ -89,7 +91,7 @@ export const makeShotshell = (level, quantity) => {
   }
 };
 
-const StrikeShel = makeItem(
+const StrikeShell = makeItem(
   30201,
   "Strike Shell",
   "bullet", { 
@@ -103,16 +105,16 @@ const StrikeShel = makeItem(
 );
 
 
-const StrikeShelII = makeItem(
+const StrikeShellII = makeItem(
   30202,
-  "Strike Shell",
+  "Strike Shell II",
   "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(World.ProsperityFlame, 10),
       makeMaterial(World.ExplosiveMaterial, 20),
       makeMaterial(World.BlisteringOre, 16),
-      makeMaterial(StrikeShel, 1)
+      makeMaterial(StrikeShell, 1)
     ]
   }
 );
@@ -175,3 +177,116 @@ const ElementalCylinderII = element => {
     }
   );
 }
+
+const GuardBreaker = makeItem(
+  30901,
+  "Guard Breaker",
+  "bullet", { 
+    isCrafted: true, 
+    craftMaterials: [
+      makeMaterial(World.SteelLiquid, 10),
+      makeMaterial(World.ProsperityFlame, 20),
+      makeMaterial(makePiercer(2, 5)),
+      makeMaterial(makePiercer(1, 5))
+    ]
+  }
+);
+
+
+const GuardBreakerII = makeItem(
+  30902,
+  "Guard Breaker II",
+  "bullet", { 
+    isCrafted: true, 
+    craftMaterials: [
+      makeMaterial(World.SteelLiquid, 24),
+      makeMaterial(World.ExplosiveMaterial, 20),
+      makeMaterial(GuardBreaker, 1)
+    ]
+  }
+);
+
+const SlugShot = makeItem(
+  31001,
+  "Slug Shot",
+  "bullet", { 
+    isCrafted: true, 
+    craftMaterials: [
+      makeMaterial(World.SteelLiquid, 20),
+      makeMaterial(World.ProsperityFlame, 20),
+      makeMaterial(makeFullMetalJacket(3, 5)),
+      makeMaterial(makeIronBullet(3, 5))
+    ]
+  }
+);
+
+
+const SlugShotII = makeItem(
+  31002,
+  "Slug Shot II",
+  "bullet", { 
+    isCrafted: true, 
+    craftMaterials: [
+      makeMaterial(World.SteelLiquid, 70),
+      makeMaterial(World.ExplosiveMaterial, 20),
+      makeMaterial(SlugShot, 1)
+    ]
+  }
+);
+
+
+const StickyShell = makeItem(
+  31101,
+  "Sticky Shell",
+  "bullet", { 
+    isCrafted: true, 
+    craftMaterials: [
+      makeMaterial(World.SteelLiquid, 10),
+      makeMaterial(World.CorrodedCartridge, 8),
+      makeMaterial(makePiercer(2, 5)),
+      makeMaterial(makePiercer(1, 5))
+    ]
+  }
+);
+
+
+const StickyShellII = makeItem(
+  31102,
+  "Sticky Shell II",
+  "bullet", { 
+    isCrafted: true, 
+    craftMaterials: [
+      makeMaterial(World.SteelLiquid, 20),
+      makeMaterial(World.CorrodedCartridge, 15),
+      makeMaterial(StickyShell, 10)
+    ]
+  }
+);
+
+const ChaserShell = makeItem(
+  31201,
+  "Chaser Shell",
+  "bullet", { 
+    isCrafted: true, 
+    craftMaterials: [
+      makeMaterial(World.BrokenTeacup, 10),
+      makeMaterial(World.RawGemstone, 10),
+      makeMaterial(Primal.MaliceFragment, 5),
+      makeShotshell(5, 2)
+    ]
+  }
+);
+
+const EnhancingShell = makeItem(
+  31301,
+  "Enhancing Shell",
+  "bullet", { 
+    isCrafted: true, 
+    craftMaterials: [
+      makeMaterial(World.JumboBeastBone, 10),
+      makeMaterial(World.TranslucentSilk, 10),
+      makeMaterial(Primal.MaliceFragment, 5),
+      makeShotshell(5, 2)
+    ]
+  }
+);

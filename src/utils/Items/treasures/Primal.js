@@ -5,6 +5,7 @@ export const PrimevalHorn = makeItem(79, "Primeval Horn", "item");
 
 export const SilverCentrum = makeItem(107, "Silver Centrum", "item");
 
+export const MaliceFragment = makeItem(533, "Malice Fragment", "item");
 export const GenesisFragment = makeItem(535, "Genesis Fragment", "item");
 export const Meteorite = makeItem(137, "Meteorite", "item");
 
