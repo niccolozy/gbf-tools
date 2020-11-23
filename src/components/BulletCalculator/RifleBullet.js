@@ -6,7 +6,7 @@ import * as Primal from "../../utils/Items/treasures/Primal";
 const FullMetalJacket = makeItem(
   20101,
   "Full Metal Jacket",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(World.IronCluster, 3),
@@ -20,7 +20,7 @@ const FullMetalJacket = makeItem(
 const FullMetalJacketII = makeItem(
   20102,
   "Full Metal Jacket II",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(FullMetalJacket, 1),
@@ -34,7 +34,7 @@ const FullMetalJacketII = makeItem(
 const FullMetalJacketIII = makeItem(
   20103,
   "Full Metal Jacket III",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(FullMetalJacketII, 2),
@@ -49,7 +49,7 @@ const FullMetalJacketIII = makeItem(
 const FullMetalJacketIV = makeItem(
   20104,
   "Full Metal Jacket IV",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(FullMetalJacketIII, 5),
@@ -63,7 +63,7 @@ const FullMetalJacketIV = makeItem(
 const FullMetalJacketV = makeItem(
   20105,
   "Full Metal Jacket V",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(FullMetalJacketIV, 5),
@@ -94,7 +94,7 @@ export const makeFullMetalJacket = (level, quantity) => {
 const Exploder = makeItem(
   20201,
   "Exploder",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(FullMetalJacket, 3),
@@ -108,7 +108,7 @@ const Exploder = makeItem(
 const ExploderII = makeItem(
   20202,
   "Exploder II",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(Exploder, 1),
@@ -122,7 +122,7 @@ const ExploderII = makeItem(
 const ExploderIII = makeItem(
   20203,
   "Exploder III",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(ExploderII, 2),
@@ -149,7 +149,7 @@ export const makeExploder = (level, quantity) => {
 const Piercer = makeItem(
   20301,
   "Piercer",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(FullMetalJacketII, 3),
@@ -163,7 +163,7 @@ const Piercer = makeItem(
 const PiercerII = makeItem(
   20302,
   "Piercer II",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(Piercer, 1),
@@ -177,7 +177,7 @@ const PiercerII = makeItem(
 const PiercerIII = makeItem(
   20303,
   "Piercer III",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(PiercerII, 2),
@@ -204,7 +204,7 @@ export const makePiercer = (level, quantity) => {
 const SilverBullet = makeItem(
   20401,
   "Silver Bullet",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(FullMetalJacketII, 3),
@@ -218,7 +218,7 @@ const SilverBullet = makeItem(
 const SilverBulletII = makeItem(
   20402,
   "Silver Bullet II",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(SilverBullet, 7),
@@ -232,7 +232,7 @@ const SilverBulletII = makeItem(
 const SilverBulletIII = makeItem(
   20403,
   "Silver Bullet III",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(SilverBulletII, 10),
@@ -259,7 +259,7 @@ export const makeSilverBullet = (level, quantity) => {
 const GoldBullet = makeItem(
   20501,
   "Gold Bullet",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(SilverBullet, 10),
@@ -272,7 +272,7 @@ const GoldBullet = makeItem(
 const GoldBulletII = makeItem(
   20502,
   "Gold Bullet II",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(GoldBullet, 2),

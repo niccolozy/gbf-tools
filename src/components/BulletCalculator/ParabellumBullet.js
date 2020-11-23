@@ -6,7 +6,7 @@ import * as Primal from "../../utils/Items/treasures/Primal";
 const IronBullet = makeItem(
   10101,
   "Iron Bullet",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(World.IronCluster, 2),
@@ -18,7 +18,7 @@ const IronBullet = makeItem(
 const IronBulletII = makeItem(
   10102,
   "Iron Bullet II",
-  "bullet/s", {
+  "bullet", {
     isCrafted: true,
     craftMaterials: [
       makeMaterial(World.IronCluster, 5),
@@ -31,7 +31,7 @@ const IronBulletII = makeItem(
 const IronBulletIII = makeItem(
   10103,
   "Iron Bullet III",
-  "bullet/s", {
+  "bullet", {
     isCrafted: true,
     craftMaterials: [
       makeMaterial(World.IronCluster, 12),
@@ -45,7 +45,7 @@ const IronBulletIII = makeItem(
 const IronBulletIV = makeItem(
   10104,
   "Iron Bullet IV",
-  "bullet/s", {
+  "bullet", {
     isCrafted:  true,
     craftMaterials: [
       makeMaterial(World.IronCluster, 25),
@@ -59,7 +59,7 @@ const IronBulletIV = makeItem(
 const IronBulletV = makeItem(
   10105,
   "Iron Bullet V",
-  "bullet/s", {
+  "bullet", {
     isCrafted:  true,
     craftMaterials: [
       makeMaterial(World.Ironluster, 40),
@@ -90,7 +90,7 @@ export const makeIronBullet = (level, quantity) => {
 const RapidBullet = makeItem(
   10201,
   "Rapid Bullet",
-  "bullet/s", { 
+  "bullet", { 
     isCrafted: true, 
     craftMaterials: [
       makeMaterial(World.IronCluster, 2),
@@ -103,7 +103,7 @@ const RapidBullet = makeItem(
 const RapidBulletII = makeItem(
   10202,
   "Rapid Bullet II",
-  "bullet/s", {
+  "bullet", {
     isCrafted: true,
     craftMaterials: [
       makeMaterial(World.IronCluster, 4),
@@ -117,7 +117,7 @@ const RapidBulletII = makeItem(
 const RapidBulletIII = makeItem(
   10203,
   "Rapid Bullet III",
-  "bullet/s", {
+  "bullet", {
     isCrafted: true,
     craftMaterials: [
       makeMaterial(World.IronCluster, 20),
@@ -131,7 +131,7 @@ const RapidBulletIII = makeItem(
 const RapidBulletIV = makeItem(
   10204,
   "Rapid Bullet IV",
-  "bullet/s", {
+  "bullet", {
     isCrafted:  true,
     craftMaterials: [
       makeMaterial(World.IronCluster, 30),
@@ -160,7 +160,7 @@ export const makeRapidBullet = (level, quantity) => {
 export const FlameBullet = makeItem(
   10301,
   "Flame Bullet",
-  "bullet/s", {
+  "bullet", {
     isCrafted: true,
     craftMaterials: [
       makeIronBullet(1, 5),
@@ -174,7 +174,7 @@ export const FlameBullet = makeItem(
 export const PoisonBullet = makeItem(
   10401,
   "Poison Bullet",
-  "bullet/s", {
+  "bullet", {
     isCrafted: true,
     craftMaterials: [
       makeIronBullet(1, 5),
@@ -188,7 +188,7 @@ export const PoisonBullet = makeItem(
 export const SleepBullet = makeItem(
   10501,
   "Sleep Bullet",
-  "bullet/s", {
+  "bullet", {
     isCrafted: true,
     craftMaterials: [
       makeIronBullet(1, 5),
@@ -202,7 +202,7 @@ export const SleepBullet = makeItem(
 export const ShieldBullet = makeItem(
   10601,
   "Shield Bullet",
-  "bullet/s", {
+  "bullet", {
     isCrafted: true,
     craftMaterials: [
       makeRapidBullet(2, 3),
@@ -216,7 +216,7 @@ export const ShieldBullet = makeItem(
 export const CharmdBullet = makeItem(
   10701,
   "Charm Bullet",
-  "bullet/s", {
+  "bullet", {
     isCrafted: true,
     craftMaterials: [
       makeIronBullet(1, 5),
@@ -230,7 +230,7 @@ export const CharmdBullet = makeItem(
 export const ParalyzeBullet = makeItem(
   10801,
   "Paralyze Bullet",
-  "bullet/s", {
+  "bullet", {
     isCrafted: true,
     craftMaterials: [
       makeIronBullet(5, 1),
@@ -244,7 +244,7 @@ export const ParalyzeBullet = makeItem(
 export const HealingBullet = makeItem(
   10901,
   "Healing Bullet",
-  "bullet/s", {
+  "bullet", {
     isCrafted: true,
     craftMaterials: [
       makeIronBullet(5, 1),
