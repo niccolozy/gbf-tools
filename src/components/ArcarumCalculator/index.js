@@ -1,10 +1,13 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import { resolveSummons, summonFactory } from "./arcarumCosts.js";
+import { resolveWeapons, weaponFactory } from "./NewWorldFoundationWeaponCosts";
 import ArcarumBanner from "./ArcarumBanner";
 import SummonStepInput from "./SummonStepInput";
+import WeaponStepInput from "./WeaponStepInput";
 import MaterialEstimation from "./MaterialEstimation";
 import { useLocalStorageState } from "../../utils/storage";
+import { makeMaterial, makeItem, resolveMaterials } from "../../utils/Items/Item";
 
 const SUMMONLIST = [
   "Justice",
@@ -47,7 +50,14 @@ const TrackerReducer = (state, action) => {
               target: action.value
             })
           }),
-          ...(action.target==="target" && { target: action.value })
+          ...(action.target==="target" && { target: action.value }),
+          ...(action.target==="weaponCurrent" && {
+            weaponCurrent: action.value, 
+            ...(action.value > state[action.summon].weaponTarget && {
+              weaponTarget: action.value
+            })
+          }),
+          ...(action.target==="weaponTarget" && { weaponTarget: action.value }),
         }
       };
       return newTracker;
@@ -63,7 +73,9 @@ export default function ArcarumCalculator() {
     initTracker[summon] = {
       track: false,
       current: 0,
-      target: 8
+      target: 8,
+      weaponCurrent: 0,
+      weaponTarget: 0
     };
   });
 
@@ -89,8 +101,11 @@ export default function ArcarumCalculator() {
     key => summonTracker[key].track
   );
 
-  let trackedSummons = trackList.map(name => ({name: name, icon: summonFactory(name, summonTracker[name].current).icon, ...summonTracker[name]}));
-  let materials = resolveSummons(trackedSummons);
+  let trackedSummons = trackList.map(name => ({name: name, icon: summonFactory(name, summonTracker[name].current).icon, weaponIcon: weaponFactory(name, summonTracker[name].weaponCurrent).icon, ...summonTracker[name]}));
+  let summonsMaterials = resolveSummons(trackedSummons);
+  let weaponMaterials = resolveWeapons(trackedSummons);
+  let virtual_target = makeItem(-1, "fake", "", {isCrafted:true, craftMaterials:[].concat(summonsMaterials, weaponMaterials)});
+  let materials = resolveMaterials(makeMaterial(virtual_target, 1));
 
   return (
     <Grid
@@ -111,6 +126,12 @@ export default function ArcarumCalculator() {
       })}
       <Grid item xs={12}>
         <SummonStepInput
+          trackedSummons={trackedSummons}
+          onStepChange={onStepChange}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <WeaponStepInput
           trackedSummons={trackedSummons}
           onStepChange={onStepChange}
         />

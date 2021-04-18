@@ -38,6 +38,16 @@ export default function ToolList({ tools, onClick }) {
           <CardHeader title="更新" />
           <Divider />
           <CardContent>
+          <Typography variant="body1">
+              <b>2021-04-18</b> 转世材料页面添加贤者武器计算{" "}
+            </Typography>
+            <List dense={true}>
+              <ListItem>添加转世武器和材料图片资源</ListItem>
+              <ListItem>召唤石和武器进度更换为可折叠面板</ListItem>
+              <ListItem>贤者领域计算准备中</ListItem>
+            </List>
+            <Divider />
+
             <Typography variant="body1">
               <b>2020-11-04</b> 移除GBF官方图片资源http外链{" "}
             </Typography>

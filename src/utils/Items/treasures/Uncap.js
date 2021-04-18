@@ -305,3 +305,64 @@ export const BellatorFragment = makeItem(25034, "Bellator Fragment", "item");
 export const CelsusFragment = makeItem(25035, "Celsus Fragment", "item");
 
 export const SephiraEvolite = makeItem(25036, "Sephira Evolite", "item");
+
+export const NewWorldQuartz = makeItem(25074, "New World Quartz", "item");
+
+// Luster
+const IgnisLuster = makeItem(25070, "Ignis Luster", "item");
+const AquaLuster = makeItem(25071, "Aqua Luster", "item");
+const TerraLuster = makeItem(25072, "Terra Luster", "item");
+const VentusLuster = makeItem(25073, "Ventus Luster", "item");
+export const Luster = element => {
+  switch (element) {
+    case "fire":
+      return IgnisLuster;
+    case "water":
+      return AquaLuster;
+    case "earth":
+      return TerraLuster;
+    case "wind":
+      return VentusLuster;
+    default:
+      console.log(`Wrong element for Luster: ${element}`);
+  }
+};
+
+
+// Veritas
+const JusticeVeritas = makeItem(25047, "Justice Veritas", "item");
+const HangedManVeritas = makeItem(25048, "Hanged Man Veritas", "item");
+const DeathVeritas = makeItem(25049, "Death Veritas", "item");
+const TemperanceVeritas = makeItem(25050, "Temperance Veritas", "item");
+const DevilVeritas = makeItem(25051, "Devil Veritas", "item");
+const TowerVeritas = makeItem(25052, "Tower Veritas", "item");
+const StarVeritas = makeItem(25053, "Star Veritas", "item");
+const MoonVeritas = makeItem(25054, "Moon Veritas", "item");
+const SunVeritas = makeItem(25055, "Sun Veritas", "item");
+const JudgementVeritas = makeItem(25056, "Judgement Veritas", "item");
+export const Veritas = summon => {
+  switch (summon) {
+    case "Justice":
+      return JusticeVeritas;
+    case "HangedMan":
+      return HangedManVeritas;
+    case "Death":
+      return DeathVeritas;
+    case "Temperance":
+      return TemperanceVeritas;
+    case "Devil":
+      return DevilVeritas;
+    case "Tower":
+      return TowerVeritas;
+    case "Star":
+      return StarVeritas;
+    case "Moon":
+      return MoonVeritas;
+    case "Sun":
+      return SunVeritas;
+    case "Judgement":
+      return JudgementVeritas;
+    default:
+      console.log(`Wrong summon for Veritas: ${summon}`);
+  }
+};

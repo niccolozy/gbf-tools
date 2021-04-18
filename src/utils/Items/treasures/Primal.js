@@ -8,6 +8,7 @@ export const SilverCentrum = makeItem(107, "Silver Centrum", "item");
 export const MaliceFragment = makeItem(533, "Malice Fragment", "item");
 export const GenesisFragment = makeItem(535, "Genesis Fragment", "item");
 export const Meteorite = makeItem(137, "Meteorite", "item");
+export const VerdantAzurite = makeItem(546, "Verdant Azurite", "item");
 
 // Magna I Omega Anima
 const TiamatOmegaAnima = makeItem(18, "Tiamat Omega Anima", "item");
@@ -210,3 +211,28 @@ export const MagnaIIOmegaAnima = element => {
   }
 };
 
+// Six-Dragon Jewel 
+const WilnasJewel = makeItem(557, "Wilnas's Jewel", "item");
+const WamdusJewel = makeItem(558, "Wamdus's Jewel", "item");
+const GalleonJewel = makeItem(559, "Galleon's Jewel", "item");
+const EwiyarJewel = makeItem(560, "Ewiyar's Jewel", "item");
+const LuWohJewel = makeItem(561, "Lu Woh's Jewel", "item");
+const FedielJewel = makeItem(562, "Fediel's Jewel", "item");
+export const SixDragonJewel = element => {
+  switch (element) {
+    case "fire":
+      return WilnasJewel;
+    case "water":
+      return WamdusJewel;
+    case "earth":
+      return GalleonJewel;
+    case "wind":
+      return EwiyarJewel;
+    case "light":
+      return LuWohJewel;
+    case "dark":
+      return FedielJewel;
+    default:
+      console.log(`Wrong element for Six-Dragon Jewel: ${element}`);
+  }
+};

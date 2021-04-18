@@ -6,6 +6,7 @@ import {VerumProof} from "../../utils/Items/treasures/Uncap";
 import {TrialFragment} from "../../utils/Items/treasures/Uncap";
 import * as World from "../../utils/Items/treasures/World";
 import {ArcarumPriorities} from "./arcarumCosts"
+import {Luster} from "../../utils/Items/treasures/Uncap";
 
 export const HazeRouter = (element, quantity) => {
   switch(element) {
@@ -99,5 +100,16 @@ export const WorldMaterialRouter = (summon, quantity) => {
       return [makeMaterial(World.BrokenTeacup, quantity)];
     default:
       console.log(`Wrong summon for World Material: ${summon}`);
+  }
+};
+
+export const LusterRouter = (element, quantity) => {
+  switch (element) {
+    case "light":
+      return [makeMaterial(Luster("fire"), Math.floor(quantity/2), ArcarumPriorities.IMPORTANT), makeMaterial(Luster("wind"), Math.floor(quantity/2), ArcarumPriorities.IMPORTANT)];
+    case "dark":
+      return [makeMaterial(Luster("water"), Math.floor(quantity/2), ArcarumPriorities.IMPORTANT), makeMaterial(Luster("earth"), Math.floor(quantity/2), ArcarumPriorities.IMPORTANT)];
+    default:
+      return [makeMaterial(Luster(element), quantity, ArcarumPriorities.IMPORTANT)];
   }
 };

@@ -1,20 +1,21 @@
 import React from "react";
 import {
-  Card,
-  CardHeader,
-  CardContent,
-  Divider,
   FormControl,
   Select,
   MenuItem,
+  InputLabel
 } from "@material-ui/core";
 import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
   TableRow
 } from "@material-ui/core";
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from "@material-ui/core/styles";
 import propTypes from "prop-types";
 
@@ -45,24 +46,12 @@ const stepChoices = [
 export default function SummonStepInput({ trackedSummons, onStepChange }) {
   const classes = useStyles();
   return (
-    <Card>
-      <CardHeader subheader="设定当前进度与目标进度" title="召唤石进度" />
-      <Divider />
-      <CardContent>
+    <Accordion defaultExpanded={true}>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <Typography variant='h5'>转世召唤石进度</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
         <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                <b>召唤石</b>
-              </TableCell>
-              <TableCell align="center">
-                <b>已完成进度</b>
-              </TableCell>
-              <TableCell align="center">
-                <b>目标进度</b>
-              </TableCell>
-            </TableRow>
-          </TableHead>
           <TableBody>
             {trackedSummons.map(({name, icon, current, target}) => {
               return (
@@ -78,7 +67,9 @@ export default function SummonStepInput({ trackedSummons, onStepChange }) {
                     <FormControl
                       fullWidth
                       style={{ marginLeft: 10, marginRight: 10 }}
+                      error={typeof(current) == "undefined" ? true : false}
                     >
+                      <InputLabel>已完成进度</InputLabel>
                       <Select
                         name="current"
                         value={current}
@@ -98,7 +89,9 @@ export default function SummonStepInput({ trackedSummons, onStepChange }) {
                     <FormControl
                       fullWidth
                       style={{ marginLeft: 10, marginRight: 10 }}
+                      error={typeof(target) == "undefined" ? true : false}
                     >
+                      <InputLabel>目标进度</InputLabel>
                       <Select
                         name="target"
                         value={target}
@@ -121,8 +114,8 @@ export default function SummonStepInput({ trackedSummons, onStepChange }) {
             })}
           </TableBody>
         </Table>
-      </CardContent>
-    </Card>
+      </AccordionDetails>
+    </Accordion>
   );
 }
 
