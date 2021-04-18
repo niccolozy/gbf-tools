@@ -35,12 +35,38 @@ export const MagnaIOmegaAnima = element => {
   }
 };
 
-const ResoluteReactor = makeItem(47, "Resolute Reactor", "item/article/s");
-const FannedFin = makeItem(48, "Fanned Fin", "item/article/s");
-const GenesisBud = makeItem(49, "Genesis Bud", "item/article/s");
-const GreenDragonEye = makeItem(32, "Green Dragon Eye", "item/article/s");
-const PrimalBit = makeItem(50, "Primal Bit", "item/article/s");
-const BlackFogSphere = makeItem(51, "Black Fog Sphere", "item/article/s");
+// True Anima
+const TrueFireAnima = makeItem(41, "True Fire Anima", "item");
+const TrueWaterAnima = makeItem(42, "True Water Anima", "item");
+const TrueEarthAnima = makeItem(43, "True Earth Anima", "item");
+const TrueWindAnima = makeItem(44, "True Wind Anima", "item");
+const TrueLightAnima = makeItem(45, "True Light Anima", "item");
+const TrueDarkAnima = makeItem(46, "True Dark Anima", "item");
+export const TrueAnima = element => {
+  switch (element) {
+    case "fire":
+      return TrueFireAnima;
+    case "water":
+      return TrueWaterAnima;
+    case "earth":
+      return TrueEarthAnima;
+    case "wind":
+      return TrueWindAnima;
+    case "light":
+      return TrueLightAnima;
+    case "dark":
+      return TrueDarkAnima;
+    default:
+      console.log(`Wrong element for True Anima: ${element}`);
+  }
+};
+
+const ResoluteReactor = makeItem(47, "Resolute Reactor", "item");
+const FannedFin = makeItem(48, "Fanned Fin", "item");
+const GenesisBud = makeItem(49, "Genesis Bud", "item");
+const GreenDragonEye = makeItem(32, "Green Dragon Eye", "item");
+const PrimalBit = makeItem(50, "Primal Bit", "item");
+const BlackFogSphere = makeItem(51, "Black Fog Sphere", "item");
 export const MagnaIDropItem = element => {
   switch (element) {
     case "fire":

@@ -56,6 +56,59 @@ export const FlawedPrism = makeItem(1202, "Flawed Prism", "item");
 export const FlawlessPrism = makeItem(1203, "Flawless Prism", "item");
 export const RainbowPrism = makeItem(1204, "Rainbow Prism", "item");
 
+// Tome
+export const RedTome = makeItem(1311, "Red Tome", "item");
+export const BlueTome = makeItem(1321, "Blue Tome", "item");
+export const BrownTome = makeItem(1331, "Brown Tome", "item");
+export const GreenTome = makeItem(1341, "Green Tome", "item");
+export const WhiteTome = makeItem(1351, "White Tome", "item");
+export const BlackTome = makeItem(1361, "Black Tome", "item");
+export const Tome = element => {
+  switch (element) {
+    case "fire":
+      return RedTome;
+    case "water":
+      return BlueTome;
+    case "earth":
+      return BrownTome;
+    case "wind":
+      return GreenTome;
+    case "light":
+      return WhiteTome;
+    case "dark":
+      return BlackTome;
+    default:
+      console.log(`Wrong element for Tome: ${element}`);
+  }
+};
+
+// Scroll
+export const HellfireScroll = makeItem(1312, "Hellfire Scroll", "item");
+export const FloodScroll = makeItem(1322, "Flood Scroll", "item");
+export const ThunderScroll = makeItem(1332, "Thunder Scroll", "item");
+export const GaleScroll = makeItem(1342, "Gale Scroll", "item");
+export const SkylightScroll = makeItem(1352, "Skylight Scroll", "item");
+export const ChasmScroll = makeItem(1362, "Chasm Scroll", "item");
+export const Scroll = element => {
+  switch (element) {
+    case "fire":
+      return HellfireScroll;
+    case "water":
+      return FloodScroll;
+    case "earth":
+      return ThunderScroll;
+    case "wind":
+      return GaleScroll;
+    case "light":
+      return SkylightScroll;
+    case "dark":
+      return ChasmScroll;
+    default:
+      console.log(`Wrong element for Scroll: ${element}`);
+  }
+};
+
+
 // Whorl
 export const InfernalWhorl = makeItem(1313, "Infernal Whorl", "item");
 export const TidalWhorl = makeItem(1323, "Tidal Whorl", "item");
