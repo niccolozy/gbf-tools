@@ -220,6 +220,6 @@ export const resolveSummons = (plans) => {
       targets.push(makeMaterial(summonFactory(name, i),1));
     });
   });
-  let virtual_target = makeItem(-1, "fake", "", {isCrafted:true, craftMaterials:targets});
+  let virtual_target = makeItem(null, "fake", "", {isCrafted:true, craftMaterials:targets});
   return resolveMaterials(makeMaterial(virtual_target, 1));
 };

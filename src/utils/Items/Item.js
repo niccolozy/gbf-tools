@@ -6,7 +6,7 @@ export const makeItem = (ingameId, name, type, {isCrafted=false, craftMaterials=
     id: ingameId,
     type: type, 
     name: name, 
-    icon: ingameId > 0 ? images("./"+type+"/"+ingameId+".jpg") : null,
+    icon: ingameId === null ? null : images("./"+type+"/"+ingameId+".jpg"),
     isCrafted: isCrafted,
     craftMaterials: craftMaterials,
     isBuyable: isBuyable,

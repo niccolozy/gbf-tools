@@ -139,6 +139,33 @@ export const SummonIIAnima = element => {
   }
 };
 
+// Urn
+const FireUrn = makeItem(111, "Fire Urn", "item");
+const WaterUrn = makeItem(112, "Water Urn", "item");
+const EarthUrn = makeItem(113, "Earth Urn", "item");
+const WindUrn = makeItem(114, "Wind Urn", "item");
+const LightUrn = makeItem(115, "Light Urn", "item");
+const DarkUrn = makeItem(116, "Dark Urn", "item");
+export const Urn = element => {
+  switch (element) {
+    case "fire":
+      return FireUrn;
+    case "water":
+      return WaterUrn;
+    case "earth":
+      return EarthUrn;
+    case "wind":
+      return WindUrn;
+    case "light":
+      return LightUrn;
+    case "dark":
+      return DarkUrn;
+    default:
+      console.log(`Wrong element for Urn: ${element}`);
+  }
+};
+
+
 // Primarch Anima
 const MichaelAnima = makeItem(506, "Michael Anima", "item");
 const GabrielAnima = makeItem(507, "Gabriel Anima", "item");
@@ -208,6 +235,32 @@ export const MagnaIIOmegaAnima = element => {
       return AvatarOmegaAnima;
     default:
       console.log(`Wrong element for Magna II Omega Anima: ${element}`);
+  }
+};
+
+// Six-Dragon drop item 
+const SmolderingRubble = makeItem(549, "Smoldering Rubble", "item");
+const AbyssalTragedy = makeItem(550, "Abyssal Tragedy", "item");
+const InsularCore = makeItem(551, "Insular Core", "item");
+const GaleRock = makeItem(552, "Gale Rock", "item");
+const ThunderboltWheel = makeItem(553, "Thunderbolt Wheel", "item");
+const Todestrieb = makeItem(554, "Todestrieb", "item");
+export const SixDragonDropItem = element => {
+  switch (element) {
+    case "fire":
+      return SmolderingRubble;
+    case "water":
+      return AbyssalTragedy;
+    case "earth":
+      return InsularCore;
+    case "wind":
+      return GaleRock;
+    case "light":
+      return ThunderboltWheel;
+    case "dark":
+      return Todestrieb;
+    default:
+      console.log(`Wrong element for Six-Dragon drop item: ${element}`);
   }
 };
 

@@ -2,9 +2,11 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 import { resolveSummons, summonFactory } from "./arcarumCosts.js";
 import { resolveWeapons, weaponFactory } from "./NewWorldFoundationWeaponCosts";
+import { resolveDomain, domainFactory } from "./EvokerDomainCost";
 import ArcarumBanner from "./ArcarumBanner";
 import SummonStepInput from "./SummonStepInput";
 import WeaponStepInput from "./WeaponStepInput";
+import DomainStepInput from "./DomainStepInput";
 import MaterialEstimation from "./MaterialEstimation";
 import { useLocalStorageState } from "../../utils/storage";
 import { makeMaterial, makeItem, resolveMaterials } from "../../utils/Items/Item";
@@ -65,6 +67,9 @@ const TrackerReducer = (state, action) => {
     case SUMMONSTEPCHANGE: {
       return changeTrackerStep(state, action.summon, "current", "target", action.target, action.value);
     }
+    case DOMAINSTEPCHANGE: {
+      return changeTrackerStep(state, action.summon, "domainCurrent", "domainTarget", action.target, action.value);
+    }
     default:
       throw new Error("Unknown operation for tracking change: " + action);
   }
@@ -78,7 +83,9 @@ export default function ArcarumCalculator() {
       current: 0,
       target: 8,
       weaponCurrent: 0,
-      weaponTarget: 0
+      weaponTarget: 0,
+      domainCurrent: 0,
+      domainTarget: 0
     };
   });
 
@@ -104,6 +111,7 @@ export default function ArcarumCalculator() {
 
   const onSummonStepChange = onStepChangeCreator(SUMMONSTEPCHANGE);
   const onWeaponStepChange = onStepChangeCreator(WEAPONSTEPCHANGE);
+  const ondomainStepChange = onStepChangeCreator(DOMAINSTEPCHANGE);
 
   const trackList = Object.keys(summonTracker).filter(
     key => summonTracker[key].track
@@ -130,10 +138,22 @@ export default function ArcarumCalculator() {
       }
     )
   );
+
+  let trackedEvoker = trackList.map(
+    name => (
+      {
+        name: name, 
+        icon: domainFactory(name, summonTracker[name].domainCurrent).icon, 
+        current: summonTracker[name].domainCurrent,
+        target: summonTracker[name].domainTarget
+      }
+    )
+  );
   
   let summonsMaterials = resolveSummons(trackedSummons);
   let weaponMaterials = resolveWeapons(trackedWeapons);
-  let virtual_target = makeItem(-1, "fake", "", {isCrafted:true, craftMaterials:[].concat(summonsMaterials, weaponMaterials)});
+  let domainMaterials = resolveDomain(trackedEvoker);
+  let virtual_target = makeItem(null, "fake", "", {isCrafted:true, craftMaterials:[].concat(summonsMaterials, weaponMaterials, domainMaterials)});
   let materials = resolveMaterials(makeMaterial(virtual_target, 1));
 
   return (
@@ -163,6 +183,13 @@ export default function ArcarumCalculator() {
         <WeaponStepInput
           trackedWeapons={trackedWeapons}
           onStepChange={onWeaponStepChange}
+        />
+      </Grid>
+
+      <Grid item xs={12}>
+        <DomainStepInput
+          trackedEvoker={trackedEvoker}
+          onStepChange={ondomainStepChange}
         />
       </Grid>
 

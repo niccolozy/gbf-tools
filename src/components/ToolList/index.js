@@ -39,6 +39,13 @@ export default function ToolList({ tools, onClick }) {
           <Divider />
           <CardContent>
           <Typography variant="body1">
+              <b>2021-04-21</b> 转世材料页面添加贤者领域计算{" "}
+            </Typography>
+            <List dense={true}>
+            </List>
+            <Divider />
+
+          <Typography variant="body1">
               <b>2021-04-18</b> 转世材料页面添加贤者武器计算{" "}
             </Typography>
             <List dense={true}>
