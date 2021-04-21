@@ -118,8 +118,8 @@ export const weaponFactory = (name, step) => {
 export const resolveWeapons = (plans) => {
   let targets = [];
   plans.forEach(plan => {
-    let {name, weaponCurrent, weaponTarget} = plan;
-    Array.from({length: weaponTarget - weaponCurrent}, (_, i) => i+weaponCurrent+1).forEach(i => {
+    let {name, current, target} = plan;
+    Array.from({length: target - current}, (_, i) => i+current+1).forEach(i => {
       targets.push(makeMaterial(weaponFactory(name, i),1));
     });
   });

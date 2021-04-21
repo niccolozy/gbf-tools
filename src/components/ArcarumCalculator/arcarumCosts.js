@@ -187,6 +187,8 @@ const Evoker = name => {
 };
 
 export const summonFactory = (name, step) => {
+  if (typeof step === "undefined")
+    step = 0;
   switch(step) {
     case UNOBTAINED:
     case SR0:

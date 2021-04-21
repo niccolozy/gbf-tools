@@ -23,7 +23,29 @@ const SUMMONLIST = [
 ];
 
 const TOGGLETRACKING = "TOGGLETRACKING";
-const CHANGESTEP = "CHANGESTEP";
+const SUMMONSTEPCHANGE = "SUMMONSTEPCHANGE";
+const WEAPONSTEPCHANGE = "WEAPONSTEPCHANGE";
+const DOMAINSTEPCHANGE = "DOMAINSTEPCHANGE";
+
+
+const isTargetValueValid = (current, target) => {
+  return target >= current;
+}
+
+const updateTracker = (oldtracker, summon, newTrackerValue) => {
+  let newTracker = Object.assign({}, oldtracker);
+  newTracker[summon] = newTrackerValue;
+  return newTracker;
+}
+
+const changeTrackerStep = (oldtracker, summon, fieldCurrent, fieldTarget, changedField, newValue) => {
+  let newTrackerValue = Object.assign({}, oldtracker[summon])
+  newTrackerValue[changedField] = newValue;
+  if (!isTargetValueValid(newTrackerValue[fieldCurrent], newTrackerValue[fieldTarget])) {
+    newTrackerValue[fieldTarget] = newTrackerValue[fieldCurrent];
+  }
+  return updateTracker(oldtracker, summon, newTrackerValue);
+}
 
 const TrackerReducer = (state, action) => {
   switch (action.type) {
@@ -37,33 +59,14 @@ const TrackerReducer = (state, action) => {
       };
       return newTracker;
     }
-    case CHANGESTEP: {
-      let newTracker = { 
-        ...state,
-        [action.summon]: {
-          ...state[action.summon],
-          ...(action.target==="current" && {
-            current: action.value, 
-            // target step shouldn't be smaller than current step
-            // overwrite with new current step if it's the case
-            ...(action.value > state[action.summon].target && {
-              target: action.value
-            })
-          }),
-          ...(action.target==="target" && { target: action.value }),
-          ...(action.target==="weaponCurrent" && {
-            weaponCurrent: action.value, 
-            ...(action.value > state[action.summon].weaponTarget && {
-              weaponTarget: action.value
-            })
-          }),
-          ...(action.target==="weaponTarget" && { weaponTarget: action.value }),
-        }
-      };
-      return newTracker;
+    case WEAPONSTEPCHANGE: {
+      return changeTrackerStep(state, action.summon, "weaponCurrent", "weaponTarget", action.target, action.value);
+    }
+    case SUMMONSTEPCHANGE: {
+      return changeTrackerStep(state, action.summon, "current", "target", action.target, action.value);
     }
     default:
-      throw new Error("Unknown operation for summon tracking change: " + action);
+      throw new Error("Unknown operation for tracking change: " + action);
   }
 };
 
@@ -88,22 +91,48 @@ export default function ArcarumCalculator() {
     });
   };
 
-  const onStepChange = (e, summon) => {
-    dispatchSummonTracker({
-      type: CHANGESTEP, 
-      summon:summon,
-      target: e.target.name,
-      value: e.target.value
-    });
+  const onStepChangeCreator = (type) => {
+    return (e, summon) => {
+      dispatchSummonTracker({
+        type: type,
+        summon: summon,
+        target: e.target.name,
+        value: e.target.value
+      })
+    };
   };
+
+  const onSummonStepChange = onStepChangeCreator(SUMMONSTEPCHANGE);
+  const onWeaponStepChange = onStepChangeCreator(WEAPONSTEPCHANGE);
 
   const trackList = Object.keys(summonTracker).filter(
     key => summonTracker[key].track
   );
 
-  let trackedSummons = trackList.map(name => ({name: name, icon: summonFactory(name, summonTracker[name].current).icon, weaponIcon: weaponFactory(name, summonTracker[name].weaponCurrent).icon, ...summonTracker[name]}));
+  let trackedSummons = trackList.map(
+    name => (
+      {
+        name: name, 
+        icon: summonFactory(name, summonTracker[name].current).icon, 
+        current: summonTracker[name].current,
+        target: summonTracker[name].target
+      }
+    )
+  );
+
+  let trackedWeapons = trackList.map(
+    name => (
+      {
+        name: name, 
+        icon: weaponFactory(name, summonTracker[name].weaponCurrent).icon, 
+        current: summonTracker[name].weaponCurrent,
+        target: summonTracker[name].weaponTarget
+      }
+    )
+  );
+  
   let summonsMaterials = resolveSummons(trackedSummons);
-  let weaponMaterials = resolveWeapons(trackedSummons);
+  let weaponMaterials = resolveWeapons(trackedWeapons);
   let virtual_target = makeItem(-1, "fake", "", {isCrafted:true, craftMaterials:[].concat(summonsMaterials, weaponMaterials)});
   let materials = resolveMaterials(makeMaterial(virtual_target, 1));
 
@@ -127,13 +156,13 @@ export default function ArcarumCalculator() {
       <Grid item xs={12}>
         <SummonStepInput
           trackedSummons={trackedSummons}
-          onStepChange={onStepChange}
+          onStepChange={onSummonStepChange}
         />
       </Grid>
       <Grid item xs={12}>
         <WeaponStepInput
-          trackedSummons={trackedSummons}
-          onStepChange={onStepChange}
+          trackedWeapons={trackedWeapons}
+          onStepChange={onWeaponStepChange}
         />
       </Grid>
 
