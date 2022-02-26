@@ -11,6 +11,7 @@ const SSR0 = 1;
 const SSR1 = 2;
 const SSR2 = 3;
 const SSR3 = 4;
+const FLB = 5;
 
 const summonToElement = {
     Justice: "water",
@@ -97,6 +98,21 @@ const SSR3Weapon = name => {
   return makeItem(WeaponId[name], name, "weapon", {isCrafted:true, craftMaterials:list});
   };
 
+  const FLBWeapon = name => {
+    let element = summonToElement[name];
+    let list = [];
+    list.push(makeMaterial(treasures.NewWorldQuartz, 20, ArcarumPriorities.RARE));
+    list.push(makeMaterial(treasures.Veritas(name), 150, ArcarumPriorities.IMPORTANT));
+    list.push(makeMaterial(treasures.Idean(name), 100, ArcarumPriorities.IMPORTANT));
+    list.push(makeMaterial(treasures.SixDragonJewel(summonToElement[name]), 30)); 
+    list.push(makeMaterial(treasures.Astra(summonToElement[name]), 120, ArcarumPriorities.IMPORTANT));
+      // Router returns an array of materials
+    list.push(...LusterRouter(element, 60));
+    list.push(...VerumProofRouter(element, 250));
+  
+    return makeItem(WeaponId[name], name, "weapon", {isCrafted:true, craftMaterials:list});
+    };
+
 export const weaponFactory = (name, step) => {
   if (typeof step === "undefined")
     step = 0;
@@ -110,6 +126,8 @@ export const weaponFactory = (name, step) => {
       return SSR2Weapon(name);
     case SSR3:
       return SSR3Weapon(name);
+    case FLB:
+      return FLBWeapon(name);
     default:
       console.log("Wrong step for weapon ", name, step);
   }

@@ -7,7 +7,8 @@ const stepChoices = [
   "SSR0突",
   "SSR1突",
   "SSR2突",
-  "SSR3突"
+  "SSR3突",
+  "SSR终突"
 ];
 
 export default function WeaponStepInput({ trackedWeapons, onStepChange }) {
