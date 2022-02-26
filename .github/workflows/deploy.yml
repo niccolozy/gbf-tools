@@ -20,8 +20,9 @@ jobs:
           CI=false npm run-script build
           
       - name: deploy
-        uses: JamesIves/github-pages-deploy-action@3.2.1
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
           FOLDER: build
+
