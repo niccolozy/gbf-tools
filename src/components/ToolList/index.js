@@ -39,6 +39,13 @@ export default function ToolList({ tools, onClick }) {
           <Divider />
           <CardContent>
           <Typography variant="body1">
+              <b>2022-06-26</b> 古战场Hell200数据{" "}
+            </Typography>
+            <List dense={true}>
+            </List>
+            <Divider />
+
+          <Typography variant="body1">
               <b>2022-02-26</b> 转世材料页面添加贤者武器终突{" "}
             </Typography>
             <List dense={true}>

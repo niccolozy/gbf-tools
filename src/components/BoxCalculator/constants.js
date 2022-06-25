@@ -56,5 +56,14 @@ export const mobInfo = {
     AP: 50,
     BP: 3,
     meat: 20
+  },
+  Hell200: {
+    hostToken: 160,
+    victoryToken: 110,
+    mvpToken: 68,
+    soloHonor: 10282248,
+    AP: 50,
+    BP: 3,
+    meat: 30
   }
 };
