@@ -106,7 +106,7 @@ export default function BoxEstimation({ payload }) {
                       <TextField
                         name={mob + ".m"}
                         className={classes.input}
-                        value={timer[mob].m}
+                        value={timer[mob] ? timer[mob].m : 0}
                         onChange={onValueChange}
                         size="small"
                         inputProps={{
@@ -121,7 +121,7 @@ export default function BoxEstimation({ payload }) {
                       <TextField
                         name={mob + ".s"}
                         className={classes.input}
-                        value={timer[mob].s}
+                        value={timer[mob] ? timer[mob].s : 0}
                         onChange={onValueChange}
                         size="small"
                         inputProps={{
