@@ -40,7 +40,7 @@ export default function BoxEstimation({ payload }) {
   }, [timer]);
 
   const computeTimeOutput = (mob, factor) => {
-    let total = (timer[mob].m * 60 + timer[mob].s) * factor;
+    let total = timer[mob] ? (timer[mob].m * 60 + timer[mob].s) * factor : 0;
     let h = Math.floor(total / 3600);
     let res = total % 3600;
     let m = Math.floor(res / 60);
