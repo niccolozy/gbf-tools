@@ -39,6 +39,16 @@ export default function ToolList({ tools, onClick }) {
           <Divider />
           <CardContent>
           <Typography variant="body1">
+              <b>2023-09-23</b> 更新古战场计算数据{" "}
+            </Typography>
+            <List dense={true}>
+              <ListItem>Ex+牛荣誉更新为88000</ListItem>
+              <ListItem>Ex和Ex+牛平均肉掉落更新为5和6.5</ListItem>
+              <ListItem>Hell 200肉消耗更新为20, 荣誉更新为13400000</ListItem>
+            </List>
+            <Divider />
+
+          <Typography variant="body1">
               <b>2022-06-26</b> 古战场Hell200数据{" "}
             </Typography>
             <List dense={true}>
